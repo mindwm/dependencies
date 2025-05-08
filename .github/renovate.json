@@ -4,5 +4,8 @@
   },
   "argocd": {
     "managerFilePatterns": ["/\\.yaml$/"]
+  },
+  "crossplane": {
+    "managerFilePatterns": ["/\\.yaml$/"]
   }
 }
