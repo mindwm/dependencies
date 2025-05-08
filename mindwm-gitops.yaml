@@ -53870,7 +53870,7 @@ spec:
       serviceAccountName: knative-operator
       containers:
       - name: knative-operator
-        image: gcr.io/knative-releases/knative.dev/operator/cmd/operator@sha256:92520a9690e6383eae76d9f831abb706f8280f6ed5c4b20d2ebcb8fc04c64908
+        image: gcr.io/knative-releases/knative.dev/operator/cmd/operator@sha256:43c660177cd9f9066d451803081ed5da44df3780cec00a80e1e5fda71dda5d34
         resources:
           requests:
             cpu: '100m'
