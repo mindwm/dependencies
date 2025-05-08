@@ -285,7 +285,7 @@ spec:
           type: NodePort
           nodePort: '30001'
     repoURL: https://zotregistry.dev/helm-charts/
-    targetRevision: '0.1.65'
+    targetRevision: '0.1.68'
   syncPolicy:
     automated:
       selfHeal: true
