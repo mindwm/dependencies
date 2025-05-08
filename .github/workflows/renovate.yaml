@@ -16,13 +16,10 @@ jobs:
         uses: renovatebot/github-action@v42.0.0
         env:
           RENOVATE_REPOSITORIES: ${{ github.repository }}
-          # Onboarding not needed for self hosted
           RENOVATE_ONBOARDING: "false"
           RENOVATE_USERNAME: "superseb-demo-renovate[bot]"
           RENOVATE_GIT_AUTHOR: "superseb-demo-renovate <121964725+superseb-demo-renovate[bot]@users.noreply.github.com>"
           RENOVATE_PLATFORM_COMMIT: "true"
-          # RENOVATE_FORCE: ${{ github.event.inputs.overrideSchedule == 'true' && '{''schedule'':null}' || '' }}
           LOG_LEVEL: ${{ inputs.logLevel || 'info' }}
-        RENOVATE_REPOSITORIES: ${{ github.repository }}
         with:
           token: ${{ secrets.RENOVATE_TOKEN }}
