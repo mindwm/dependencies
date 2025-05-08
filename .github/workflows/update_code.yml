@@ -21,6 +21,9 @@ jobs:
           branch: 'master'
           owner: 'mindwm'
           repository: 'mindwm-gitops'
-      - name: ls
+      - name: kcl run
+        uses: kcllang/kcl:v0.9.7
         run: |
-          find
+          cd mindwm-gitops
+          kcl run | tee ../test.yaml 
+          ls -ltr ../test.yaml
