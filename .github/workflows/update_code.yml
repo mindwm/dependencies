@@ -22,7 +22,7 @@ jobs:
           owner: 'mindwm'
           repository: 'mindwm-gitops'
       - name: kcl run
-        uses: kcllang/kcl:v0.9.7
+        container: kcllang/kcl:v0.9.7
         run: |
           cd mindwm-gitops
           kcl run | tee ../test.yaml 
