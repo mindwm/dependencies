@@ -1,6 +1,5 @@
 {
-  "extends": ["config:base"],
-  "yaml": {
-    "fileMatch": [".*\\.yaml$"]
+  "kubernetes": {
+    "managerFilePatterns": ["/\\.yaml$/"]
   }
 }
