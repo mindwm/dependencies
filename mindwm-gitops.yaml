@@ -56482,7 +56482,7 @@ metadata:
 apiVersion: pkg.crossplane.io/v1beta1
 kind: Function
 spec:
-  package: xpkg.upbound.io/crossplane-contrib/function-kcl:v0.9.4
+  package: xpkg.upbound.io/crossplane-contrib/function-kcl:v0.11.4
 metadata:
   name: function-kcl
   annotations:
