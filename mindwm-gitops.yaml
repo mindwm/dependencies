@@ -55460,7 +55460,7 @@ spec:
       serviceAccountName: tekton-pipelines-controller
       containers:
       - name: tekton-pipelines-controller
-        image: ghcr.io/tektoncd/pipeline/controller-10a3e32792f33651396d02b6855a6e36:v0.68.0@sha256:b09f78ea0b73e944c1a002fba65fed7853a84bd237fe0cff610b65654e5bb7b9
+        image: ghcr.io/tektoncd/pipeline/controller-10a3e32792f33651396d02b6855a6e36:v1.0.0@sha256:3ea85d91808ffa72cf56958c219ab515ef6bd319f6b8501b288a3a54b69806d7
         args:
         - '-entrypoint-image'
         - ghcr.io/tektoncd/pipeline/entrypoint-bff0a22da108bc2f16c818c97641a296:v0.68.0@sha256:049c93545701656a908a6059174822ea5b4ce70ef4f38efda6d1979e1cb1e7c4
