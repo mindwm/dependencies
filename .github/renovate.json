@@ -2,23 +2,23 @@
   "labels": ["dependencies"], 
   "packageRules": [
       {
-        "matchPackageNames": ["kubernetes"],
+        "matchPackageNames": ["/kubernetes/"],
         "labels": ["kubernetes", "dependencies"]
       },
       {
-        "matchPackageNames": ["argocd"],
+        "matchPackageNames": ["/argocd/"],
         "labels": ["argocd", "dependencies"]
       },
       {
-        "matchPackageNames": ["crossplane"],
+        "matchPackageNames": ["/crossplane/"],
         "labels": ["crossplane", "dependencies"]
       },
       {
-        "matchPackageNames": ["tekton"],
+        "matchPackageNames": ["/tekton/"],
         "labels": ["tekton", "dependencies"]
       },
       {
-        "matchPackageNames": ["helm-values"],
+        "matchPackageNames": ["/helm-values/"],
         "labels": ["helm-values", "dependencies"]
       }
     ], 
