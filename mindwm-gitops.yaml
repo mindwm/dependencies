@@ -55624,7 +55624,7 @@ spec:
       serviceAccountName: tekton-events-controller
       containers:
       - name: tekton-events-controller
-        image: ghcr.io/tektoncd/pipeline/events-a9042f7efb0cbade2a868a1ee5ddd52c:v0.68.0@sha256:c087ceed9501f4042a68d09d291d39bff07db43b1e39af4d15e0bad6730e68eb
+        image: ghcr.io/tektoncd/pipeline/events-a9042f7efb0cbade2a868a1ee5ddd52c:v0.70.0@sha256:4766db5f4d0cb923a0ef440c3f0fb309477162935d121289d85965d6adda8448
         args: []
         volumeMounts:
         - name: config-logging
