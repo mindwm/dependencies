@@ -1,5 +1,8 @@
 {
   "kubernetes": {
     "managerFilePatterns": ["/\\.yaml$/"]
+  },
+  "argocd": {
+    "managerFilePatterns": ["/\\.yaml$/"]
   }
 }
