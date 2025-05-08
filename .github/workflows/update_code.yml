@@ -21,9 +21,14 @@ jobs:
           branch: 'master'
           owner: 'mindwm'
           repository: 'mindwm-gitops'
-      - name: kcl run
-        container: kcllang/kcl:v0.9.7
-        run: |
-          cd mindwm-gitops
-          kcl run | tee ../test.yaml 
-          ls -ltr ../test.yaml
+      - name: kcl render
+        uses: tvandinther/knit@v0.0.4
+        with:
+          filepath: mindwm-gitops/main.k
+
+      # - name: kcl run
+      #   container: kcllang/kcl:v0.9.7
+      #   run: |
+      #     cd mindwm-gitops
+      #     kcl run | tee ../test.yaml 
+      #     ls -ltr ../test.yaml
