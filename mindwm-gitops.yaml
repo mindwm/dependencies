@@ -1040,7 +1040,7 @@ spec:
           enabled: false
         extraObjects: []
     repoURL: https://victoriametrics.github.io/helm-charts/
-    targetRevision: '0.25.10'
+    targetRevision: '0.45.0'
   syncPolicy:
     automated:
       selfHeal: true
