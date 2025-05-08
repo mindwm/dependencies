@@ -115,7 +115,7 @@ spec:
       values: |
         null
     repoURL: https://istio-release.storage.googleapis.com/charts
-    targetRevision: '1.24.2'
+    targetRevision: '1.26.0'
   syncPolicy:
     automated:
       selfHeal: true
