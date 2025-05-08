@@ -56081,7 +56081,7 @@ spec:
       serviceAccountName: tekton-pipelines-resolvers
       containers:
       - name: controller
-        image: ghcr.io/tektoncd/pipeline/resolvers-ff86b24f130c42b88983d3c13993056d:v0.68.0@sha256:d2c1753592a904c682443e17637bee367a6f76659121fbc0b0a6e5f27989f9af
+        image: ghcr.io/tektoncd/pipeline/resolvers-ff86b24f130c42b88983d3c13993056d:v0.70.0@sha256:8b20efb3866e4bd41b4beba7a7ed51dc7c76f0763b84c32564fbc31c715f0cff
         resources:
           requests:
             cpu: '100m'
