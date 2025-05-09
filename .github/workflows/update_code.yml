@@ -24,7 +24,7 @@ jobs:
 
       - name: before
         run: |
-          ls -ltrh mindwm-gitops.yaml
+          md5sum mindwm-gitops.yaml
           ls -ltrh mindwm-gitops
 
 
@@ -35,7 +35,7 @@ jobs:
 
       - name: after
         run: |
-          ls -ltrh mindwm-gitops.yaml
+          md5sum *.yaml
 
       - name: Commit & Push changes
         uses: actions-js/push@master
