@@ -56247,7 +56247,7 @@ spec:
       serviceAccountName: tekton-pipelines-webhook
       containers:
       - name: webhook
-        image: ghcr.io/tektoncd/pipeline/webhook-d4749e605405422fd87700164e31b2d1:v0.68.0@sha256:1bebecfa0b0612c67310b92967916460299549e585e5d06d32ed674eb8126f5d
+        image: ghcr.io/tektoncd/pipeline/webhook-d4749e605405422fd87700164e31b2d1:v1.0.0@sha256:460ce6c48202ab21cf5d83253a74fa22f87ea511aa66606b4be8168ef3ecfe7d
         resources:
           requests:
             cpu: '100m'
