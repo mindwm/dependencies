@@ -1096,7 +1096,7 @@ spec:
       values: |
         null
     repoURL: https://charts.crossplane.io/stable
-    targetRevision: '1.18.2'
+    targetRevision: '1.19.1'
   syncPolicy:
     automated:
       selfHeal: true
@@ -56492,7 +56492,7 @@ metadata:
 apiVersion: pkg.crossplane.io/v1beta1
 kind: Function
 spec:
-  package: xpkg.upbound.io/crossplane-contrib/function-auto-ready:v0.4.1
+  package: xpkg.upbound.io/crossplane-contrib/function-auto-ready:v0.4.2
 metadata:
   name: function-auto-ready
   annotations:
@@ -56502,7 +56502,7 @@ metadata:
 apiVersion: pkg.crossplane.io/v1
 kind: Provider
 spec:
-  package: xpkg.upbound.io/crossplane-contrib/provider-kubernetes:v0.15.1
+  package: xpkg.upbound.io/crossplane-contrib/provider-kubernetes:v0.18.0
 metadata:
   name: provider-kubernetes
   annotations:
@@ -56538,7 +56538,7 @@ spec:
 apiVersion: pkg.crossplane.io/v1
 kind: Provider
 spec:
-  package: xpkg.upbound.io/crossplane-contrib/provider-helm:v0.19.0
+  package: xpkg.upbound.io/crossplane-contrib/provider-helm:v0.20.4
   runtimeConfigRef:
     apiVersion: pkg.crossplane.io/v1beta1
     kind: DeploymentRuntimeConfig
