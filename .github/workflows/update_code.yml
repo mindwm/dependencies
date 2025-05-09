@@ -1,13 +1,13 @@
 name: Sync code
 on:
-  # schedule:
-  #   - cron: '0/15 * * * *'
-  workflow_dispatch:
-    inputs:
-      environment:
-        description: 'Deployment environment'
-        required: true
-        default: 'staging'
+  repository_dispatch:
+    types: [mindwm_gitops_updated]
+  # workflow_dispatch:
+  #   inputs:
+  #     environment:
+  #       description: 'Deployment environment'
+  #       required: true
+  #       default: 'staging'
 jobs:
   sync:
     runs-on: ubuntu-latest
@@ -30,9 +30,3 @@ jobs:
         uses: actions-js/push@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-      # - name: kcl run
-      #   container: kcllang/kcl:v0.9.7
-      #   run: |
-      #     cd mindwm-gitops
-      #     kcl run | tee ../test.yaml 
-      #     ls -ltr ../test.yaml
