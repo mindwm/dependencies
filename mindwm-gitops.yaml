@@ -62444,7 +62444,7 @@ spec:
       serviceAccountName: controller
       containers:
       - name: default-domain
-        image: gcr.io/knative-releases/knative.dev/serving/cmd/default-domain@sha256:893e7cefa81636d00bc4d636effedef042d4cc51dab2c369367520ac1bf7572c
+        image: gcr.io/knative-releases/knative.dev/serving/cmd/default-domain@sha256:07bfa937dcb8e9ba90e6d70f8543b18adfebf9157477e8b8ab3531312c6b8712
         args:
         - '-magic-dns=nip.io'
         ports:
