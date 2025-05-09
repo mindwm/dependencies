@@ -62089,7 +62089,7 @@ spec:
       serviceAccountName: jetstream-ch-controller
       containers:
       - name: controller
-        image: gcr.io/knative-releases/knative.dev/eventing-natss/cmd/jetstream/controller@sha256:9c07194d65de26d8bd608cf99396b3cb00b58c731bd4cc6fa633ff3aaf3096ba
+        image: gcr.io/knative-releases/knative.dev/eventing-natss/cmd/jetstream/controller@sha256:bfc4918cc42325218bc0e7a4943e56af5cf753a566b9f3f117ba7025335a9074
         env:
         - name: CONFIG_LOGGING_NAME
           value: config-logging
