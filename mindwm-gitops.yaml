@@ -1,3 +1,13 @@
+downloading 'kcl-lang/argo-cd-order:0.2.0' from 'ghcr.io/kcl-lang/argo-cd-order:0.2.0'
+downloading 'kcl-lang/argoproj:0.1.0' from 'ghcr.io/kcl-lang/argoproj:0.1.0'
+downloading 'kcl-lang/crossplane:1.16.0' from 'ghcr.io/kcl-lang/crossplane:1.16.0'
+downloading 'kcl-lang/istio:1.21.2' from 'ghcr.io/kcl-lang/istio:1.21.2'
+downloading 'kcl-lang/json_merge_patch:0.1.0' from 'ghcr.io/kcl-lang/json_merge_patch:0.1.0'
+downloading 'kcl-lang/k8s:1.29' from 'ghcr.io/kcl-lang/k8s:1.29'
+downloading 'kcl-lang/knative:0.2.0' from 'ghcr.io/kcl-lang/knative:0.2.0'
+downloading 'kcl-lang/knative-operator:0.3.0' from 'ghcr.io/kcl-lang/knative-operator:0.3.0'
+downloading 'kcl-lang/k8s:1.28' from 'ghcr.io/kcl-lang/k8s:1.28'
+downloading 'kcl-lang/k8s:1.31.2' from 'ghcr.io/kcl-lang/k8s:1.31.2'
 apiVersion: v1
 kind: Namespace
 metadata:
@@ -83,7 +93,7 @@ spec:
       values: |
         installCRDs: true
     repoURL: https://charts.jetstack.io
-    targetRevision: '1.17.2'
+    targetRevision: '1.16.3'
   syncPolicy:
     automated:
       selfHeal: true
@@ -199,7 +209,7 @@ spec:
               targetPort: 4222
               port: 4222
     repoURL: https://nats-io.github.io/k8s/helm/charts/
-    targetRevision: '1.3.5'
+    targetRevision: '1.2.9'
   syncPolicy:
     automated:
       selfHeal: true
@@ -257,7 +267,7 @@ spec:
         write:
           replicas: 0
     repoURL: https://grafana.github.io/helm-charts
-    targetRevision: '6.29.0'
+    targetRevision: '6.25.0'
   syncPolicy:
     automated:
       selfHeal: true
@@ -285,7 +295,7 @@ spec:
           type: NodePort
           nodePort: '30001'
     repoURL: https://zotregistry.dev/helm-charts/
-    targetRevision: '0.1.65'
+    targetRevision: '0.1.68'
   syncPolicy:
     automated:
       selfHeal: true
@@ -310,7 +320,7 @@ spec:
       releaseName: otel-collector
       values: |
         image:
-          repository: ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector-k8s
+          repository: otel/opentelemetry-collector-k8s
         mode: deployment
         config:
           receivers:
@@ -348,7 +358,7 @@ spec:
           zipkin:
             enabled: false
     repoURL: https://open-telemetry.github.io/opentelemetry-helm-charts
-    targetRevision: '0.122.5'
+    targetRevision: '0.114.0'
   syncPolicy:
     automated:
       selfHeal: true
@@ -380,7 +390,7 @@ spec:
             enabled: true
             remoteWriteUrl: http://vmsingle-vm-aio-victoria-metrics-k8s-stack.monitoring:8429/api/v1/write
     repoURL: https://grafana.github.io/helm-charts
-    targetRevision: '1.21.1'
+    targetRevision: '1.18.1'
   syncPolicy:
     automated:
       selfHeal: true
@@ -49458,7 +49468,7 @@ metadata:
   name: knative-operator
   labels:
     app.kubernetes.io/name: knative-operator
-    app.kubernetes.io/version: '1.18.0'
+    app.kubernetes.io/version: '1.17.2'
   annotations:
     argocd.argoproj.io/sync-wave: '2'
 ---
@@ -49469,7 +49479,7 @@ metadata:
   namespace: knative-operator
   labels:
     app.kubernetes.io/component: operator-webhook
-    app.kubernetes.io/version: '1.18.0'
+    app.kubernetes.io/version: '1.17.2'
     app.kubernetes.io/name: knative-operator
   annotations:
     argocd.argoproj.io/sync-wave: '2'
@@ -49481,7 +49491,7 @@ metadata:
   namespace: knative-operator
   labels:
     app.kubernetes.io/component: operator-webhook
-    app.kubernetes.io/version: '1.18.0'
+    app.kubernetes.io/version: '1.17.2'
     app.kubernetes.io/name: knative-operator
   annotations:
     argocd.argoproj.io/sync-wave: '2'
@@ -49496,7 +49506,7 @@ spec:
         app: operator-webhook
         role: operator-webhook
         app.kubernetes.io/component: operator-webhook
-        app.kubernetes.io/version: '1.18.0'
+        app.kubernetes.io/version: '1.17.2'
         app.kubernetes.io/name: knative-operator
         sidecar.istio.io/inject: 'false'
     spec:
@@ -49512,7 +49522,7 @@ spec:
       serviceAccountName: operator-webhook
       containers:
       - name: operator-webhook
-        image: gcr.io/knative-releases/knative.dev/operator/cmd/webhook@sha256:952b580d6194f10974e5f842bfe46d4d406f6661c70ec51fb9815242921924ac
+        image: gcr.io/knative-releases/knative.dev/operator/cmd/webhook@sha256:3b76fa6824fb58e81634e28dceb717409465ed264f76aa53d800703264e1badd
         resources:
           requests:
             cpu: '100m'
@@ -49583,7 +49593,7 @@ metadata:
   labels:
     role: operator-webhook
     app.kubernetes.io/component: operator-webhook
-    app.kubernetes.io/version: '1.18.0'
+    app.kubernetes.io/version: '1.17.2'
     app.kubernetes.io/name: knative-operator
   name: operator-webhook
   namespace: knative-operator
@@ -49608,7 +49618,7 @@ kind: CustomResourceDefinition
 metadata:
   name: knativeeventings.operator.knative.dev
   labels:
-    app.kubernetes.io/version: '1.18.0'
+    app.kubernetes.io/version: '1.17.2'
     app.kubernetes.io/name: knative-operator
   annotations:
     argocd.argoproj.io/sync-wave: '2'
@@ -51177,7 +51187,7 @@ kind: CustomResourceDefinition
 metadata:
   name: knativeservings.operator.knative.dev
   labels:
-    app.kubernetes.io/version: '1.18.0'
+    app.kubernetes.io/version: '1.17.2'
     app.kubernetes.io/name: knative-operator
   annotations:
     argocd.argoproj.io/sync-wave: '2'
@@ -52875,7 +52885,7 @@ kind: ClusterRole
 metadata:
   name: knative-serving-operator-aggregated
   labels:
-    app.kubernetes.io/version: '1.18.0'
+    app.kubernetes.io/version: '1.17.2'
     app.kubernetes.io/name: knative-operator
   annotations:
     argocd.argoproj.io/sync-wave: '2'
@@ -52891,7 +52901,7 @@ kind: ClusterRole
 metadata:
   name: knative-serving-operator-aggregated-stable
   labels:
-    app.kubernetes.io/version: '1.18.0'
+    app.kubernetes.io/version: '1.17.2'
     app.kubernetes.io/name: knative-operator
   annotations:
     argocd.argoproj.io/sync-wave: '2'
@@ -52909,7 +52919,7 @@ kind: ClusterRole
 metadata:
   name: knative-eventing-operator-aggregated
   labels:
-    app.kubernetes.io/version: '1.18.0'
+    app.kubernetes.io/version: '1.17.2'
     app.kubernetes.io/name: knative-operator
   annotations:
     argocd.argoproj.io/sync-wave: '2'
@@ -52925,7 +52935,7 @@ kind: ClusterRole
 metadata:
   name: knative-eventing-operator-aggregated-stable
   labels:
-    app.kubernetes.io/version: '1.18.0'
+    app.kubernetes.io/version: '1.17.2'
     app.kubernetes.io/name: knative-operator
   annotations:
     argocd.argoproj.io/sync-wave: '2'
@@ -52943,7 +52953,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: knative-serving-operator
   labels:
-    app.kubernetes.io/version: '1.18.0'
+    app.kubernetes.io/version: '1.17.2'
     app.kubernetes.io/name: knative-operator
   annotations:
     argocd.argoproj.io/sync-wave: '2'
@@ -53173,7 +53183,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: knative-eventing-operator
   labels:
-    app.kubernetes.io/version: '1.18.0'
+    app.kubernetes.io/version: '1.17.2'
     app.kubernetes.io/name: knative-operator
   annotations:
     argocd.argoproj.io/sync-wave: '2'
@@ -53551,7 +53561,7 @@ metadata:
   name: knative-operator
   namespace: knative-operator
   labels:
-    app.kubernetes.io/version: '1.18.0'
+    app.kubernetes.io/version: '1.17.2'
     app.kubernetes.io/name: knative-operator
   annotations:
     argocd.argoproj.io/sync-wave: '2'
@@ -53561,7 +53571,7 @@ kind: ClusterRoleBinding
 metadata:
   name: knative-serving-operator
   labels:
-    app.kubernetes.io/version: '1.18.0'
+    app.kubernetes.io/version: '1.17.2'
     app.kubernetes.io/name: knative-operator
   annotations:
     argocd.argoproj.io/sync-wave: '2'
@@ -53579,7 +53589,7 @@ kind: ClusterRoleBinding
 metadata:
   name: knative-eventing-operator
   labels:
-    app.kubernetes.io/version: '1.18.0'
+    app.kubernetes.io/version: '1.17.2'
     app.kubernetes.io/name: knative-operator
   annotations:
     argocd.argoproj.io/sync-wave: '2'
@@ -53598,7 +53608,7 @@ metadata:
   namespace: knative-operator
   name: knative-operator-webhook
   labels:
-    app.kubernetes.io/version: '1.18.0'
+    app.kubernetes.io/version: '1.17.2'
     app.kubernetes.io/name: knative-operator
   annotations:
     argocd.argoproj.io/sync-wave: '2'
@@ -53620,7 +53630,7 @@ kind: ClusterRole
 metadata:
   name: knative-operator-webhook
   labels:
-    app.kubernetes.io/version: '1.18.0'
+    app.kubernetes.io/version: '1.17.2'
     app.kubernetes.io/name: knative-operator
   annotations:
     argocd.argoproj.io/sync-wave: '2'
@@ -53706,7 +53716,7 @@ metadata:
   name: operator-webhook
   namespace: knative-operator
   labels:
-    app.kubernetes.io/version: '1.18.0'
+    app.kubernetes.io/version: '1.17.2'
     app.kubernetes.io/name: knative-operator
   annotations:
     argocd.argoproj.io/sync-wave: '2'
@@ -53717,7 +53727,7 @@ metadata:
   namespace: knative-operator
   name: operator-webhook
   labels:
-    app.kubernetes.io/version: '1.18.0'
+    app.kubernetes.io/version: '1.17.2'
     app.kubernetes.io/name: knative-operator
   annotations:
     argocd.argoproj.io/sync-wave: '2'
@@ -53735,7 +53745,7 @@ kind: ClusterRoleBinding
 metadata:
   name: operator-webhook
   labels:
-    app.kubernetes.io/version: '1.18.0'
+    app.kubernetes.io/version: '1.17.2'
     app.kubernetes.io/name: knative-operator
   annotations:
     argocd.argoproj.io/sync-wave: '2'
@@ -53753,7 +53763,7 @@ kind: ClusterRoleBinding
 metadata:
   name: knative-serving-operator-aggregated
   labels:
-    app.kubernetes.io/version: '1.18.0'
+    app.kubernetes.io/version: '1.17.2'
     app.kubernetes.io/name: knative-operator
   annotations:
     argocd.argoproj.io/sync-wave: '2'
@@ -53771,7 +53781,7 @@ kind: ClusterRoleBinding
 metadata:
   name: knative-serving-operator-aggregated-stable
   labels:
-    app.kubernetes.io/version: '1.18.0'
+    app.kubernetes.io/version: '1.17.2'
     app.kubernetes.io/name: knative-operator
   annotations:
     argocd.argoproj.io/sync-wave: '2'
@@ -53789,7 +53799,7 @@ kind: ClusterRoleBinding
 metadata:
   name: knative-eventing-operator-aggregated
   labels:
-    app.kubernetes.io/version: '1.18.0'
+    app.kubernetes.io/version: '1.17.2'
     app.kubernetes.io/name: knative-operator
   annotations:
     argocd.argoproj.io/sync-wave: '2'
@@ -53807,7 +53817,7 @@ kind: ClusterRoleBinding
 metadata:
   name: knative-eventing-operator-aggregated-stable
   labels:
-    app.kubernetes.io/version: '1.18.0'
+    app.kubernetes.io/version: '1.17.2'
     app.kubernetes.io/name: knative-operator
   annotations:
     argocd.argoproj.io/sync-wave: '2'
@@ -53826,7 +53836,7 @@ metadata:
   name: config-logging
   namespace: knative-operator
   labels:
-    app.kubernetes.io/version: '1.18.0'
+    app.kubernetes.io/version: '1.17.2'
     app.kubernetes.io/name: knative-operator
   annotations:
     argocd.argoproj.io/sync-wave: '2'
@@ -53838,7 +53848,7 @@ metadata:
   name: config-observability
   namespace: knative-operator
   labels:
-    app.kubernetes.io/version: '1.18.0'
+    app.kubernetes.io/version: '1.17.2'
     app.kubernetes.io/name: knative-operator
   annotations:
     argocd.argoproj.io/sync-wave: '2'
@@ -53851,7 +53861,7 @@ metadata:
   namespace: knative-operator
   labels:
     app.kubernetes.io/name: knative-operator
-    app.kubernetes.io/version: '1.18.0'
+    app.kubernetes.io/version: '1.17.2'
   annotations:
     argocd.argoproj.io/sync-wave: '2'
 spec:
@@ -53864,13 +53874,13 @@ spec:
       labels:
         name: knative-operator
         app.kubernetes.io/name: knative-operator
-        app.kubernetes.io/version: '1.18.0'
+        app.kubernetes.io/version: '1.17.2'
         sidecar.istio.io/inject: 'false'
     spec:
       serviceAccountName: knative-operator
       containers:
       - name: knative-operator
-        image: gcr.io/knative-releases/knative.dev/operator/cmd/operator@sha256:92520a9690e6383eae76d9f831abb706f8280f6ed5c4b20d2ebcb8fc04c64908
+        image: gcr.io/knative-releases/knative.dev/operator/cmd/operator@sha256:9727e5ba9579d98d35181ce14c0aacad2943b2fe1b9a2340dd621718e88da31f
         resources:
           requests:
             cpu: '100m'
@@ -56441,7 +56451,7 @@ spec:
       debug: 'true'
     deployment:
       registries-skipping-tag-resolving: zot-int.zot.svc.cluster.local:5000,zot-int.zot:5000,127.0.0.1:30001
-  version: '1.18.0'
+  version: '1.17.0'
 ---
 apiVersion: operator.knative.dev/v1beta1
 kind: KnativeEventing
@@ -56460,7 +56470,7 @@ spec:
       debug: 'true'
     observability:
       metrics.backend-destination: prometheus
-  version: '1.18.0'
+  version: '1.17.0'
 ---
 apiVersion: v1
 data:
@@ -56604,7 +56614,7 @@ metadata:
   name: kafka-broker-config
   namespace: knative-eventing
   labels:
-    app.kubernetes.io/version: a5c7f94a542f15dd8cd1732031decb7a7adb7900
+    app.kubernetes.io/version: '979404493c01b4f8057288c74af6d155dedd8429'
   annotations:
     argocd.argoproj.io/sync-wave: '7'
 data:
@@ -56618,7 +56628,7 @@ metadata:
   name: kafka-channel-config
   namespace: knative-eventing
   labels:
-    app.kubernetes.io/version: a5c7f94a542f15dd8cd1732031decb7a7adb7900
+    app.kubernetes.io/version: '979404493c01b4f8057288c74af6d155dedd8429'
   annotations:
     argocd.argoproj.io/sync-wave: '7'
 data:
@@ -56629,7 +56639,7 @@ kind: CustomResourceDefinition
 metadata:
   name: kafkachannels.messaging.knative.dev
   labels:
-    app.kubernetes.io/version: a5c7f94a542f15dd8cd1732031decb7a7adb7900
+    app.kubernetes.io/version: '979404493c01b4f8057288c74af6d155dedd8429'
     knative.dev/crd-install: 'true'
     messaging.knative.dev/subscribable: 'true'
     duck.knative.dev/addressable: 'true'
@@ -56641,301 +56651,6 @@ spec:
   - name: v1beta1
     served: true
     storage: true
-    subresources:
-      status: {}
-    schema:
-      openAPIV3Schema:
-        description: KafkaChannel is a resource representing a Channel that is backed by a topic of an Apache Kafka cluster.
-        type: object
-        properties:
-          spec:
-            description: Spec defines the desired state of the Channel.
-            type: object
-            properties:
-              numPartitions:
-                description: NumPartitions is the number of partitions of a Kafka topic. By default, it is set to 1.
-                type: integer
-                format: int32
-                default: 1
-              replicationFactor:
-                description: ReplicationFactor is the replication factor of a Kafka topic. By default, it is set to 1.
-                type: integer
-                maximum: 32767
-                default: 1
-              retentionDuration:
-                description: RetentionDuration is the retention time for events in a Kafka Topic represented as an ISO-8601 Duration.  By default it is set to 168 hours, which is the precise form of 7 days.
-                type: string
-              delivery:
-                description: DeliverySpec contains the default delivery spec for each subscription to this Channelable. Each subscription delivery spec, if any, overrides this global delivery spec.
-                type: object
-                properties:
-                  backoffDelay:
-                    description: 'BackoffDelay is the delay before retrying. More information on Duration format: - https://www.iso.org/iso-8601-date-and-time-format.html - https://en.wikipedia.org/wiki/ISO_8601  For linear policy, backoff delay is backoffDelay*<numberOfRetries>. For exponential policy, backoff delay is backoffDelay*2^<numberOfRetries>.'
-                    type: string
-                  backoffPolicy:
-                    description: BackoffPolicy is the retry backoff policy (linear, exponential).
-                    type: string
-                  deadLetterSink:
-                    description: DeadLetterSink is the sink receiving event that could not be sent to a destination.
-                    type: object
-                    properties:
-                      ref:
-                        description: Ref points to an Addressable.
-                        type: object
-                        properties:
-                          apiVersion:
-                            description: API version of the referent.
-                            type: string
-                          kind:
-                            description: 'Kind of the referent. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
-                            type: string
-                          name:
-                            description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names'
-                            type: string
-                          namespace:
-                            description: 'Namespace of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/ This is optional field, it gets defaulted to the object holding it if left out.'
-                            type: string
-                      uri:
-                        description: URI can be an absolute URL(non-empty scheme and non-empty host) pointing to the target or a relative URI. Relative URIs will be resolved using the base URI retrieved from Ref.
-                        type: string
-                      CACerts:
-                        type: string
-                      audience:
-                        description: Audience is the OIDC audience for the deadLetterSink.
-                        type: string
-                  retry:
-                    description: Retry is the minimum number of retries the sender should attempt when sending an event before moving it to the dead letter sink.
-                    type: integer
-                    format: int32
-                x-kubernetes-preserve-unknown-fields: true
-              subscribers:
-                description: This is the list of subscriptions for this subscribable.
-                type: array
-                items:
-                  type: object
-                  properties:
-                    delivery:
-                      description: DeliverySpec contains options controlling the event delivery
-                      type: object
-                      properties:
-                        backoffDelay:
-                          description: 'BackoffDelay is the delay before retrying. More information on Duration format: - https://www.iso.org/iso-8601-date-and-time-format.html - https://en.wikipedia.org/wiki/ISO_8601  For linear policy, backoff delay is backoffDelay*<numberOfRetries>. For exponential policy, backoff delay is backoffDelay*2^<numberOfRetries>.'
-                          type: string
-                        backoffPolicy:
-                          description: BackoffPolicy is the retry backoff policy (linear, exponential).
-                          type: string
-                        deadLetterSink:
-                          description: DeadLetterSink is the sink receiving event that could not be sent to a destination.
-                          type: object
-                          properties:
-                            ref:
-                              description: Ref points to an Addressable.
-                              type: object
-                              properties:
-                                apiVersion:
-                                  description: API version of the referent.
-                                  type: string
-                                kind:
-                                  description: 'Kind of the referent. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
-                                  type: string
-                                name:
-                                  description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names'
-                                  type: string
-                                namespace:
-                                  description: 'Namespace of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/ This is optional field, it gets defaulted to the object holding it if left out.'
-                                  type: string
-                            uri:
-                              description: URI can be an absolute URL(non-empty scheme and non-empty host) pointing to the target or a relative URI. Relative URIs will be resolved using the base URI retrieved from Ref.
-                              type: string
-                            CACerts:
-                              type: string
-                            audience:
-                              description: Audience is the OIDC audience for the deadLetterSink.
-                              type: string
-                        retry:
-                          description: Retry is the minimum number of retries the sender should attempt when sending an event before moving it to the dead letter sink.
-                          type: integer
-                          format: int32
-                      x-kubernetes-preserve-unknown-fields: true
-                    generation:
-                      description: Generation of the origin of the subscriber with uid:UID.
-                      type: integer
-                      format: int64
-                    name:
-                      description: The name of the subscription
-                      type: string
-                    replyUri:
-                      description: ReplyURI is the endpoint for the reply
-                      type: string
-                    replyCACerts:
-                      description: replyCACerts is the CA certs to trust for the reply.
-                      type: string
-                    replyAudience:
-                      description: ReplyAudience is the OIDC audience for the replyUri.
-                      type: string
-                    subscriberUri:
-                      description: SubscriberURI is the endpoint for the subscriber
-                      type: string
-                    subscriberCACerts:
-                      description: SubscriberCACerts is the CA certs to trust for the subscriber.
-                      type: string
-                    subscriberAudience:
-                      description: SubscriberAudience is the OIDC audience for the subscriberUri.
-                      type: string
-                    uid:
-                      description: UID is used to understand the origin of the subscriber.
-                      type: string
-                    auth:
-                      description: Auth provides the relevant information for OIDC authentication.
-                      type: object
-                      properties:
-                        serviceAccountName:
-                          description: ServiceAccountName is the name of the generated service account used for this components OIDC authentication.
-                          type: string
-          status:
-            description: Status represents the current state of the KafkaChannel. This data may be out of date.
-            type: object
-            properties:
-              address:
-                type: object
-                required:
-                - url
-                properties:
-                  name:
-                    type: string
-                  url:
-                    type: string
-                  CACerts:
-                    type: string
-                  audience:
-                    type: string
-              addresses:
-                description: Kafka Sink is Addressable. It exposes the endpoints as URIs to get events delivered into the Kafka topic.
-                type: array
-                items:
-                  type: object
-                  properties:
-                    name:
-                      type: string
-                    url:
-                      type: string
-                    CACerts:
-                      type: string
-                    audience:
-                      type: string
-              annotations:
-                description: Annotations is additional Status fields for the Resource to save some additional State as well as convey more information to the user. This is roughly akin to Annotations on any k8s resource, just the reconciler conveying richer information outwards.
-                type: object
-                x-kubernetes-preserve-unknown-fields: true
-              policies:
-                description: List of applied EventPolicies
-                type: array
-                items:
-                  type: object
-                  properties:
-                    apiVersion:
-                      description: The API version of the applied EventPolicy. This indicates, which version of EventPolicy is supported by the resource.
-                      type: string
-                    name:
-                      description: The name of the applied EventPolicy
-                      type: string
-              conditions:
-                description: Conditions the latest available observations of a resource's current state.
-                type: array
-                items:
-                  type: object
-                  required:
-                  - type
-                  - status
-                  properties:
-                    lastTransitionTime:
-                      description: LastTransitionTime is the last time the condition transitioned from one status to another. We use VolatileTime in place of metav1.Time to exclude this from creating equality.Semantic differences (all other things held constant).
-                      type: string
-                    message:
-                      description: A human readable message indicating details about the transition.
-                      type: string
-                    reason:
-                      description: The reason for the condition's last transition.
-                      type: string
-                    severity:
-                      description: Severity with which to treat failures of this type of condition. When this is not specified, it defaults to Error.
-                      type: string
-                    status:
-                      description: Status of the condition, one of True, False, Unknown.
-                      type: string
-                    type:
-                      description: Type of condition.
-                      type: string
-              deadLetterChannel:
-                description: DeadLetterChannel is a KReference and is set by the channel when it supports native error handling via a channel Failed messages are delivered here.
-                type: object
-                properties:
-                  apiVersion:
-                    description: API version of the referent.
-                    type: string
-                  kind:
-                    description: 'Kind of the referent. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
-                    type: string
-                  name:
-                    description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names'
-                    type: string
-                  namespace:
-                    description: 'Namespace of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/ This is optional field, it gets defaulted to the object holding it if left out.'
-                    type: string
-              deadLetterSinkUri:
-                description: DeadLetterSinkURI is the resolved URI of the dead letter ref if one is specified in the Spec.Delivery.
-                type: string
-              deadLetterSinkCACerts:
-                type: string
-              deadLetterSinkAudience:
-                description: OIDC audience of the dead letter sink.
-                type: string
-              observedGeneration:
-                description: ObservedGeneration is the 'Generation' of the Service that was last processed by the controller.
-                type: integer
-                format: int64
-              subscribers:
-                description: This is the list of subscription's statuses for this channel.
-                type: array
-                items:
-                  type: object
-                  properties:
-                    message:
-                      description: A human readable message indicating details of Ready status.
-                      type: string
-                    observedGeneration:
-                      description: Generation of the origin of the subscriber with uid:UID.
-                      type: integer
-                      format: int64
-                    ready:
-                      description: Status of the subscriber.
-                      type: string
-                    uid:
-                      description: UID is used to understand the origin of the subscriber.
-                      type: string
-                    auth:
-                      description: Auth provides the relevant information for OIDC authentication.
-                      type: object
-                      properties:
-                        serviceAccountName:
-                          description: ServiceAccountName is the name of the generated service account used for this components OIDC authentication.
-                          type: string
-    additionalPrinterColumns:
-    - name: Ready
-      type: string
-      jsonPath: '.status.conditions[?(@.type=="Ready")].status'
-    - name: Reason
-      type: string
-      jsonPath: '.status.conditions[?(@.type=="Ready")].reason'
-    - name: URL
-      type: string
-      jsonPath: '.status.address.url'
-    - name: Age
-      type: date
-      jsonPath: '.metadata.creationTimestamp'
-  - name: v1
-    served: true
-    storage: false
     subresources:
       status: {}
     schema:
@@ -57248,7 +56963,7 @@ spec:
       - v1beta1
       clientConfig:
         service:
-          name: kafka-webhook-eventing
+          name: kafka-webhook
           namespace: knative-eventing
 ---
 apiVersion: apiextensions.k8s.io/v1
@@ -57256,7 +56971,7 @@ kind: CustomResourceDefinition
 metadata:
   creationTimestamp: null
   labels:
-    app.kubernetes.io/version: a5c7f94a542f15dd8cd1732031decb7a7adb7900
+    app.kubernetes.io/version: '979404493c01b4f8057288c74af6d155dedd8429'
     knative.dev/crd-install: 'true'
   name: consumers.internal.kafka.eventing.knative.dev
   annotations:
@@ -57297,7 +57012,7 @@ kind: CustomResourceDefinition
 metadata:
   creationTimestamp: null
   labels:
-    app.kubernetes.io/version: a5c7f94a542f15dd8cd1732031decb7a7adb7900
+    app.kubernetes.io/version: '979404493c01b4f8057288c74af6d155dedd8429'
     knative.dev/crd-install: 'true'
   name: consumergroups.internal.kafka.eventing.knative.dev
   annotations:
@@ -57350,7 +57065,7 @@ metadata:
   labels:
     duck.knative.dev/addressable: 'true'
     knative.dev/crd-install: 'true'
-    app.kubernetes.io/version: a5c7f94a542f15dd8cd1732031decb7a7adb7900
+    app.kubernetes.io/version: '979404493c01b4f8057288c74af6d155dedd8429'
   annotations:
     argocd.argoproj.io/sync-wave: '7'
 spec:
@@ -57524,7 +57239,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   labels:
-    app.kubernetes.io/version: a5c7f94a542f15dd8cd1732031decb7a7adb7900
+    app.kubernetes.io/version: '979404493c01b4f8057288c74af6d155dedd8429'
     eventing.knative.dev/source: 'true'
     duck.knative.dev/source: 'true'
     knative.dev/crd-install: 'true'
@@ -58365,7 +58080,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: eventing-kafka-source-observer
   labels:
-    app.kubernetes.io/version: a5c7f94a542f15dd8cd1732031decb7a7adb7900
+    app.kubernetes.io/version: '979404493c01b4f8057288c74af6d155dedd8429'
     duck.knative.dev/source: 'true'
   annotations:
     argocd.argoproj.io/sync-wave: '7'
@@ -58385,7 +58100,7 @@ metadata:
   name: config-kafka-source-defaults
   namespace: knative-eventing
   labels:
-    app.kubernetes.io/version: a5c7f94a542f15dd8cd1732031decb7a7adb7900
+    app.kubernetes.io/version: '979404493c01b4f8057288c74af6d155dedd8429'
   annotations:
     knative.dev/example-checksum: b6ed351d
     argocd.argoproj.io/sync-wave: '7'
@@ -58397,7 +58112,7 @@ metadata:
   name: config-kafka-autoscaler
   namespace: knative-eventing
   labels:
-    app.kubernetes.io/version: a5c7f94a542f15dd8cd1732031decb7a7adb7900
+    app.kubernetes.io/version: '979404493c01b4f8057288c74af6d155dedd8429'
   annotations:
     argocd.argoproj.io/sync-wave: '7'
 data:
@@ -58428,7 +58143,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   labels:
-    app.kubernetes.io/version: a5c7f94a542f15dd8cd1732031decb7a7adb7900
+    app.kubernetes.io/version: '979404493c01b4f8057288c74af6d155dedd8429'
   name: config-kafka-leader-election
   namespace: knative-eventing
   annotations:
@@ -58447,7 +58162,7 @@ metadata:
   name: kafka-config-logging
   namespace: knative-eventing
   labels:
-    app.kubernetes.io/version: a5c7f94a542f15dd8cd1732031decb7a7adb7900
+    app.kubernetes.io/version: '979404493c01b4f8057288c74af6d155dedd8429'
   annotations:
     argocd.argoproj.io/sync-wave: '7'
 data:
@@ -58478,26 +58193,12 @@ data:
     [
     ]
 ---
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: config-tracing
-  namespace: knative-eventing
-  labels:
-    app.kubernetes.io/version: a5c7f94a542f15dd8cd1732031decb7a7adb7900
-    knative.dev/config-propagation: original
-    knative.dev/config-category: eventing
-  annotations:
-    knative.dev/example-checksum: '4002b4c2'
-    argocd.argoproj.io/sync-wave: '7'
-data: {}
----
 kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: knative-kafka-addressable-resolver
   labels:
-    app.kubernetes.io/version: a5c7f94a542f15dd8cd1732031decb7a7adb7900
+    app.kubernetes.io/version: '979404493c01b4f8057288c74af6d155dedd8429'
     duck.knative.dev/addressable: 'true'
   annotations:
     argocd.argoproj.io/sync-wave: '7'
@@ -58526,7 +58227,7 @@ kind: ClusterRole
 metadata:
   name: knative-kafka-channelable-manipulator
   labels:
-    app.kubernetes.io/version: a5c7f94a542f15dd8cd1732031decb7a7adb7900
+    app.kubernetes.io/version: '979404493c01b4f8057288c74af6d155dedd8429'
     duck.knative.dev/channelable: 'true'
   annotations:
     argocd.argoproj.io/sync-wave: '7'
@@ -58550,7 +58251,7 @@ kind: ClusterRole
 metadata:
   name: kafka-controller
   labels:
-    app.kubernetes.io/version: a5c7f94a542f15dd8cd1732031decb7a7adb7900
+    app.kubernetes.io/version: '979404493c01b4f8057288c74af6d155dedd8429'
   annotations:
     argocd.argoproj.io/sync-wave: '7'
 rules:
@@ -58828,7 +58529,7 @@ metadata:
   name: kafka-controller
   namespace: knative-eventing
   labels:
-    app.kubernetes.io/version: a5c7f94a542f15dd8cd1732031decb7a7adb7900
+    app.kubernetes.io/version: '979404493c01b4f8057288c74af6d155dedd8429'
   annotations:
     argocd.argoproj.io/sync-wave: '7'
 ---
@@ -58837,7 +58538,7 @@ kind: ClusterRoleBinding
 metadata:
   name: kafka-controller
   labels:
-    app.kubernetes.io/version: a5c7f94a542f15dd8cd1732031decb7a7adb7900
+    app.kubernetes.io/version: '979404493c01b4f8057288c74af6d155dedd8429'
   annotations:
     argocd.argoproj.io/sync-wave: '7'
 subjects:
@@ -58854,7 +58555,7 @@ kind: ClusterRoleBinding
 metadata:
   name: kafka-controller-addressable-resolver
   labels:
-    app.kubernetes.io/version: a5c7f94a542f15dd8cd1732031decb7a7adb7900
+    app.kubernetes.io/version: '979404493c01b4f8057288c74af6d155dedd8429'
   annotations:
     argocd.argoproj.io/sync-wave: '7'
 subjects:
@@ -58873,7 +58574,7 @@ metadata:
   namespace: knative-eventing
   labels:
     app: kafka-controller
-    app.kubernetes.io/version: a5c7f94a542f15dd8cd1732031decb7a7adb7900
+    app.kubernetes.io/version: '979404493c01b4f8057288c74af6d155dedd8429'
     app.kubernetes.io/component: kafka-controller
     app.kubernetes.io/name: knative-eventing
   annotations:
@@ -58887,7 +58588,7 @@ spec:
       name: kafka-controller
       labels:
         app: kafka-controller
-        app.kubernetes.io/version: a5c7f94a542f15dd8cd1732031decb7a7adb7900
+        app.kubernetes.io/version: '979404493c01b4f8057288c74af6d155dedd8429'
         app.kubernetes.io/component: kafka-controller
         app.kubernetes.io/name: knative-eventing
     spec:
@@ -58912,7 +58613,7 @@ spec:
             weight: 100
       containers:
       - name: controller
-        image: gcr.io/knative-releases/knative.dev/eventing-kafka-broker/control-plane/cmd/kafka-controller@sha256:e80fc086fb12b136b93f666f2a7aaa47c281fa2838aa4312c379e09d04452db3
+        image: gcr.io/knative-releases/knative.dev/eventing-kafka-broker/control-plane/cmd/kafka-controller@sha256:d7427bf00794cd9180e3844f35e40bedd11d9547b12c5f309e1aaf2234464ca8
         imagePullPolicy: IfNotPresent
         env:
         - name: BROKER_DATA_PLANE_CONFIG_MAP_NAMESPACE
@@ -58989,8 +58690,6 @@ spec:
           value: '100'
         - name: POD_CAPACITY
           value: '20'
-        - name: DISPATCHERS_MIN_REPLICAS
-          value: '0'
         - name: SCHEDULER_CONFIG
           value: config-kafka-scheduler
         - name: DESCHEDULER_CONFIG
@@ -59039,7 +58738,7 @@ kind: ClusterRole
 metadata:
   name: kafka-webhook-eventing
   labels:
-    app.kubernetes.io/version: a5c7f94a542f15dd8cd1732031decb7a7adb7900
+    app.kubernetes.io/version: '979404493c01b4f8057288c74af6d155dedd8429'
   annotations:
     argocd.argoproj.io/sync-wave: '7'
 rules:
@@ -59139,7 +58838,7 @@ metadata:
   name: kafka-webhook-eventing
   namespace: knative-eventing
   labels:
-    app.kubernetes.io/version: a5c7f94a542f15dd8cd1732031decb7a7adb7900
+    app.kubernetes.io/version: '979404493c01b4f8057288c74af6d155dedd8429'
   annotations:
     argocd.argoproj.io/sync-wave: '7'
 ---
@@ -59148,7 +58847,7 @@ kind: ClusterRoleBinding
 metadata:
   name: kafka-webhook-eventing
   labels:
-    app.kubernetes.io/version: a5c7f94a542f15dd8cd1732031decb7a7adb7900
+    app.kubernetes.io/version: '979404493c01b4f8057288c74af6d155dedd8429'
   annotations:
     argocd.argoproj.io/sync-wave: '7'
 subjects:
@@ -59165,7 +58864,7 @@ kind: MutatingWebhookConfiguration
 metadata:
   name: defaulting.webhook.kafka.eventing.knative.dev
   labels:
-    app.kubernetes.io/version: a5c7f94a542f15dd8cd1732031decb7a7adb7900
+    app.kubernetes.io/version: '979404493c01b4f8057288c74af6d155dedd8429'
   annotations:
     argocd.argoproj.io/sync-wave: '7'
 webhooks:
@@ -59186,7 +58885,7 @@ kind: MutatingWebhookConfiguration
 metadata:
   name: pods.defaulting.webhook.kafka.eventing.knative.dev
   labels:
-    app.kubernetes.io/version: a5c7f94a542f15dd8cd1732031decb7a7adb7900
+    app.kubernetes.io/version: '979404493c01b4f8057288c74af6d155dedd8429'
   annotations:
     argocd.argoproj.io/sync-wave: '7'
 webhooks:
@@ -59216,7 +58915,7 @@ metadata:
   name: kafka-webhook-eventing-certs
   namespace: knative-eventing
   labels:
-    app.kubernetes.io/version: a5c7f94a542f15dd8cd1732031decb7a7adb7900
+    app.kubernetes.io/version: '979404493c01b4f8057288c74af6d155dedd8429'
   annotations:
     argocd.argoproj.io/sync-wave: '7'
 ---
@@ -59225,7 +58924,7 @@ kind: ValidatingWebhookConfiguration
 metadata:
   name: validation.webhook.kafka.eventing.knative.dev
   labels:
-    app.kubernetes.io/version: a5c7f94a542f15dd8cd1732031decb7a7adb7900
+    app.kubernetes.io/version: '979404493c01b4f8057288c74af6d155dedd8429'
   annotations:
     argocd.argoproj.io/sync-wave: '7'
 webhooks:
@@ -59248,7 +58947,7 @@ metadata:
   namespace: knative-eventing
   labels:
     app: kafka-webhook-eventing
-    app.kubernetes.io/version: a5c7f94a542f15dd8cd1732031decb7a7adb7900
+    app.kubernetes.io/version: '979404493c01b4f8057288c74af6d155dedd8429'
     app.kubernetes.io/component: kafka-webhook-eventing
     app.kubernetes.io/name: knative-eventing
   annotations:
@@ -59261,7 +58960,7 @@ spec:
     metadata:
       labels:
         app: kafka-webhook-eventing
-        app.kubernetes.io/version: a5c7f94a542f15dd8cd1732031decb7a7adb7900
+        app.kubernetes.io/version: '979404493c01b4f8057288c74af6d155dedd8429'
         app.kubernetes.io/component: kafka-webhook-eventing
         app.kubernetes.io/name: knative-eventing
     spec:
@@ -59280,7 +58979,7 @@ spec:
       containers:
       - name: kafka-webhook-eventing
         terminationMessagePolicy: FallbackToLogsOnError
-        image: gcr.io/knative-releases/knative.dev/eventing-kafka-broker/control-plane/cmd/webhook-kafka@sha256:ac3613d5021b8ea35cd123fe6bb21d6e482f51e18af9dfb8e887f07528cf1b3d
+        image: gcr.io/knative-releases/knative.dev/eventing-kafka-broker/control-plane/cmd/webhook-kafka@sha256:cdb92a989e11950fe35c55cd09b32d824e3ab86d4bc42cf577da59faac09df8f
         resources:
           requests:
             cpu: '20m'
@@ -59348,7 +59047,7 @@ metadata:
   namespace: knative-eventing
   labels:
     app: kafka-webhook-eventing
-    app.kubernetes.io/version: a5c7f94a542f15dd8cd1732031decb7a7adb7900
+    app.kubernetes.io/version: '979404493c01b4f8057288c74af6d155dedd8429'
     app.kubernetes.io/component: kafka-webhook-eventing
     app.kubernetes.io/name: knative-eventing
   annotations:
@@ -59370,7 +59069,7 @@ metadata:
   name: config-kafka-source-data-plane
   namespace: knative-eventing
   labels:
-    app.kubernetes.io/version: a5c7f94a542f15dd8cd1732031decb7a7adb7900
+    app.kubernetes.io/version: '979404493c01b4f8057288c74af6d155dedd8429'
   annotations:
     knative.dev/example-checksum: '8157ecb1'
     argocd.argoproj.io/sync-wave: '8'
@@ -59478,7 +59177,7 @@ kind: ClusterRole
 metadata:
   name: knative-kafka-source-data-plane
   labels:
-    app.kubernetes.io/version: a5c7f94a542f15dd8cd1732031decb7a7adb7900
+    app.kubernetes.io/version: '979404493c01b4f8057288c74af6d155dedd8429'
   annotations:
     argocd.argoproj.io/sync-wave: '8'
 rules:
@@ -59503,7 +59202,7 @@ metadata:
   name: knative-kafka-source-data-plane
   namespace: knative-eventing
   labels:
-    app.kubernetes.io/version: a5c7f94a542f15dd8cd1732031decb7a7adb7900
+    app.kubernetes.io/version: '979404493c01b4f8057288c74af6d155dedd8429'
   annotations:
     argocd.argoproj.io/sync-wave: '8'
 ---
@@ -59512,7 +59211,7 @@ kind: ClusterRoleBinding
 metadata:
   name: knative-kafka-source-data-plane
   labels:
-    app.kubernetes.io/version: a5c7f94a542f15dd8cd1732031decb7a7adb7900
+    app.kubernetes.io/version: '979404493c01b4f8057288c74af6d155dedd8429'
   annotations:
     argocd.argoproj.io/sync-wave: '8'
 subjects:
@@ -59531,7 +59230,7 @@ metadata:
   namespace: knative-eventing
   labels:
     app: kafka-source-dispatcher
-    app.kubernetes.io/version: a5c7f94a542f15dd8cd1732031decb7a7adb7900
+    app.kubernetes.io/version: '979404493c01b4f8057288c74af6d155dedd8429'
     app.kubernetes.io/component: kafka-source-dispatcher
     app.kubernetes.io/name: knative-eventing
   annotations:
@@ -59547,7 +59246,7 @@ spec:
       name: kafka-source-dispatcher
       labels:
         app: kafka-source-dispatcher
-        app.kubernetes.io/version: a5c7f94a542f15dd8cd1732031decb7a7adb7900
+        app.kubernetes.io/version: '979404493c01b4f8057288c74af6d155dedd8429'
         app.kubernetes.io/component: kafka-channel-dispatcher
         app.kubernetes.io/name: knative-eventing
         app.kubernetes.io/kind: kafka-dispatcher
@@ -59573,7 +59272,7 @@ spec:
         runAsUser: 1001
       containers:
       - name: kafka-source-dispatcher
-        image: gcr.io/knative-releases/knative-kafka-broker-dispatcher-loom@sha256:228bd3e8d92ce290fa52a6a4355a670fcc5deed48566b874353dc451c9ff6451
+        image: gcr.io/knative-releases/knative-kafka-broker-dispatcher-loom@sha256:f54956c65a03e5c32425364a4505698f486c855cfc542cd9d33ee047f168b6c9
         imagePullPolicy: IfNotPresent
         volumeMounts:
         - mountPath: /etc/config
@@ -59689,7 +59388,7 @@ metadata:
   name: config-kafka-channel-data-plane
   namespace: knative-eventing
   labels:
-    app.kubernetes.io/version: a5c7f94a542f15dd8cd1732031decb7a7adb7900
+    app.kubernetes.io/version: '979404493c01b4f8057288c74af6d155dedd8429'
   annotations:
     knative.dev/example-checksum: '6ce544b6'
     argocd.argoproj.io/sync-wave: '9'
@@ -59796,7 +59495,7 @@ kind: ClusterRole
 metadata:
   name: knative-kafka-channel-data-plane
   labels:
-    app.kubernetes.io/version: a5c7f94a542f15dd8cd1732031decb7a7adb7900
+    app.kubernetes.io/version: '979404493c01b4f8057288c74af6d155dedd8429'
   annotations:
     argocd.argoproj.io/sync-wave: '9'
 rules:
@@ -59830,7 +59529,7 @@ metadata:
   name: knative-kafka-channel-data-plane
   namespace: knative-eventing
   labels:
-    app.kubernetes.io/version: a5c7f94a542f15dd8cd1732031decb7a7adb7900
+    app.kubernetes.io/version: '979404493c01b4f8057288c74af6d155dedd8429'
   annotations:
     argocd.argoproj.io/sync-wave: '9'
 ---
@@ -59839,7 +59538,7 @@ kind: ClusterRoleBinding
 metadata:
   name: knative-kafka-channel-data-plane
   labels:
-    app.kubernetes.io/version: a5c7f94a542f15dd8cd1732031decb7a7adb7900
+    app.kubernetes.io/version: '979404493c01b4f8057288c74af6d155dedd8429'
   annotations:
     argocd.argoproj.io/sync-wave: '9'
 subjects:
@@ -59858,7 +59557,7 @@ metadata:
   namespace: knative-eventing
   labels:
     app: kafka-channel-dispatcher
-    app.kubernetes.io/version: a5c7f94a542f15dd8cd1732031decb7a7adb7900
+    app.kubernetes.io/version: '979404493c01b4f8057288c74af6d155dedd8429'
     app.kubernetes.io/component: kafka-channel-dispatcher
     app.kubernetes.io/name: knative-eventing
   annotations:
@@ -59874,7 +59573,7 @@ spec:
       name: kafka-channel-dispatcher
       labels:
         app: kafka-channel-dispatcher
-        app.kubernetes.io/version: a5c7f94a542f15dd8cd1732031decb7a7adb7900
+        app.kubernetes.io/version: '979404493c01b4f8057288c74af6d155dedd8429'
         app.kubernetes.io/component: kafka-channel-dispatcher
         app.kubernetes.io/name: knative-eventing
         app.kubernetes.io/kind: kafka-dispatcher
@@ -59900,7 +59599,7 @@ spec:
         runAsUser: 1001
       containers:
       - name: kafka-channel-dispatcher
-        image: gcr.io/knative-releases/knative-kafka-broker-dispatcher-loom@sha256:228bd3e8d92ce290fa52a6a4355a670fcc5deed48566b874353dc451c9ff6451
+        image: gcr.io/knative-releases/knative-kafka-broker-dispatcher-loom@sha256:f54956c65a03e5c32425364a4505698f486c855cfc542cd9d33ee047f168b6c9
         imagePullPolicy: IfNotPresent
         volumeMounts:
         - mountPath: /etc/config
@@ -60017,7 +59716,7 @@ metadata:
   namespace: knative-eventing
   labels:
     app: kafka-channel-receiver
-    app.kubernetes.io/version: a5c7f94a542f15dd8cd1732031decb7a7adb7900
+    app.kubernetes.io/version: '979404493c01b4f8057288c74af6d155dedd8429'
     app.kubernetes.io/component: kafka-channel-receiver
     app.kubernetes.io/name: knative-eventing
   annotations:
@@ -60031,7 +59730,7 @@ spec:
       name: kafka-channel-receiver
       labels:
         app: kafka-channel-receiver
-        app.kubernetes.io/version: a5c7f94a542f15dd8cd1732031decb7a7adb7900
+        app.kubernetes.io/version: '979404493c01b4f8057288c74af6d155dedd8429'
         app.kubernetes.io/component: kafka-channel-receiver
         app.kubernetes.io/name: knative-eventing
         app.kubernetes.io/kind: kafka-receiver
@@ -60057,7 +59756,7 @@ spec:
         runAsUser: 1001
       containers:
       - name: kafka-channel-receiver
-        image: gcr.io/knative-releases/knative-kafka-broker-receiver-loom@sha256:1f39d0e8bfc7277976e007aca6b44574edcd8cfc6d3b9c363d578c63c5b02158
+        image: gcr.io/knative-releases/knative-kafka-broker-receiver-loom@sha256:4624d7d61ea89da53405756cffbc4e9150e99a7319a5fe00746569aaf04f7fc9
         imagePullPolicy: IfNotPresent
         volumeMounts:
         - mountPath: /etc/config
@@ -60194,7 +59893,7 @@ metadata:
   namespace: knative-eventing
   labels:
     app: kafka-channel-receiver
-    app.kubernetes.io/version: a5c7f94a542f15dd8cd1732031decb7a7adb7900
+    app.kubernetes.io/version: '979404493c01b4f8057288c74af6d155dedd8429'
     app.kubernetes.io/component: kafka-channel-receiver
     app.kubernetes.io/name: knative-eventing
   annotations:
@@ -60226,7 +59925,7 @@ metadata:
   name: config-kafka-broker-data-plane
   namespace: knative-eventing
   labels:
-    app.kubernetes.io/version: a5c7f94a542f15dd8cd1732031decb7a7adb7900
+    app.kubernetes.io/version: '979404493c01b4f8057288c74af6d155dedd8429'
   annotations:
     knative.dev/example-checksum: '57a32008'
     argocd.argoproj.io/sync-wave: '10'
@@ -60334,7 +60033,7 @@ kind: ClusterRole
 metadata:
   name: knative-kafka-broker-data-plane
   labels:
-    app.kubernetes.io/version: a5c7f94a542f15dd8cd1732031decb7a7adb7900
+    app.kubernetes.io/version: '979404493c01b4f8057288c74af6d155dedd8429'
   annotations:
     argocd.argoproj.io/sync-wave: '10'
 rules:
@@ -60368,7 +60067,7 @@ metadata:
   name: knative-kafka-broker-data-plane
   namespace: knative-eventing
   labels:
-    app.kubernetes.io/version: a5c7f94a542f15dd8cd1732031decb7a7adb7900
+    app.kubernetes.io/version: '979404493c01b4f8057288c74af6d155dedd8429'
   annotations:
     argocd.argoproj.io/sync-wave: '10'
 ---
@@ -60377,7 +60076,7 @@ kind: ClusterRoleBinding
 metadata:
   name: knative-kafka-broker-data-plane
   labels:
-    app.kubernetes.io/version: a5c7f94a542f15dd8cd1732031decb7a7adb7900
+    app.kubernetes.io/version: '979404493c01b4f8057288c74af6d155dedd8429'
   annotations:
     argocd.argoproj.io/sync-wave: '10'
 subjects:
@@ -60396,7 +60095,7 @@ metadata:
   namespace: knative-eventing
   labels:
     app: kafka-broker-dispatcher
-    app.kubernetes.io/version: a5c7f94a542f15dd8cd1732031decb7a7adb7900
+    app.kubernetes.io/version: '979404493c01b4f8057288c74af6d155dedd8429'
     app.kubernetes.io/component: kafka-broker-dispatcher
     app.kubernetes.io/name: knative-eventing
   annotations:
@@ -60412,7 +60111,7 @@ spec:
       name: kafka-broker-dispatcher
       labels:
         app: kafka-broker-dispatcher
-        app.kubernetes.io/version: a5c7f94a542f15dd8cd1732031decb7a7adb7900
+        app.kubernetes.io/version: '979404493c01b4f8057288c74af6d155dedd8429'
         app.kubernetes.io/component: kafka-broker-dispatcher
         app.kubernetes.io/name: knative-eventing
         app.kubernetes.io/kind: kafka-dispatcher
@@ -60438,7 +60137,7 @@ spec:
         runAsUser: 1001
       containers:
       - name: kafka-broker-dispatcher
-        image: gcr.io/knative-releases/knative-kafka-broker-dispatcher-loom@sha256:228bd3e8d92ce290fa52a6a4355a670fcc5deed48566b874353dc451c9ff6451
+        image: gcr.io/knative-releases/knative-kafka-broker-dispatcher-loom@sha256:f54956c65a03e5c32425364a4505698f486c855cfc542cd9d33ee047f168b6c9
         imagePullPolicy: IfNotPresent
         volumeMounts:
         - mountPath: /etc/config
@@ -60555,7 +60254,7 @@ metadata:
   namespace: knative-eventing
   labels:
     app: kafka-broker-receiver
-    app.kubernetes.io/version: a5c7f94a542f15dd8cd1732031decb7a7adb7900
+    app.kubernetes.io/version: '979404493c01b4f8057288c74af6d155dedd8429'
     app.kubernetes.io/component: kafka-broker-receiver
     app.kubernetes.io/name: knative-eventing
   annotations:
@@ -60569,7 +60268,7 @@ spec:
       name: kafka-broker-receiver
       labels:
         app: kafka-broker-receiver
-        app.kubernetes.io/version: a5c7f94a542f15dd8cd1732031decb7a7adb7900
+        app.kubernetes.io/version: '979404493c01b4f8057288c74af6d155dedd8429'
         app.kubernetes.io/component: kafka-broker-receiver
         app.kubernetes.io/name: knative-eventing
     spec:
@@ -60594,7 +60293,7 @@ spec:
         runAsUser: 1001
       containers:
       - name: kafka-broker-receiver
-        image: gcr.io/knative-releases/knative-kafka-broker-receiver-loom@sha256:1f39d0e8bfc7277976e007aca6b44574edcd8cfc6d3b9c363d578c63c5b02158
+        image: gcr.io/knative-releases/knative-kafka-broker-receiver-loom@sha256:4624d7d61ea89da53405756cffbc4e9150e99a7319a5fe00746569aaf04f7fc9
         imagePullPolicy: IfNotPresent
         volumeMounts:
         - mountPath: /etc/config
@@ -60731,7 +60430,7 @@ metadata:
   namespace: knative-eventing
   labels:
     app: kafka-broker-receiver
-    app.kubernetes.io/version: a5c7f94a542f15dd8cd1732031decb7a7adb7900
+    app.kubernetes.io/version: '979404493c01b4f8057288c74af6d155dedd8429'
     app.kubernetes.io/component: kafka-broker-receiver
     app.kubernetes.io/name: knative-eventing
   annotations:
@@ -60766,7 +60465,7 @@ kind: ClusterRole
 metadata:
   name: nats-webhook-admission
   labels:
-    nats.eventing.knative.dev/release: v1.18.0
+    nats.eventing.knative.dev/release: v1.17.0
   annotations:
     argocd.argoproj.io/sync-wave: '11'
 rules:
@@ -60787,7 +60486,7 @@ metadata:
   name: nats-webhook
   namespace: knative-eventing
   labels:
-    nats.eventing.knative.dev/release: v1.18.0
+    nats.eventing.knative.dev/release: v1.17.0
   annotations:
     argocd.argoproj.io/sync-wave: '11'
 rules:
@@ -60825,7 +60524,7 @@ metadata:
   name: nats-webhook
   namespace: knative-eventing
   labels:
-    nats.eventing.knative.dev/release: v1.18.0
+    nats.eventing.knative.dev/release: v1.17.0
   annotations:
     argocd.argoproj.io/sync-wave: '11'
 ---
@@ -60891,7 +60590,7 @@ kind: MutatingWebhookConfiguration
 metadata:
   name: defaulting.webhook.nats.messaging.knative.dev
   labels:
-    nats.eventing.knative.dev/release: v1.18.0
+    nats.eventing.knative.dev/release: v1.17.0
   annotations:
     argocd.argoproj.io/sync-wave: '11'
 webhooks:
@@ -60912,7 +60611,7 @@ metadata:
   name: nats-webhook
   namespace: knative-eventing
   labels:
-    nats.eventing.knative.dev/release: v1.18.0
+    nats.eventing.knative.dev/release: v1.17.0
   annotations:
     argocd.argoproj.io/sync-wave: '11'
 spec:
@@ -60941,7 +60640,7 @@ spec:
       containers:
       - name: nats-webhook
         terminationMessagePolicy: FallbackToLogsOnError
-        image: gcr.io/knative-releases/knative.dev/eventing-natss/cmd/webhook@sha256:0acc45c6ed0f1c36536f79c918e9ef930b34e4dfcdd5bca995264342ac98ca2d
+        image: gcr.io/knative-releases/knative.dev/eventing-natss/cmd/webhook@sha256:a5d32c9d3ad21d2c02253dae5264ae4cbb1740aac45e36328a7476a6f80c6dfb
         resources:
           requests:
             cpu: '20m'
@@ -60995,7 +60694,7 @@ kind: ValidatingWebhookConfiguration
 metadata:
   name: validation.webhook.nats.messaging.knative.dev
   labels:
-    nats.eventing.knative.dev/release: v1.18.0
+    nats.eventing.knative.dev/release: v1.17.0
   annotations:
     argocd.argoproj.io/sync-wave: '11'
 webhooks:
@@ -61014,7 +60713,7 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    nats.eventing.knative.dev/release: v1.18.0
+    nats.eventing.knative.dev/release: v1.17.0
     role: nats-webhook
   name: nats-webhook
   namespace: knative-eventing
@@ -61033,7 +60732,7 @@ kind: ClusterRole
 metadata:
   name: nats-jsm-addressable-resolver
   labels:
-    nats.eventing.knative.dev/release: v1.18.0
+    nats.eventing.knative.dev/release: v1.17.0
     duck.knative.dev/addressable: 'true'
   annotations:
     argocd.argoproj.io/sync-wave: '11'
@@ -61053,7 +60752,7 @@ kind: ClusterRole
 metadata:
   name: nats-jsm-channelable-manipulator
   labels:
-    nats.eventing.knative.dev/release: v1.18.0
+    nats.eventing.knative.dev/release: v1.17.0
     duck.knative.dev/channelable: 'true'
   annotations:
     argocd.argoproj.io/sync-wave: '11'
@@ -61187,7 +60886,7 @@ metadata:
   name: jetstream-ch-controller
   namespace: knative-eventing
   labels:
-    nats.eventing.knative.dev/release: v1.18.0
+    nats.eventing.knative.dev/release: v1.17.0
   annotations:
     argocd.argoproj.io/sync-wave: '11'
 ---
@@ -61298,7 +60997,7 @@ metadata:
   name: jetstream-ch-dispatcher
   namespace: knative-eventing
   labels:
-    nats.eventing.knative.dev/release: v1.18.0
+    nats.eventing.knative.dev/release: v1.17.0
   annotations:
     argocd.argoproj.io/sync-wave: '11'
 ---
@@ -61417,7 +61116,7 @@ kind: CustomResourceDefinition
 metadata:
   name: natsjetstreamchannels.messaging.knative.dev
   labels:
-    nats.eventing.knative.dev/release: v1.18.0
+    nats.eventing.knative.dev/release: v1.17.0
     knative.dev/crd-install: 'true'
     messaging.knative.dev/subscribable: 'true'
     duck.knative.dev/addressable: 'true'
@@ -62370,7 +62069,7 @@ metadata:
   name: jetstream-ch-controller
   namespace: knative-eventing
   labels:
-    nats.eventing.knative.dev/release: v1.18.0
+    nats.eventing.knative.dev/release: v1.17.0
     messaging.knative.dev/channel: nats-jetstream-channel
     messaging.knative.dev/role: controller
   annotations:
@@ -62390,14 +62089,14 @@ spec:
       serviceAccountName: jetstream-ch-controller
       containers:
       - name: controller
-        image: gcr.io/knative-releases/knative.dev/eventing-natss/cmd/jetstream/controller@sha256:bfc4918cc42325218bc0e7a4943e56af5cf753a566b9f3f117ba7025335a9074
+        image: gcr.io/knative-releases/knative.dev/eventing-natss/cmd/jetstream/controller@sha256:9c07194d65de26d8bd608cf99396b3cb00b58c731bd4cc6fa633ff3aaf3096ba
         env:
         - name: CONFIG_LOGGING_NAME
           value: config-logging
         - name: METRICS_DOMAIN
           value: knative.dev/eventing
         - name: DISPATCHER_IMAGE
-          value: gcr.io/knative-releases/knative.dev/eventing-natss/cmd/jetstream/dispatcher@sha256:040c4d62e37cccca5e28daa36d9811b843a0eabe968895c57bea1021ac7216f0
+          value: gcr.io/knative-releases/knative.dev/eventing-natss/cmd/jetstream/dispatcher@sha256:783cec0479338952e4954a37405a420c62d218ddcb91644c18bb0ed339221e1f
         - name: DISPATCHER_SERVICE_ACCOUNT
           value: jetstream-ch-dispatcher
         - name: SYSTEM_NAMESPACE
@@ -62775,7 +62474,7 @@ spec:
       kind: KCLInput
       spec:
         dependencies: "                k8s = { oci = \"oci://ghcr.io/kcl-lang/k8s\", tag = \"1.29\" }\n                crossplane = { oci = \"oci://ghcr.io/kcl-lang/crossplane\", tag = \"1.16.0\" }\n                crossplane-provider-kubernetes = { oci = \"oci://ghcr.io/kcl-lang/crossplane-provider-kubernetes\", tag = \"0.9.0\" }\n                knative-operator = { oci = \"oci://ghcr.io/kcl-lang/knative-operator\", tag = \"0.3.0\" }\n                knative = { oci = \"oci://ghcr.io/kcl-lang/knative\", tag = \"0.2.0\" }\n                istio = { oci = \"oci://ghcr.io/kcl-lang/istio\", tag = \"1.21.3\" }\n                json_merge_patch = { oci = \"oci://ghcr.io/kcl-lang/json_merge_patch\", tag = \"0.1.0\" }\n                "
-        source: "import k8s.api.core.v1 as k8core\nimport crossplane.v1alpha1.helm_crossplane_io_v1alpha1_release as crossplane_helm\nimport crossplane_provider_kubernetes.v1alpha1.kubernetes_crossplane_io_v1alpha1_object as crossplane_kubernetes\nimport knative.v1.eventing_knative_dev_v1_broker as knative_broker\nimport knative.v1.serving_knative_dev_v1_service as knative_service\nimport istio.v1alpha3.networking_istio_io_v1alpha3_gateway as istio_gateway\nimport istio.v1alpha3.networking_istio_io_v1alpha3_virtual_service as istio_virtual_service\nmindwm_domain = \"mindwm.local\"\n\n\nsources = {\n  mindwm_ns = \"org.mindwm\" \n  func_ns = \"knfunc\"\n  knfunc_action = lambda user_name host_name {\n    hostname = \"%\" if host_name == \"\" else host_name\n    \"${sources.mindwm_ns}.${sources.func_ns}.%.%...tmux.%.%.action\"\n  } \n} \n\nkafka = {\n    cluster_name = \"neo4j-cdc\"\n    namespace = \"redpanda\"\n    port = 9093\n    brokerEndpoint = cluster_name + \".\" + namespace + \":${port}\"\n    mkContextCdcTopicName = lambda context_name : str {\n        context_name + \"-cdc-topic\"\n    }\n}\n\nargocd = {\n  release_name = \"argocd\"\n  gateway_name = \"argocd-gateway\"\n  namespace = \"argocd\"\n  url = \"argocd.${mindwm_domain}\"\n  virtual_service = \"argocd-vs\"\n  destination = lambda {\n    \"${argocd.release_name}-server.${argocd.namespace}.svc.cluster.local\"\n  } \n} \n\nknativeBroker = {\n    deadLetterImage = \"gcr.io/knative-releases/knative.dev/eventing/cmd/event_display\"\n}\n\ncontextBroker = {\n    name = lambda context_name : str {\n        \"context-broker\" + delimiter + context_name\n    }\n    configMapName = lambda context_name : str {\n        name(context_name) + delimiter + \"configmap\"\n    }\n    kafkaSourceName = lambda context_name : str {\n        name(context_name) + delimiter + \"source\"\n\n    }\n    deadLetterName = lambda context_name : str {\n        name(context_name) + delimiter + \"dead-letter\"\n    }\n}\n\n\nMindwm = {\n    user = {\n        namespace = lambda username : str -> str {\n            \"user-\" + username\n        }\n        broker = {\n            configmap = lambda user_name : str -> str {\n                \"user\" + delimiter + user_name + delimiter + \"broker-configmap\"\n            }\n            name = lambda user_name : str -> str {\n                \"user\" + delimiter + user_name + delimiter + \"broker\"\n            }\n        }\n        deadLetter = {\n            name = lambda user_name : str -> str {\n                \"user\" + delimiter + user_name + delimiter + \"dead-letter\"\n            }\n        }\n        contextTrigger = {\n            name = lambda context_name : str -> str {\n                \"trigger-user-broker-to\" + delimiter + context_name\n            }\n            crossplane_name = lambda user_name : str, context_name : str -> str {\n                \"trigger\" + delimiter + user_name + delimiter + \"broker-to\" + delimiter + context_name\n            }\n        }\n        trigger_back = lambda user_name : str -> str {\n          \"trigger-context-to-user\" + delimiter + user_name\n        }\n    }\n    host = {\n        broker = {\n            configmap = lambda host_name : str -> str {\n                host_name + delimiter + \"broker-configmap\"\n            }\n            name = lambda host_name : str -> str {\n                host_name + delimiter + \"broker\"\n            }\n        }\n        trigger = lambda host_name : str -> str {\n            # FIXME (@metacoma)\n            # host trigger name = \"trigger-{host_name}-broker-to-user-broker\n            \"trigger-host-broker-to\" + delimiter + host_name\n        }\n        trigger_back = lambda host_name : str -> str {\n            \"trigger-knative-to-host-\" + delimiter + host_name\n        }\n    }\n\n    context = {\n        istio_gateway = lambda context_name : str - >str {\n          \"context-${context_name}-gateway\"\n        } \n        neo4j_vs_name = lambda context_name : str -> str {\n          \"${context_name}-neo4j-ui\"\n        }\n        io_context = {\n            name = \"io-context\"\n            crossplane_name = lambda context_name : str -> str {\n                 context_name + delimiter + \"io-context\"\n            }\n            crossplane_trigger = lambda context_name : str -> str {\n                 context_name + delimiter + \"io-context-trigger\"\n            }\n\n            image = \"ghcr.io/mindwm/io-context:latest\"\n        }\n        touch = {\n            name = \"mindwm-touch\"\n            crossplane_name = lambda context_name : str -> str {\n                 context_name + delimiter + \"mindwm-touch\"\n            }\n            crossplane_trigger = lambda context_name : str -> str {\n                 context_name + delimiter + \"mindwm-touch-trigger\"\n            }\n\n            image = \"ghcr.io/mindwm/mindwm-touch:latest\"\n        }\n    }\n}\n\nknative = {\n    serving = {\n        namespace = \"knative-serving\"\n        version = \"1.18.0\"\n    }\n    eventing = {\n        namespace = \"knative-eventing\"\n        version = \"1.18.0\"\n    }\n}\n\ncert_manager = {\n  helm_chart_version = \"1.17.2\"\n  namespace = \"cert-manager\"\n}\n\nistio = {\n    version = \"1.24.2\"\n    system = {\n        namespace = \"istio-system\"\n    }\n    gateway = {\n        namespace = \"istio-system\"\n    }\n    pilot = {\n        cpu_req = \"200m\"\n    }\n}\n\nkafka_cluster_name = \"neo4j-cdc\"\nkafka_port = 9003\n#neo4j_version = \"4.4.33\"\n#neo4j_password = \"password\"\ncrossplane = {\n    namespace = \"crossplane-system\"\n}\n\nmonitoring = {\n  namespace = \"monitoring\"\n  gateway_name = \"${namespace}-gateway\"\n  otel_collector = {\n    release_name = \"otel-collector\"\n  }\n  loki = {\n    url = \"loki.${mindwm_domain}\"\n    release_name = \"loki\"\n    virtual_service = \"loki-vs\"\n    destination = lambda {\n        \"${monitoring.loki.release_name}-gateway\"\n    }\n  }\n  tempo = {\n    url = \"tempo.${mindwm_domain}\"\n    virtual_service = \"tempo-vs\"\n    release_name = \"tempo\"\n    destination = lambda {\n      \"tempo\"\n    }\n  }\n  grafana = {\n    url = \"grafana.${mindwm_domain}\"\n    virtual_service = \"grafana-vs\"\n    destination = lambda {\n      \"${monitoring.victoria_metrics.release_name}-grafana\"\n    }\n  } \n  victoria_metrics = {\n    release_name = \"vm-aio\"\n    url = \"vm.${mindwm_domain}\"\n    virtual_service = \"vm-vs\"\n    destination = lambda {\n      #\"${monitoring.victoria_metrics.release_name}.${monitoring.namespace}.svc.cluster.local\"\n      \"vmsingle-${monitoring.victoria_metrics.release_name}-victoria-metrics-k8s-stack.${monitoring.namespace}.svc.cluster.local\"\n    }\n  }\n  promtail = {\n    release_name = \"promtail\"\n  }\n  zipkin_endpoint = lambda tempo_release_name : str, monitoring_ns : str {\n    \"http://${tempo_release_name}.${monitoring_ns}:9411/api/v2/spans\"\n  }\n  prometheus_endpoint = lambda {\n    \"http://vmsingle-${monitoring.victoria_metrics.release_name}-victoria-metrics-k8s-stack.${monitoring.namespace}:8429\"\n  }\n  opencensus_endpoint = lambda tempo_release_name : str, monitoring_ns : str {\n    \"${tempo_release_name}.${monitoring_ns}:55678\"\n  }\n  traces_endpoint = lambda tempo_release_name : str, monitoring_ns : str {\n    \"http://${tempo_release_name}.${monitoring_ns}:4317/v1/traces\"\n  }\n  loki_endpoint = lambda {\n    \"http://${monitoring.loki.release_name}.${monitoring.namespace}:3100/otlp\"\n  }\n}\n\ndelimiter = \"-\"\n\ncontextNamespacePrefix = \"context\"\nuserNamespacePrefix = \"team\"\n\nmakeUserNamespace = lambda username : str {\n    userNamespacePrefix + delimiter + username\n}\n\nmakeContextNamespace = lambda ns_name : str {\n    contextNamespacePrefix + delimiter + ns_name\n}\n\nmakeKafkaTopicName = lambda context_name : str {\n    \"context\" + delimiter + context_name + delimiter + \"cdc\"\n}\n\nneo4j = {\n    version = \"4.4.35\"\n    username = \"neo4j\"\n    password = \"password\"\n    release_name = \"neo4j\"\n    port = 7687\n    http_port = 7474\n\n    crossplane_pvc_name = lambda context_name : str -> str {\n        context_name + delimiter + \"neo4j-plugin-pvc\"\n    }\n\n    crossplane_name = lambda context_name : str -> str {\n        context_name + delimiter + \"neo4j\"\n    }\n}\n\nvector = {\n    image = {\n        repo = \"ghcr.io/mindwm/vector-image/vector-image\"\n        tag = \"main\"\n    }\n    chart_version = \"0.33.0\"\n    crossplane_name = lambda context_name : str -> str {\n        context_name + delimiter + \"vector\"\n    }\n}\n\nconfig = {\n    kafka_cluster_name = \"neo4j-cdc\"\n    kafka_port = 9003\n    crossplane = {\n        namespace = \"crossplane-system\"\n    }\n}\n\nzot = {\n    chart_version = \"0.1.65\"\n    release_name = \"zot\"\n    namespace = \"zot\"\n}\n\nimport regex\nimport manifests\n\nuserPrefix = \"user\"\ncontextPrefix = \"context\"\nhostPrefix = \"host\"\n\nschema ResourceNameStr:\n    data: str\n    check:\n        regex.match(data, r'^[a-z0-9]([-a-z0-9]*[a-z0-9])?$')\n        len(data) < 64\nschema DomainStr:\n    data: str\n    check:\n        regex.match(data, \"\")\n\ngetData = lambda resourceStr : any -> str {\n    resourceStr.data\n}\ncrossplaneResourceName = lambda entity: any, resourceName : ResourceNameStr -> str {\n    getData(entity.name) + \"-\" + getData(resourceName)\n}\n\ncrossplane_user2context_trigger_name = lambda user : MindwmUser, ctx: MindwmContext -> str {\n  \"user-\" + getData(user.name) + \"-to-context-\" + getData(ctx.name)\n} \n\ncrossplane_context2user_trigger_name = lambda user : MindwmUser, ctx: MindwmContext -> str {\n  \"context-\" + getData(ctx.name) + \"-to-user-\" + getData(user.name)\n} \n\ndomain: DomainStr { data = \"mindwm.local\" }\n\nschema Mindwm2:\n    context: MindwmContext\n    user: MindwmUser\n    host: MindwmHost\n\nschema MindwmHost:\n    name: ResourceNameStr\n    broker: Broker { name.data = \"${getData(name)}-host-broker\"}\n    # from host_broker to user broker trigger\n    trigger: Trigger { name.data = \"${getData(name)}-trigger-to-user-broker\" }\n    # from user_broker to host broker trigger\n    trigger_back: Trigger {\n      name.data = \"user-broker-to-\" + getData(name) + \"-broker-trigger\"\n    } \n\nschema MindwmUser:\n    name: ResourceNameStr\n    namespace: ResourceNameStr = { data = \"${userPrefix}-${getData(name)}\" }\n    broker: Broker { name.data = \"user-broker\" }\n\nschema MindwmContext:\n    name: ResourceNameStr\n    namespace: ResourceNameStr = { data = \"${contextPrefix}-${getData(name)}\" }\n    broker: Broker { \n      name.data = \"context-broker\"\n      virtual_service = {\n        name.data = \"broker-virtual-service\"\n      } \n    } \n    kafka: Kafka {}\n    neo4j: Neo4j {}\n    vector: Vector {}\n    cdc_topic: KafkaTopic { \n      name.data = \"context-\" + getData(name) + \"-cdc\"\n    } \n    gateway: IstioGateway { \n      name.data = \"gateway\" \n      hosts = [\n        \"neo4j.\" + getData(name) + \".\" + getData(domain)\n      ] \n    } \n    neo4j_virtual_service: IstioVirtualService {\n      name.data = \"neo4j-virtual-service\"\n    } \n    kafkaSource: KafkaSource = {\n        name.data = getData(cdc_topic.name) + \"-kafkasource\"\n        topicName = cdc_topic.name\n        bootstrap_servers = [ \"${getData(kafka.cluster_name)}.${getData(kafka.namespace)}:${kafka.port}\" ]\n    }\n    io_context: KnativeFunction {\n        name.data = \"iocontext\"\n        image = \"ghcr.io/mindwm/knfunc-io-context:latest\"\n    }\n    kafka_cdc: KnativeFunction {\n        name.data = \"kafka-cdc\"\n        image = \"ghcr.io/mindwm/knfunc-kafka-cdc:1.0.4\"\n    }\n    pong: KnativeFunction {\n        name.data = \"pong\"\n        image = \"ghcr.io/mindwm/knfunc-pong:latest\"\n    }\n\n    clipboard: KnativeFunction {\n        name.data = \"clipboard\"\n        image = \"ghcr.io/mindwm/knfunc-clipboard:master\"\n    }\n\nschema KafkaTopic:\n    name: ResourceNameStr\n\nschema Broker:\n    name: ResourceNameStr\n    configMapName: ResourceNameStr = (lambda brokerName : ResourceNameStr -> ResourceNameStr {\n        { data = \"${getData(brokerName)}-config\" }\n    })(name)\n    deadLetter: DeadLetter { name.data = \"dead-letter\" }\n    virtual_service?: IstioVirtualService \n\nschema DeadLetter:\n    name: ResourceNameStr\n    image: str = \"gcr.io/knative-releases/knative.dev/eventing/cmd/event_display\"\n\nschema Trigger:\n    name: ResourceNameStr\n\nschema KafkaSource:\n    name: ResourceNameStr\n    topicName: ResourceNameStr\n    bootstrap_servers: [str]\n\nschema Kafka:\n    namespace: ResourceNameStr = { data = \"redpanda\" }\n    port: int = 9093\n    cluster_name: ResourceNameStr = { data = \"neo4j-cdc\" }\n    bootstrap_servers: [str] = [\n       getData(cluster_name) + \".\" + getData(namespace) + \":\" + str(port)\n    ]\n\n\nschema Neo4j:\n    name: ResourceNameStr = { data = \"neo4j\" }\n    version: str = \"4.4.33\"\n    username: str = \"neo4j\"\n    password: str = \"password\"\n    plugin_pvc_name: ResourceNameStr = { data = \"neo4j-plugins\" }\n    pvc_size: str = \"5Gi\"\n    port: int = 7687\n\nschema Vector:\n    name: ResourceNameStr = { data = \"vector\" }\n\nschema Crossplane:\n    apiVersion: str = \"apiextensions.crossplane.io/v1\"\n    compositeVersion: str = \"v1beta1\"\n    domain: DomainStr { data = \"mindwm.io\" }\n\nschema IstioGateway:\n    name: ResourceNameStr \n    hosts: [str]\n\nschema IstioVirtualService:\n    name: ResourceNameStr\n\nschema KnativeFunction:\n    name: ResourceNameStr \n    image: str\n#ctx = MindwmContext { name.data = \"pink\" }\n\ncontext_name = option(\"params\").oxr.spec.name\nctx = MindwmContext {\n    name.data = \"${context_name}\"\n} \nitems = [\n  {\n    apiVersion = \"kubernetes.crossplane.io/v1alpha2\"\n    kind = \"Object\"\n    metadata.name = crossplaneResourceName(ctx, ctx.namespace) \n    spec.forProvider.manifest = k8core.Namespace {\n      metadata.name = getData(ctx.namespace)\n      metadata.labels = {\n          \"istio-injection\" = \"enabled\"\n      }\n    }\n  }\n  {\n    apiVersion = \"kubernetes.crossplane.io/v1alpha2\"\n    kind = \"Object\"\n    metadata.name = crossplaneResourceName(ctx, ctx.neo4j.plugin_pvc_name) \n    spec.forProvider.manifest = k8core.PersistentVolumeClaim {\n        metadata.name = getData(ctx.neo4j.plugin_pvc_name)\n        metadata.namespace = getData(ctx.namespace)\n        spec = {\n          accessModes = [ \"ReadWriteOnce\" ]\n          resources.requests.storage = \"1Gi\"\n        }\n    } \n  }\n  # redpanda (kafka topic) for broadcast graph changes to process eventing\n  {\n    apiVersion = \"kubernetes.crossplane.io/v1alpha2\"\n    kind = \"Object\"\n    metadata.name = crossplaneResourceName(ctx, ctx.cdc_topic.name)\n    spec.forProvider.manifest = {\n        apiVersion = \"cluster.redpanda.com/v1alpha1\"\n        kind = \"Topic\"\n        metadata = {\n            name = getData(ctx.cdc_topic.name)\n            namespace = getData(ctx.kafka.namespace)\n        }\n        spec = {\n            partitions = 1\n            replicationFactor = 1\n            additionalConfig = {\n                \"cleanup.policy\" = \"compact\"\n            }\n            kafkaApiSpec.brokers = ctx.kafka.bootstrap_servers\n        }\n    }\n  }\n  crossplane_helm.Release {\n    metadata.name = crossplaneResourceName(ctx, ctx.neo4j.name)\n    spec.forProvider = {\n        namespace = getData(ctx.namespace)\n        chart = {\n          name = \"neo4j-standalone\"\n          repository = \"https://helm.neo4j.com/neo4j\"\n          version = \"4.4.35\"\n        } \n        values = {\n            additionalVolumeMounts = [\n                {\n                    mountPath = \"/var/lib/neo4j/plugins\"\n                    name = getData(ctx.neo4j.plugin_pvc_name)\n                }\n            ]\n            additionalVolumes = [\n                {\n                    name = getData(ctx.neo4j.plugin_pvc_name)\n                    persistentVolumeClaim.claimName = getData(ctx.neo4j.plugin_pvc_name)\n                }\n            ]\n            env = {\n                \"NEO4J_apoc_export_file_enabled\" = \"true\"\n                \"NEO4J_apoc_import_file_enabled\" = \"true\"\n                \"NEO4J_apoc_import_file_use__neo4j__config\" = \"true\"\n                \"NEO4J_dbms_logs_debug_level\" = \"DEBUG\"\n                \"NEO4J_kafka_bootstrap_servers\" = \"neo4j-cdc.redpanda:9093\"\n                \"NEO4J_streams_source_topic_nodes_\" + getData(ctx.cdc_topic.name) = \"*\"\n                \"NEO4J_streams_source_topic_relationships_\"+ getData(ctx.cdc_topic.name) = '*'\n            }\n            neo4j.password = \"password\"\n            services.neo4j.spec.type = \"NodePort\"\n            neo4j.labels = {\n                \"sidecar.istio.io/inject\" = \"false\"\n            }\n            neo4j.resources = {\n                cpu = \"500m\"\n                memory: \"2Gi\"\n            }\n            volumes = {\n                data = {\n                    dynamic = {\n                        storageClassName = \"local-path\"\n                        requests.storage = \"5Gi\"\n                    }\n                    mode = \"dynamic\"\n                }\n            }\n            # TODO(@metacoma) k8.core.podSpec\n            podSpec.initContainers = [\n                {\n                    image = \"curlimages/curl:8.6.0\"\n                    name = \"install-apoc-plugin\"\n                    user = \"root\"\n                    volumeMounts = [{\n                        mountPath = \"/var/lib/neo4j/plugins\"\n                        name = getData(ctx.neo4j.plugin_pvc_name)\n                    }]\n                    workingDir = \"/var/lib/neo4j/plugins\"\n                    command = [\n                        \"curl\",\n                        \"--retry\"\n                        \"3\"\n                        \"-Lo\"\n                        \"apoc.jar\"\n                        \"--no-clobber\"\n                        \"https://github.com/neo4j-contrib/neo4j-apoc-procedures/releases/download/4.4.0.23/apoc-4.4.0.23-all.jar\"\n                    ]\n                }\n                {\n                    image = \"curlimages/curl:8.6.0\"\n                    name = \"install-neo4j-stream-plugin\"\n                    user = \"root\"\n                    workingDir = \"/var/lib/neo4j/plugins\"\n                    volumeMounts = [{\n                        mountPath = \"/var/lib/neo4j/plugins\"\n                        name = getData(ctx.neo4j.plugin_pvc_name)\n                    }]\n                    command = [\n                        \"curl\",\n                        \"--retry\"\n                        \"3\"\n                        \"-Lo\"\n                        \"streams.jar\"\n                        \"--no-clobber\"\n                        \"https://github.com/neo4j-contrib/neo4j-streams/releases/download/4.1.3/neo4j-streams-4.1.3.jar\"\n                    ]\n                }\n            ]\n\n        }\n    }\n  }\n  crossplane_kubernetes.Object {\n    metadata.name = crossplaneResourceName(ctx, ctx.broker.configMapName) \n    spec.forProvider.manifest = k8core.ConfigMap {\n        metadata = {\n            name = getData(ctx.broker.configMapName)\n            namespace = getData(ctx.namespace)\n        } \n        data = {\n            \"channel-template-spec\" = '''apiVersion: messaging.knative.dev/v1\nkind: InMemoryChannel\n'''\n        }\n    } \n\n  } \n  # contextBroker\n  crossplane_kubernetes.Object {\n    metadata.name = crossplaneResourceName(ctx, ctx.broker.name)\n    spec.forProvider.manifest = knative_broker.Broker {\n      metadata = {\n        name = getData(ctx.broker.name)\n        namespace = getData(ctx.namespace)\n        annotations = {\n          \"eventing.knative.dev/broker.class\" = \"MTChannelBasedBroker\"\n        }\n\n      } \n      spec.config = {\n          apiVersion = \"v1\"\n          kind = \"ConfigMap\"\n          name = getData(ctx.broker.configMapName)\n      }\n    }\n  } \n  # kafkaSource\n  crossplane_kubernetes.Object {\n    metadata.name = crossplaneResourceName(ctx, ctx.kafkaSource.name)\n    spec.forProvider.manifest = {\n      apiVersion = \"sources.knative.dev/v1beta1\"\n      kind = \"KafkaSource\"\n      metadata = {\n        name = getData(ctx.kafkaSource.name)\n        namespace = getData(ctx.namespace)\n      }\n      spec = {\n            bootstrapServers = ctx.kafka.bootstrap_servers\n            consumerGroup = \"knative-group\"\n            sink.ref = {\n                apiVersion = \"eventing.knative.dev/v1\"\n                kind = \"Broker\"\n                name = getData(ctx.broker.name)\n            }\n            topics = [ getData(ctx.cdc_topic.name) ]\n      }  \n    }\n  } \n  # deadLetter service\n  crossplane_kubernetes.Object {\n    metadata.name = crossplaneResourceName(ctx, ctx.broker.deadLetter.name)\n    spec.forProvider.manifest = knative_service.Service {\n      metadata = {\n        name = getData(ctx.broker.deadLetter.name)\n        namespace = getData(ctx.namespace)\n      }\n      spec.template.spec.containers = [{\n          image = ctx.broker.deadLetter.image\n          env = [{\n            name = \"REQUEST_LOGGING_ENABLED\"\n            value = \"1\"\n          }] \n      }]\n    } \n  } \n  crossplane_kubernetes.Object {\n    metadata.name = crossplaneResourceName(ctx, ctx.broker.virtual_service.name)\n    spec.forProvider.manifest = istio_virtual_service.VirtualService {\n      metadata.name = getData(ctx.broker.virtual_service.name)\n      metadata.namespace = getData(ctx.namespace)\n      spec = {\n        # TODO @(metacoma) hardcode\n        hosts = [\n          \"broker-ingress.knative-eventing.svc.cluster.local\"\n        ]\n        # TODO @(metacoma) hardcode\n        gateways = [\n          \"knative-serving/knative-ingress-gateway\",\n          \"knative-serving/knative-local-gateway\"\n        ]\n        http = [{\n          match = [{ uri.regex = \".*\"}]\n          route = [{\n            # TODO (@metacoma) hardcode\n            destination.host = \"broker-ingress.knative-eventing.svc.cluster.local\"\n            destination.port.number = 80 # TODO(@metacoma) hardcode\n          }]\n        }]\n      }\n    }\n  } \n  # io_context\n  crossplane_kubernetes.Object {\n    metadata.name = crossplaneResourceName(ctx, ctx.io_context.name)\n    spec.forProvider.manifest = knative_service.Service {\n      metadata = {\n        name = getData(ctx.io_context.name)\n        namespace = getData(ctx.namespace)\n      }\n      spec.template.spec.containers = [{\n          image = ctx.io_context.image\n          env = [\n            {\n              name = \"NEO4J_URI\"\n              value = \"bolt://\" + getData(ctx.name) + \"-\" + getData(ctx.neo4j.name) + \"-neo4j:\" + str(ctx.neo4j.port)\n            }\n            {\n              name = \"NEO4J_USERNAME\"\n              value =  ctx.neo4j.username\n            }\n            {\n              name = \"NEO4J_PASSWORD\"\n              value = ctx.neo4j.password\n            }\n            {\n              name = \"CONTEXT_NAME\"\n              value = getData(ctx.name)\n            }\n            {\n              name = \"OTEL_EXPORTER_OTLP_ENDPOINT\"\n              value = \"http://otel-collector-opentelemetry-collector.monitoring:4317\"\n            }\n            {\n              name = \"OTEL_EXPORTER_OTLP_TRACES_ENDPOINT\"\n              value = \"http://tempo.monitoring:4317/v1/traces\"\n            }\n          ] \n      }]\n    } \n  } \n\n  # io-trigger\n  crossplane_kubernetes.Object {\n    metadata.name = crossplaneResourceName(ctx, ctx.io_context.name) + \"-trigger\"\n    spec.forProvider.manifest = {\n      apiVersion = \"eventing.knative.dev/v1\"\n      kind = \"Trigger\"\n      metadata = {\n        name = getData(ctx.io_context.name) + \"-trigger\"\n        namespace = getData(ctx.namespace)\n      }\n      spec = {\n        broker = getData(ctx.broker.name)\n        delivery.deadLetterSink.ref = {\n          apiVersion = \"serving.knative.dev/v1\"\n          kind = \"Service\" \n          name = getData(ctx.broker.deadLetter.name)\n        }\n        filters = [{\n          \"all\" = [\n            {\n              exact.type = \"org.mindwm.v1.iodocument\"\n            }\n            {\n              \"not\" = { prefix.subject = \"#\" }\n            }\n          ]\n        }]\n        subscriber.ref = {\n          apiVersion = \"serving.knative.dev/v1\"\n          kind = \"Service\"\n          name = getData(ctx.io_context.name)\n        }\n      } \n    } \n  }\n\n  # pong\n  crossplane_kubernetes.Object {\n    metadata.name = crossplaneResourceName(ctx, ctx.pong.name)\n    spec.forProvider.manifest = knative_service.Service {\n      metadata = {\n        name = getData(ctx.pong.name)\n        namespace = getData(ctx.namespace)\n      }\n      spec.template.spec.containers = [{\n          image = ctx.pong.image\n          env = [\n            {\n              name = \"OTEL_EXPORTER_OTLP_ENDPOINT\"\n              value = \"http://otel-collector-opentelemetry-collector.monitoring:4317\"\n            }\n            {\n              name = \"OTEL_EXPORTER_OTLP_TRACES_ENDPOINT\"\n              value = \"http://tempo.monitoring:4317/v1/traces\"\n            }\n          ] \n      }]\n    } \n  } \n  #pong trigger\n  crossplane_kubernetes.Object {\n    metadata.name = crossplaneResourceName(ctx, ctx.pong.name) + \"-trigger\"\n    spec.forProvider.manifest = {\n      apiVersion = \"eventing.knative.dev/v1\"\n      kind = \"Trigger\"\n      metadata = {\n        name = getData(ctx.pong.name) + \"-trigger\"\n        namespace = getData(ctx.namespace)\n      }\n      spec = {\n        broker = getData(ctx.broker.name)\n        delivery.deadLetterSink.ref = {\n          apiVersion = \"serving.knative.dev/v1\"\n          kind = \"Service\" \n          name = getData(ctx.broker.deadLetter.name)\n        }\n        filters = [{\n          \"all\" = [\n            {\n              exact.type = \"org.mindwm.v1.iodocument\"\n            }\n            {\n              prefix.subject = \"#\" \n            }\n          ]\n        }]\n        subscriber.ref = {\n          apiVersion = \"serving.knative.dev/v1\"\n          kind = \"Service\"\n          name = getData(ctx.pong.name)\n        }\n      } \n    } \n  }\n\n  # kafka_cdc\n  crossplane_kubernetes.Object {\n    metadata.name = crossplaneResourceName(ctx, ctx.kafka_cdc.name)\n    spec.forProvider.manifest = knative_service.Service {\n      metadata = {\n        name = getData(ctx.kafka_cdc.name)\n        namespace = getData(ctx.namespace)\n      }\n      spec.template.spec.containers = [{\n          image = ctx.kafka_cdc.image\n          env = [\n            {\n              name = \"NEO4J_URI\"\n              value = \"bolt://\" + getData(ctx.name) + \"-\" + getData(ctx.neo4j.name) + \"-neo4j:\" + str(ctx.neo4j.port)\n            }\n            {\n              name = \"NEO4J_USERNAME\"\n              value =  ctx.neo4j.username\n            }\n            {\n              name = \"NEO4J_PASSWORD\"\n              value = ctx.neo4j.password\n            }\n            {\n              name = \"CONTEXT_NAME\"\n              value = getData(ctx.name)\n            }\n            {\n              name = \"OTEL_EXPORTER_OTLP_ENDPOINT\"\n              value = \"http://otel-collector-opentelemetry-collector.monitoring:4317\"\n            }\n            {\n              name = \"OTEL_EXPORTER_OTLP_TRACES_ENDPOINT\"\n              value = \"http://tempo.monitoring:4317/v1/traces\"\n            }\n          ] \n      }]\n    } \n  } \n\n  #kafka-cdc trigger\n  crossplane_kubernetes.Object {\n    metadata.name = crossplaneResourceName(ctx, ctx.kafka_cdc.name) + \"-trigger\"\n    spec.forProvider.manifest = {\n      apiVersion = \"eventing.knative.dev/v1\"\n      kind = \"Trigger\"\n      metadata = {\n        name = getData(ctx.kafka_cdc.name) + \"-trigger\"\n        namespace = getData(ctx.namespace)\n      }\n      spec = {\n        broker = getData(ctx.broker.name)\n        delivery.deadLetterSink.ref = {\n          apiVersion = \"serving.knative.dev/v1\"\n          kind = \"Service\"\n          name = getData(ctx.broker.deadLetter.name)\n        }\n        filters = [{\n          \"all\" = [\n            {\n              exact.type = \"dev.knative.kafka.event\"\n            }\n            {\n              \"not\" = { prefix.source = \"org.mindwm\" }\n            }\n          ]\n        }]\n        subscriber.ref = {\n          apiVersion = \"serving.knative.dev/v1\"\n          kind = \"Service\"\n          name = getData(ctx.kafka_cdc.name)\n        }\n      }\n    }\n  }\n\n  crossplane_kubernetes.Object {\n    metadata.name = crossplaneResourceName(ctx, ctx.clipboard.name)\n    spec.forProvider.manifest = knative_service.Service {\n      metadata = {\n        name = getData(ctx.clipboard.name)\n        namespace = getData(ctx.namespace)\n      }\n      spec.template.spec.containers = [{\n          image = ctx.clipboard.image\n          env = [\n            {\n              name = \"NEO4J_URI\"\n              value = \"bolt://\" + getData(ctx.name) + \"-\" + getData(ctx.neo4j.name) + \"-neo4j:\" + str(ctx.neo4j.port)\n            }\n            {\n              name = \"NEO4J_USERNAME\"\n              value =  ctx.neo4j.username\n            }\n            {\n              name = \"NEO4J_PASSWORD\"\n              value = ctx.neo4j.password\n            }\n            {\n              name = \"CONTEXT_NAME\"\n              value = getData(ctx.name)\n            }\n            {\n              name = \"OTEL_EXPORTER_OTLP_ENDPOINT\"\n              value = \"http://otel-collector-opentelemetry-collector.monitoring:4317\"\n            }\n            {\n              name = \"OTEL_EXPORTER_OTLP_TRACES_ENDPOINT\"\n              value = \"http://tempo.monitoring:4317/v1/traces\"\n            }\n          ] \n      }]\n    } \n  } \n  #clipboard trigger\n  crossplane_kubernetes.Object {\n    metadata.name = crossplaneResourceName(ctx, ctx.clipboard.name) + \"-trigger\"\n    spec.forProvider.manifest = {\n      apiVersion = \"eventing.knative.dev/v1\"\n      kind = \"Trigger\"\n      metadata = {\n        name = getData(ctx.clipboard.name) + \"-trigger\"\n        namespace = getData(ctx.namespace)\n      }\n      spec = {\n        broker = getData(ctx.broker.name)\n        delivery.deadLetterSink.ref = {\n          apiVersion = \"serving.knative.dev/v1\"\n          kind = \"Service\" \n          name = getData(ctx.broker.deadLetter.name)\n        }\n        filters = [{\n          \"all\" = [\n            {\n              exact.type = \"org.mindwm.v1.clipboard\"\n            }\n          ]\n        }]\n        subscriber.ref = {\n          apiVersion = \"serving.knative.dev/v1\"\n          kind = \"Service\"\n          name = getData(ctx.clipboard.name)\n        }\n      } \n    } \n  }\n\n  crossplane_kubernetes.Object {\n    metadata.name = crossplaneResourceName(ctx, ctx.gateway.name)\n    spec.forProvider.manifest = istio_gateway.Gateway {\n      metadata.name = getData(ctx.gateway.name)\n      metadata.namespace = getData(ctx.namespace)\n      spec = {\n        selector.istio = \"ingressgateway\" #TODO@(metacoma) ingress release name ?\n        servers = [{\n          port = {\n            number = 80\n            name = \"http\"\n            protocol = \"HTTP\"\n          }\n          hosts = ctx.gateway.hosts\n        }]\n      }\n    }\n  } \n\n  crossplane_kubernetes.Object {\n    metadata.name = crossplaneResourceName(ctx, ctx.neo4j_virtual_service.name)\n    spec.forProvider.manifest = istio_virtual_service.VirtualService {\n      metadata.name = getData(ctx.neo4j_virtual_service.name)\n      metadata.namespace = getData(ctx.namespace)\n      spec = {\n        hosts = ctx.gateway.hosts\n        gateways = [ getData(ctx.gateway.name) ]\n        http = [{\n          match = [{ uri.prefix = \"/\", port = 80}]\n          route = [{ \n            destination.host = getData(ctx.name) + \"-\" + getData(ctx.neo4j.name)\n            destination.port.number = ctx.neo4j.port # TODO(@metacoma) hardcode\n          }]\n\n        }]\n      }\n    }\n  } \n\n]\n"
+        source: "import k8s.api.core.v1 as k8core\nimport crossplane.v1alpha1.helm_crossplane_io_v1alpha1_release as crossplane_helm\nimport crossplane_provider_kubernetes.v1alpha1.kubernetes_crossplane_io_v1alpha1_object as crossplane_kubernetes\nimport knative.v1.eventing_knative_dev_v1_broker as knative_broker\nimport knative.v1.serving_knative_dev_v1_service as knative_service\nimport istio.v1alpha3.networking_istio_io_v1alpha3_gateway as istio_gateway\nimport istio.v1alpha3.networking_istio_io_v1alpha3_virtual_service as istio_virtual_service\nmindwm_domain = \"mindwm.local\"\n\n\nsources = {\n  mindwm_ns = \"org.mindwm\" \n  func_ns = \"knfunc\"\n  knfunc_action = lambda user_name host_name {\n    hostname = \"%\" if host_name == \"\" else host_name\n    \"${sources.mindwm_ns}.${sources.func_ns}.%.%...tmux.%.%.action\"\n  } \n} \n\nkafka = {\n    cluster_name = \"neo4j-cdc\"\n    namespace = \"redpanda\"\n    port = 9093\n    brokerEndpoint = cluster_name + \".\" + namespace + \":${port}\"\n    mkContextCdcTopicName = lambda context_name : str {\n        context_name + \"-cdc-topic\"\n    }\n}\n\nargocd = {\n  release_name = \"argocd\"\n  gateway_name = \"argocd-gateway\"\n  namespace = \"argocd\"\n  url = \"argocd.${mindwm_domain}\"\n  virtual_service = \"argocd-vs\"\n  destination = lambda {\n    \"${argocd.release_name}-server.${argocd.namespace}.svc.cluster.local\"\n  } \n} \n\nknativeBroker = {\n    deadLetterImage = \"gcr.io/knative-releases/knative.dev/eventing/cmd/event_display\"\n}\n\ncontextBroker = {\n    name = lambda context_name : str {\n        \"context-broker\" + delimiter + context_name\n    }\n    configMapName = lambda context_name : str {\n        name(context_name) + delimiter + \"configmap\"\n    }\n    kafkaSourceName = lambda context_name : str {\n        name(context_name) + delimiter + \"source\"\n\n    }\n    deadLetterName = lambda context_name : str {\n        name(context_name) + delimiter + \"dead-letter\"\n    }\n}\n\n\nMindwm = {\n    user = {\n        namespace = lambda username : str -> str {\n            \"user-\" + username\n        }\n        broker = {\n            configmap = lambda user_name : str -> str {\n                \"user\" + delimiter + user_name + delimiter + \"broker-configmap\"\n            }\n            name = lambda user_name : str -> str {\n                \"user\" + delimiter + user_name + delimiter + \"broker\"\n            }\n        }\n        deadLetter = {\n            name = lambda user_name : str -> str {\n                \"user\" + delimiter + user_name + delimiter + \"dead-letter\"\n            }\n        }\n        contextTrigger = {\n            name = lambda context_name : str -> str {\n                \"trigger-user-broker-to\" + delimiter + context_name\n            }\n            crossplane_name = lambda user_name : str, context_name : str -> str {\n                \"trigger\" + delimiter + user_name + delimiter + \"broker-to\" + delimiter + context_name\n            }\n        }\n        trigger_back = lambda user_name : str -> str {\n          \"trigger-context-to-user\" + delimiter + user_name\n        }\n    }\n    host = {\n        broker = {\n            configmap = lambda host_name : str -> str {\n                host_name + delimiter + \"broker-configmap\"\n            }\n            name = lambda host_name : str -> str {\n                host_name + delimiter + \"broker\"\n            }\n        }\n        trigger = lambda host_name : str -> str {\n            # FIXME (@metacoma)\n            # host trigger name = \"trigger-{host_name}-broker-to-user-broker\n            \"trigger-host-broker-to\" + delimiter + host_name\n        }\n        trigger_back = lambda host_name : str -> str {\n            \"trigger-knative-to-host-\" + delimiter + host_name\n        }\n    }\n\n    context = {\n        istio_gateway = lambda context_name : str - >str {\n          \"context-${context_name}-gateway\"\n        } \n        neo4j_vs_name = lambda context_name : str -> str {\n          \"${context_name}-neo4j-ui\"\n        }\n        io_context = {\n            name = \"io-context\"\n            crossplane_name = lambda context_name : str -> str {\n                 context_name + delimiter + \"io-context\"\n            }\n            crossplane_trigger = lambda context_name : str -> str {\n                 context_name + delimiter + \"io-context-trigger\"\n            }\n\n            image = \"ghcr.io/mindwm/io-context:latest\"\n        }\n        touch = {\n            name = \"mindwm-touch\"\n            crossplane_name = lambda context_name : str -> str {\n                 context_name + delimiter + \"mindwm-touch\"\n            }\n            crossplane_trigger = lambda context_name : str -> str {\n                 context_name + delimiter + \"mindwm-touch-trigger\"\n            }\n\n            image = \"ghcr.io/mindwm/mindwm-touch:latest\"\n        }\n    }\n}\n\nknative = {\n    serving = {\n        namespace = \"knative-serving\"\n        version = \"1.17.0\"\n    }\n    eventing = {\n        namespace = \"knative-eventing\"\n        version = \"1.17.0\"\n    }\n}\n\ncert_manager = {\n  helm_chart_version = \"1.16.3\"\n  namespace = \"cert-manager\"\n}\n\nistio = {\n    version = \"1.24.2\"\n    system = {\n        namespace = \"istio-system\"\n    }\n    gateway = {\n        namespace = \"istio-system\"\n    }\n    pilot = {\n        cpu_req = \"200m\"\n    }\n}\n\nkafka_cluster_name = \"neo4j-cdc\"\nkafka_port = 9003\n#neo4j_version = \"4.4.33\"\n#neo4j_password = \"password\"\ncrossplane = {\n    namespace = \"crossplane-system\"\n}\n\nmonitoring = {\n  namespace = \"monitoring\"\n  gateway_name = \"${namespace}-gateway\"\n  otel_collector = {\n    release_name = \"otel-collector\"\n  }\n  loki = {\n    url = \"loki.${mindwm_domain}\"\n    release_name = \"loki\"\n    virtual_service = \"loki-vs\"\n    destination = lambda {\n        \"${monitoring.loki.release_name}-gateway\"\n    }\n  }\n  tempo = {\n    url = \"tempo.${mindwm_domain}\"\n    virtual_service = \"tempo-vs\"\n    release_name = \"tempo\"\n    destination = lambda {\n      \"tempo\"\n    }\n  }\n  grafana = {\n    url = \"grafana.${mindwm_domain}\"\n    virtual_service = \"grafana-vs\"\n    destination = lambda {\n      \"${monitoring.victoria_metrics.release_name}-grafana\"\n    }\n  } \n  victoria_metrics = {\n    release_name = \"vm-aio\"\n    url = \"vm.${mindwm_domain}\"\n    virtual_service = \"vm-vs\"\n    destination = lambda {\n      #\"${monitoring.victoria_metrics.release_name}.${monitoring.namespace}.svc.cluster.local\"\n      \"vmsingle-${monitoring.victoria_metrics.release_name}-victoria-metrics-k8s-stack.${monitoring.namespace}.svc.cluster.local\"\n    }\n  }\n  promtail = {\n    release_name = \"promtail\"\n  }\n  zipkin_endpoint = lambda tempo_release_name : str, monitoring_ns : str {\n    \"http://${tempo_release_name}.${monitoring_ns}:9411/api/v2/spans\"\n  }\n  prometheus_endpoint = lambda {\n    \"http://vmsingle-${monitoring.victoria_metrics.release_name}-victoria-metrics-k8s-stack.${monitoring.namespace}:8429\"\n  }\n  opencensus_endpoint = lambda tempo_release_name : str, monitoring_ns : str {\n    \"${tempo_release_name}.${monitoring_ns}:55678\"\n  }\n  traces_endpoint = lambda tempo_release_name : str, monitoring_ns : str {\n    \"http://${tempo_release_name}.${monitoring_ns}:4317/v1/traces\"\n  }\n  loki_endpoint = lambda {\n    \"http://${monitoring.loki.release_name}.${monitoring.namespace}:3100/otlp\"\n  }\n}\n\ndelimiter = \"-\"\n\ncontextNamespacePrefix = \"context\"\nuserNamespacePrefix = \"team\"\n\nmakeUserNamespace = lambda username : str {\n    userNamespacePrefix + delimiter + username\n}\n\nmakeContextNamespace = lambda ns_name : str {\n    contextNamespacePrefix + delimiter + ns_name\n}\n\nmakeKafkaTopicName = lambda context_name : str {\n    \"context\" + delimiter + context_name + delimiter + \"cdc\"\n}\n\nneo4j = {\n    version = \"4.4.35\"\n    username = \"neo4j\"\n    password = \"password\"\n    release_name = \"neo4j\"\n    port = 7687\n    http_port = 7474\n\n    crossplane_pvc_name = lambda context_name : str -> str {\n        context_name + delimiter + \"neo4j-plugin-pvc\"\n    }\n\n    crossplane_name = lambda context_name : str -> str {\n        context_name + delimiter + \"neo4j\"\n    }\n}\n\nvector = {\n    image = {\n        repo = \"ghcr.io/mindwm/vector-image/vector-image\"\n        tag = \"main\"\n    }\n    chart_version = \"0.33.0\"\n    crossplane_name = lambda context_name : str -> str {\n        context_name + delimiter + \"vector\"\n    }\n}\n\nconfig = {\n    kafka_cluster_name = \"neo4j-cdc\"\n    kafka_port = 9003\n    crossplane = {\n        namespace = \"crossplane-system\"\n    }\n}\n\nzot = {\n    chart_version = \"0.1.68\"\n    release_name = \"zot\"\n    namespace = \"zot\"\n}\n\nimport regex\nimport manifests\n\nuserPrefix = \"user\"\ncontextPrefix = \"context\"\nhostPrefix = \"host\"\n\nschema ResourceNameStr:\n    data: str\n    check:\n        regex.match(data, r'^[a-z0-9]([-a-z0-9]*[a-z0-9])?$')\n        len(data) < 64\nschema DomainStr:\n    data: str\n    check:\n        regex.match(data, \"\")\n\ngetData = lambda resourceStr : any -> str {\n    resourceStr.data\n}\ncrossplaneResourceName = lambda entity: any, resourceName : ResourceNameStr -> str {\n    getData(entity.name) + \"-\" + getData(resourceName)\n}\n\ncrossplane_user2context_trigger_name = lambda user : MindwmUser, ctx: MindwmContext -> str {\n  \"user-\" + getData(user.name) + \"-to-context-\" + getData(ctx.name)\n} \n\ncrossplane_context2user_trigger_name = lambda user : MindwmUser, ctx: MindwmContext -> str {\n  \"context-\" + getData(ctx.name) + \"-to-user-\" + getData(user.name)\n} \n\ndomain: DomainStr { data = \"mindwm.local\" }\n\nschema Mindwm2:\n    context: MindwmContext\n    user: MindwmUser\n    host: MindwmHost\n\nschema MindwmHost:\n    name: ResourceNameStr\n    broker: Broker { name.data = \"${getData(name)}-host-broker\"}\n    # from host_broker to user broker trigger\n    trigger: Trigger { name.data = \"${getData(name)}-trigger-to-user-broker\" }\n    # from user_broker to host broker trigger\n    trigger_back: Trigger {\n      name.data = \"user-broker-to-\" + getData(name) + \"-broker-trigger\"\n    } \n\nschema MindwmUser:\n    name: ResourceNameStr\n    namespace: ResourceNameStr = { data = \"${userPrefix}-${getData(name)}\" }\n    broker: Broker { name.data = \"user-broker\" }\n\nschema MindwmContext:\n    name: ResourceNameStr\n    namespace: ResourceNameStr = { data = \"${contextPrefix}-${getData(name)}\" }\n    broker: Broker { \n      name.data = \"context-broker\"\n      virtual_service = {\n        name.data = \"broker-virtual-service\"\n      } \n    } \n    kafka: Kafka {}\n    neo4j: Neo4j {}\n    vector: Vector {}\n    cdc_topic: KafkaTopic { \n      name.data = \"context-\" + getData(name) + \"-cdc\"\n    } \n    gateway: IstioGateway { \n      name.data = \"gateway\" \n      hosts = [\n        \"neo4j.\" + getData(name) + \".\" + getData(domain)\n      ] \n    } \n    neo4j_virtual_service: IstioVirtualService {\n      name.data = \"neo4j-virtual-service\"\n    } \n    kafkaSource: KafkaSource = {\n        name.data = getData(cdc_topic.name) + \"-kafkasource\"\n        topicName = cdc_topic.name\n        bootstrap_servers = [ \"${getData(kafka.cluster_name)}.${getData(kafka.namespace)}:${kafka.port}\" ]\n    }\n    io_context: KnativeFunction {\n        name.data = \"iocontext\"\n        image = \"ghcr.io/mindwm/knfunc-io-context:latest\"\n    }\n    kafka_cdc: KnativeFunction {\n        name.data = \"kafka-cdc\"\n        image = \"ghcr.io/mindwm/knfunc-kafka-cdc:1.0.4\"\n    }\n    pong: KnativeFunction {\n        name.data = \"pong\"\n        image = \"ghcr.io/mindwm/knfunc-pong:latest\"\n    }\n\n    clipboard: KnativeFunction {\n        name.data = \"clipboard\"\n        image = \"ghcr.io/mindwm/knfunc-clipboard:master\"\n    }\n\nschema KafkaTopic:\n    name: ResourceNameStr\n\nschema Broker:\n    name: ResourceNameStr\n    configMapName: ResourceNameStr = (lambda brokerName : ResourceNameStr -> ResourceNameStr {\n        { data = \"${getData(brokerName)}-config\" }\n    })(name)\n    deadLetter: DeadLetter { name.data = \"dead-letter\" }\n    virtual_service?: IstioVirtualService \n\nschema DeadLetter:\n    name: ResourceNameStr\n    image: str = \"gcr.io/knative-releases/knative.dev/eventing/cmd/event_display\"\n\nschema Trigger:\n    name: ResourceNameStr\n\nschema KafkaSource:\n    name: ResourceNameStr\n    topicName: ResourceNameStr\n    bootstrap_servers: [str]\n\nschema Kafka:\n    namespace: ResourceNameStr = { data = \"redpanda\" }\n    port: int = 9093\n    cluster_name: ResourceNameStr = { data = \"neo4j-cdc\" }\n    bootstrap_servers: [str] = [\n       getData(cluster_name) + \".\" + getData(namespace) + \":\" + str(port)\n    ]\n\n\nschema Neo4j:\n    name: ResourceNameStr = { data = \"neo4j\" }\n    version: str = \"4.4.33\"\n    username: str = \"neo4j\"\n    password: str = \"password\"\n    plugin_pvc_name: ResourceNameStr = { data = \"neo4j-plugins\" }\n    pvc_size: str = \"5Gi\"\n    port: int = 7687\n\nschema Vector:\n    name: ResourceNameStr = { data = \"vector\" }\n\nschema Crossplane:\n    apiVersion: str = \"apiextensions.crossplane.io/v1\"\n    compositeVersion: str = \"v1beta1\"\n    domain: DomainStr { data = \"mindwm.io\" }\n\nschema IstioGateway:\n    name: ResourceNameStr \n    hosts: [str]\n\nschema IstioVirtualService:\n    name: ResourceNameStr\n\nschema KnativeFunction:\n    name: ResourceNameStr \n    image: str\n#ctx = MindwmContext { name.data = \"pink\" }\n\ncontext_name = option(\"params\").oxr.spec.name\nctx = MindwmContext {\n    name.data = \"${context_name}\"\n} \nitems = [\n  {\n    apiVersion = \"kubernetes.crossplane.io/v1alpha2\"\n    kind = \"Object\"\n    metadata.name = crossplaneResourceName(ctx, ctx.namespace) \n    spec.forProvider.manifest = k8core.Namespace {\n      metadata.name = getData(ctx.namespace)\n      metadata.labels = {\n          \"istio-injection\" = \"enabled\"\n      }\n    }\n  }\n  {\n    apiVersion = \"kubernetes.crossplane.io/v1alpha2\"\n    kind = \"Object\"\n    metadata.name = crossplaneResourceName(ctx, ctx.neo4j.plugin_pvc_name) \n    spec.forProvider.manifest = k8core.PersistentVolumeClaim {\n        metadata.name = getData(ctx.neo4j.plugin_pvc_name)\n        metadata.namespace = getData(ctx.namespace)\n        spec = {\n          accessModes = [ \"ReadWriteOnce\" ]\n          resources.requests.storage = \"1Gi\"\n        }\n    } \n  }\n  # redpanda (kafka topic) for broadcast graph changes to process eventing\n  {\n    apiVersion = \"kubernetes.crossplane.io/v1alpha2\"\n    kind = \"Object\"\n    metadata.name = crossplaneResourceName(ctx, ctx.cdc_topic.name)\n    spec.forProvider.manifest = {\n        apiVersion = \"cluster.redpanda.com/v1alpha1\"\n        kind = \"Topic\"\n        metadata = {\n            name = getData(ctx.cdc_topic.name)\n            namespace = getData(ctx.kafka.namespace)\n        }\n        spec = {\n            partitions = 1\n            replicationFactor = 1\n            additionalConfig = {\n                \"cleanup.policy\" = \"compact\"\n            }\n            kafkaApiSpec.brokers = ctx.kafka.bootstrap_servers\n        }\n    }\n  }\n  crossplane_helm.Release {\n    metadata.name = crossplaneResourceName(ctx, ctx.neo4j.name)\n    spec.forProvider = {\n        namespace = getData(ctx.namespace)\n        chart = {\n          name = \"neo4j-standalone\"\n          repository = \"https://helm.neo4j.com/neo4j\"\n          version = \"4.4.35\"\n        } \n        values = {\n            additionalVolumeMounts = [\n                {\n                    mountPath = \"/var/lib/neo4j/plugins\"\n                    name = getData(ctx.neo4j.plugin_pvc_name)\n                }\n            ]\n            additionalVolumes = [\n                {\n                    name = getData(ctx.neo4j.plugin_pvc_name)\n                    persistentVolumeClaim.claimName = getData(ctx.neo4j.plugin_pvc_name)\n                }\n            ]\n            env = {\n                \"NEO4J_apoc_export_file_enabled\" = \"true\"\n                \"NEO4J_apoc_import_file_enabled\" = \"true\"\n                \"NEO4J_apoc_import_file_use__neo4j__config\" = \"true\"\n                \"NEO4J_dbms_logs_debug_level\" = \"DEBUG\"\n                \"NEO4J_kafka_bootstrap_servers\" = \"neo4j-cdc.redpanda:9093\"\n                \"NEO4J_streams_source_topic_nodes_\" + getData(ctx.cdc_topic.name) = \"*\"\n                \"NEO4J_streams_source_topic_relationships_\"+ getData(ctx.cdc_topic.name) = '*'\n            }\n            neo4j.password = \"password\"\n            services.neo4j.spec.type = \"NodePort\"\n            neo4j.labels = {\n                \"sidecar.istio.io/inject\" = \"false\"\n            }\n            neo4j.resources = {\n                cpu = \"500m\"\n                memory: \"2Gi\"\n            }\n            volumes = {\n                data = {\n                    dynamic = {\n                        storageClassName = \"local-path\"\n                        requests.storage = \"5Gi\"\n                    }\n                    mode = \"dynamic\"\n                }\n            }\n            # TODO(@metacoma) k8.core.podSpec\n            podSpec.initContainers = [\n                {\n                    image = \"curlimages/curl:8.6.0\"\n                    name = \"install-apoc-plugin\"\n                    user = \"root\"\n                    volumeMounts = [{\n                        mountPath = \"/var/lib/neo4j/plugins\"\n                        name = getData(ctx.neo4j.plugin_pvc_name)\n                    }]\n                    workingDir = \"/var/lib/neo4j/plugins\"\n                    command = [\n                        \"curl\",\n                        \"--retry\"\n                        \"3\"\n                        \"-Lo\"\n                        \"apoc.jar\"\n                        \"--no-clobber\"\n                        \"https://github.com/neo4j-contrib/neo4j-apoc-procedures/releases/download/4.4.0.23/apoc-4.4.0.23-all.jar\"\n                    ]\n                }\n                {\n                    image = \"curlimages/curl:8.6.0\"\n                    name = \"install-neo4j-stream-plugin\"\n                    user = \"root\"\n                    workingDir = \"/var/lib/neo4j/plugins\"\n                    volumeMounts = [{\n                        mountPath = \"/var/lib/neo4j/plugins\"\n                        name = getData(ctx.neo4j.plugin_pvc_name)\n                    }]\n                    command = [\n                        \"curl\",\n                        \"--retry\"\n                        \"3\"\n                        \"-Lo\"\n                        \"streams.jar\"\n                        \"--no-clobber\"\n                        \"https://github.com/neo4j-contrib/neo4j-streams/releases/download/4.1.3/neo4j-streams-4.1.3.jar\"\n                    ]\n                }\n            ]\n\n        }\n    }\n  }\n  crossplane_kubernetes.Object {\n    metadata.name = crossplaneResourceName(ctx, ctx.broker.configMapName) \n    spec.forProvider.manifest = k8core.ConfigMap {\n        metadata = {\n            name = getData(ctx.broker.configMapName)\n            namespace = getData(ctx.namespace)\n        } \n        data = {\n            \"channel-template-spec\" = '''apiVersion: messaging.knative.dev/v1\nkind: InMemoryChannel\n'''\n        }\n    } \n\n  } \n  # contextBroker\n  crossplane_kubernetes.Object {\n    metadata.name = crossplaneResourceName(ctx, ctx.broker.name)\n    spec.forProvider.manifest = knative_broker.Broker {\n      metadata = {\n        name = getData(ctx.broker.name)\n        namespace = getData(ctx.namespace)\n        annotations = {\n          \"eventing.knative.dev/broker.class\" = \"MTChannelBasedBroker\"\n        }\n\n      } \n      spec.config = {\n          apiVersion = \"v1\"\n          kind = \"ConfigMap\"\n          name = getData(ctx.broker.configMapName)\n      }\n    }\n  } \n  # kafkaSource\n  crossplane_kubernetes.Object {\n    metadata.name = crossplaneResourceName(ctx, ctx.kafkaSource.name)\n    spec.forProvider.manifest = {\n      apiVersion = \"sources.knative.dev/v1beta1\"\n      kind = \"KafkaSource\"\n      metadata = {\n        name = getData(ctx.kafkaSource.name)\n        namespace = getData(ctx.namespace)\n      }\n      spec = {\n            bootstrapServers = ctx.kafka.bootstrap_servers\n            consumerGroup = \"knative-group\"\n            sink.ref = {\n                apiVersion = \"eventing.knative.dev/v1\"\n                kind = \"Broker\"\n                name = getData(ctx.broker.name)\n            }\n            topics = [ getData(ctx.cdc_topic.name) ]\n      }  \n    }\n  } \n  # deadLetter service\n  crossplane_kubernetes.Object {\n    metadata.name = crossplaneResourceName(ctx, ctx.broker.deadLetter.name)\n    spec.forProvider.manifest = knative_service.Service {\n      metadata = {\n        name = getData(ctx.broker.deadLetter.name)\n        namespace = getData(ctx.namespace)\n      }\n      spec.template.spec.containers = [{\n          image = ctx.broker.deadLetter.image\n          env = [{\n            name = \"REQUEST_LOGGING_ENABLED\"\n            value = \"1\"\n          }] \n      }]\n    } \n  } \n  crossplane_kubernetes.Object {\n    metadata.name = crossplaneResourceName(ctx, ctx.broker.virtual_service.name)\n    spec.forProvider.manifest = istio_virtual_service.VirtualService {\n      metadata.name = getData(ctx.broker.virtual_service.name)\n      metadata.namespace = getData(ctx.namespace)\n      spec = {\n        # TODO @(metacoma) hardcode\n        hosts = [\n          \"broker-ingress.knative-eventing.svc.cluster.local\"\n        ]\n        # TODO @(metacoma) hardcode\n        gateways = [\n          \"knative-serving/knative-ingress-gateway\",\n          \"knative-serving/knative-local-gateway\"\n        ]\n        http = [{\n          match = [{ uri.regex = \".*\"}]\n          route = [{\n            # TODO (@metacoma) hardcode\n            destination.host = \"broker-ingress.knative-eventing.svc.cluster.local\"\n            destination.port.number = 80 # TODO(@metacoma) hardcode\n          }]\n        }]\n      }\n    }\n  } \n  # io_context\n  crossplane_kubernetes.Object {\n    metadata.name = crossplaneResourceName(ctx, ctx.io_context.name)\n    spec.forProvider.manifest = knative_service.Service {\n      metadata = {\n        name = getData(ctx.io_context.name)\n        namespace = getData(ctx.namespace)\n      }\n      spec.template.spec.containers = [{\n          image = ctx.io_context.image\n          env = [\n            {\n              name = \"NEO4J_URI\"\n              value = \"bolt://\" + getData(ctx.name) + \"-\" + getData(ctx.neo4j.name) + \"-neo4j:\" + str(ctx.neo4j.port)\n            }\n            {\n              name = \"NEO4J_USERNAME\"\n              value =  ctx.neo4j.username\n            }\n            {\n              name = \"NEO4J_PASSWORD\"\n              value = ctx.neo4j.password\n            }\n            {\n              name = \"CONTEXT_NAME\"\n              value = getData(ctx.name)\n            }\n            {\n              name = \"OTEL_EXPORTER_OTLP_ENDPOINT\"\n              value = \"http://otel-collector-opentelemetry-collector.monitoring:4317\"\n            }\n            {\n              name = \"OTEL_EXPORTER_OTLP_TRACES_ENDPOINT\"\n              value = \"http://tempo.monitoring:4317/v1/traces\"\n            }\n          ] \n      }]\n    } \n  } \n\n  # io-trigger\n  crossplane_kubernetes.Object {\n    metadata.name = crossplaneResourceName(ctx, ctx.io_context.name) + \"-trigger\"\n    spec.forProvider.manifest = {\n      apiVersion = \"eventing.knative.dev/v1\"\n      kind = \"Trigger\"\n      metadata = {\n        name = getData(ctx.io_context.name) + \"-trigger\"\n        namespace = getData(ctx.namespace)\n      }\n      spec = {\n        broker = getData(ctx.broker.name)\n        delivery.deadLetterSink.ref = {\n          apiVersion = \"serving.knative.dev/v1\"\n          kind = \"Service\" \n          name = getData(ctx.broker.deadLetter.name)\n        }\n        filters = [{\n          \"all\" = [\n            {\n              exact.type = \"org.mindwm.v1.iodocument\"\n            }\n            {\n              \"not\" = { prefix.subject = \"#\" }\n            }\n          ]\n        }]\n        subscriber.ref = {\n          apiVersion = \"serving.knative.dev/v1\"\n          kind = \"Service\"\n          name = getData(ctx.io_context.name)\n        }\n      } \n    } \n  }\n\n  # pong\n  crossplane_kubernetes.Object {\n    metadata.name = crossplaneResourceName(ctx, ctx.pong.name)\n    spec.forProvider.manifest = knative_service.Service {\n      metadata = {\n        name = getData(ctx.pong.name)\n        namespace = getData(ctx.namespace)\n      }\n      spec.template.spec.containers = [{\n          image = ctx.pong.image\n          env = [\n            {\n              name = \"OTEL_EXPORTER_OTLP_ENDPOINT\"\n              value = \"http://otel-collector-opentelemetry-collector.monitoring:4317\"\n            }\n            {\n              name = \"OTEL_EXPORTER_OTLP_TRACES_ENDPOINT\"\n              value = \"http://tempo.monitoring:4317/v1/traces\"\n            }\n          ] \n      }]\n    } \n  } \n  #pong trigger\n  crossplane_kubernetes.Object {\n    metadata.name = crossplaneResourceName(ctx, ctx.pong.name) + \"-trigger\"\n    spec.forProvider.manifest = {\n      apiVersion = \"eventing.knative.dev/v1\"\n      kind = \"Trigger\"\n      metadata = {\n        name = getData(ctx.pong.name) + \"-trigger\"\n        namespace = getData(ctx.namespace)\n      }\n      spec = {\n        broker = getData(ctx.broker.name)\n        delivery.deadLetterSink.ref = {\n          apiVersion = \"serving.knative.dev/v1\"\n          kind = \"Service\" \n          name = getData(ctx.broker.deadLetter.name)\n        }\n        filters = [{\n          \"all\" = [\n            {\n              exact.type = \"org.mindwm.v1.iodocument\"\n            }\n            {\n              prefix.subject = \"#\" \n            }\n          ]\n        }]\n        subscriber.ref = {\n          apiVersion = \"serving.knative.dev/v1\"\n          kind = \"Service\"\n          name = getData(ctx.pong.name)\n        }\n      } \n    } \n  }\n\n  # kafka_cdc\n  crossplane_kubernetes.Object {\n    metadata.name = crossplaneResourceName(ctx, ctx.kafka_cdc.name)\n    spec.forProvider.manifest = knative_service.Service {\n      metadata = {\n        name = getData(ctx.kafka_cdc.name)\n        namespace = getData(ctx.namespace)\n      }\n      spec.template.spec.containers = [{\n          image = ctx.kafka_cdc.image\n          env = [\n            {\n              name = \"NEO4J_URI\"\n              value = \"bolt://\" + getData(ctx.name) + \"-\" + getData(ctx.neo4j.name) + \"-neo4j:\" + str(ctx.neo4j.port)\n            }\n            {\n              name = \"NEO4J_USERNAME\"\n              value =  ctx.neo4j.username\n            }\n            {\n              name = \"NEO4J_PASSWORD\"\n              value = ctx.neo4j.password\n            }\n            {\n              name = \"CONTEXT_NAME\"\n              value = getData(ctx.name)\n            }\n            {\n              name = \"OTEL_EXPORTER_OTLP_ENDPOINT\"\n              value = \"http://otel-collector-opentelemetry-collector.monitoring:4317\"\n            }\n            {\n              name = \"OTEL_EXPORTER_OTLP_TRACES_ENDPOINT\"\n              value = \"http://tempo.monitoring:4317/v1/traces\"\n            }\n          ] \n      }]\n    } \n  } \n\n  #kafka-cdc trigger\n  crossplane_kubernetes.Object {\n    metadata.name = crossplaneResourceName(ctx, ctx.kafka_cdc.name) + \"-trigger\"\n    spec.forProvider.manifest = {\n      apiVersion = \"eventing.knative.dev/v1\"\n      kind = \"Trigger\"\n      metadata = {\n        name = getData(ctx.kafka_cdc.name) + \"-trigger\"\n        namespace = getData(ctx.namespace)\n      }\n      spec = {\n        broker = getData(ctx.broker.name)\n        delivery.deadLetterSink.ref = {\n          apiVersion = \"serving.knative.dev/v1\"\n          kind = \"Service\"\n          name = getData(ctx.broker.deadLetter.name)\n        }\n        filters = [{\n          \"all\" = [\n            {\n              exact.type = \"dev.knative.kafka.event\"\n            }\n            {\n              \"not\" = { prefix.source = \"org.mindwm\" }\n            }\n          ]\n        }]\n        subscriber.ref = {\n          apiVersion = \"serving.knative.dev/v1\"\n          kind = \"Service\"\n          name = getData(ctx.kafka_cdc.name)\n        }\n      }\n    }\n  }\n\n  crossplane_kubernetes.Object {\n    metadata.name = crossplaneResourceName(ctx, ctx.clipboard.name)\n    spec.forProvider.manifest = knative_service.Service {\n      metadata = {\n        name = getData(ctx.clipboard.name)\n        namespace = getData(ctx.namespace)\n      }\n      spec.template.spec.containers = [{\n          image = ctx.clipboard.image\n          env = [\n            {\n              name = \"NEO4J_URI\"\n              value = \"bolt://\" + getData(ctx.name) + \"-\" + getData(ctx.neo4j.name) + \"-neo4j:\" + str(ctx.neo4j.port)\n            }\n            {\n              name = \"NEO4J_USERNAME\"\n              value =  ctx.neo4j.username\n            }\n            {\n              name = \"NEO4J_PASSWORD\"\n              value = ctx.neo4j.password\n            }\n            {\n              name = \"CONTEXT_NAME\"\n              value = getData(ctx.name)\n            }\n            {\n              name = \"OTEL_EXPORTER_OTLP_ENDPOINT\"\n              value = \"http://otel-collector-opentelemetry-collector.monitoring:4317\"\n            }\n            {\n              name = \"OTEL_EXPORTER_OTLP_TRACES_ENDPOINT\"\n              value = \"http://tempo.monitoring:4317/v1/traces\"\n            }\n          ] \n      }]\n    } \n  } \n  #clipboard trigger\n  crossplane_kubernetes.Object {\n    metadata.name = crossplaneResourceName(ctx, ctx.clipboard.name) + \"-trigger\"\n    spec.forProvider.manifest = {\n      apiVersion = \"eventing.knative.dev/v1\"\n      kind = \"Trigger\"\n      metadata = {\n        name = getData(ctx.clipboard.name) + \"-trigger\"\n        namespace = getData(ctx.namespace)\n      }\n      spec = {\n        broker = getData(ctx.broker.name)\n        delivery.deadLetterSink.ref = {\n          apiVersion = \"serving.knative.dev/v1\"\n          kind = \"Service\" \n          name = getData(ctx.broker.deadLetter.name)\n        }\n        filters = [{\n          \"all\" = [\n            {\n              exact.type = \"org.mindwm.v1.clipboard\"\n            }\n          ]\n        }]\n        subscriber.ref = {\n          apiVersion = \"serving.knative.dev/v1\"\n          kind = \"Service\"\n          name = getData(ctx.clipboard.name)\n        }\n      } \n    } \n  }\n\n  crossplane_kubernetes.Object {\n    metadata.name = crossplaneResourceName(ctx, ctx.gateway.name)\n    spec.forProvider.manifest = istio_gateway.Gateway {\n      metadata.name = getData(ctx.gateway.name)\n      metadata.namespace = getData(ctx.namespace)\n      spec = {\n        selector.istio = \"ingressgateway\" #TODO@(metacoma) ingress release name ?\n        servers = [{\n          port = {\n            number = 80\n            name = \"http\"\n            protocol = \"HTTP\"\n          }\n          hosts = ctx.gateway.hosts\n        }]\n      }\n    }\n  } \n\n  crossplane_kubernetes.Object {\n    metadata.name = crossplaneResourceName(ctx, ctx.neo4j_virtual_service.name)\n    spec.forProvider.manifest = istio_virtual_service.VirtualService {\n      metadata.name = getData(ctx.neo4j_virtual_service.name)\n      metadata.namespace = getData(ctx.namespace)\n      spec = {\n        hosts = ctx.gateway.hosts\n        gateways = [ getData(ctx.gateway.name) ]\n        http = [{\n          match = [{ uri.prefix = \"/\", port = 80}]\n          route = [{ \n            destination.host = getData(ctx.name) + \"-\" + getData(ctx.neo4j.name)\n            destination.port.number = ctx.neo4j.port # TODO(@metacoma) hardcode\n          }]\n\n        }]\n      }\n    }\n  } \n\n]\n"
   - step: automatically-detect-ready-composed-resources
     functionRef:
       name: function-auto-ready
@@ -62834,7 +62533,7 @@ spec:
       kind: KCLInput
       spec:
         dependencies: "                k8s = { oci = \"oci://ghcr.io/kcl-lang/k8s\", tag = \"1.29\" }\n                knative = { oci = \"oci://ghcr.io/kcl-lang/knative\", tag = \"0.2.0\" }\n                crossplane-provider-kubernetes = { oci = \"oci://ghcr.io/kcl-lang/crossplane-provider-kubernetes\", tag = \"0.9.0\" }\n                "
-        source: "import k8s.api.core.v1 as k8core\nimport knative.v1.serving_knative_dev_v1_service as knative_service\nimport knative.v1.eventing_knative_dev_v1_broker as knative_broker\nimport crossplane_provider_kubernetes.v1alpha1.kubernetes_crossplane_io_v1alpha1_object as crossplane_kubernetes\nmindwm_domain = \"mindwm.local\"\n\n\nsources = {\n  mindwm_ns = \"org.mindwm\" \n  func_ns = \"knfunc\"\n  knfunc_action = lambda user_name host_name {\n    hostname = \"%\" if host_name == \"\" else host_name\n    \"${sources.mindwm_ns}.${sources.func_ns}.%.%.${user_name}..tmux.%.%.action\"\n  } \n} \n\nkafka = {\n    cluster_name = \"neo4j-cdc\"\n    namespace = \"redpanda\"\n    port = 9093\n    brokerEndpoint = cluster_name + \".\" + namespace + \":${port}\"\n    mkContextCdcTopicName = lambda context_name : str {\n        context_name + \"-cdc-topic\"\n    }\n}\n\nargocd = {\n  release_name = \"argocd\"\n  gateway_name = \"argocd-gateway\"\n  namespace = \"argocd\"\n  url = \"argocd.${mindwm_domain}\"\n  virtual_service = \"argocd-vs\"\n  destination = lambda {\n    \"${argocd.release_name}-server.${argocd.namespace}.svc.cluster.local\"\n  } \n} \n\nknativeBroker = {\n    deadLetterImage = \"gcr.io/knative-releases/knative.dev/eventing/cmd/event_display\"\n}\n\ncontextBroker = {\n    name = lambda context_name : str {\n        \"context-broker\" + delimiter + context_name\n    }\n    configMapName = lambda context_name : str {\n        name(context_name) + delimiter + \"configmap\"\n    }\n    kafkaSourceName = lambda context_name : str {\n        name(context_name) + delimiter + \"source\"\n\n    }\n    deadLetterName = lambda context_name : str {\n        name(context_name) + delimiter + \"dead-letter\"\n    }\n}\n\n\nMindwm = {\n    user = {\n        namespace = lambda username : str -> str {\n            \"user-\" + username\n        }\n        broker = {\n            configmap = lambda user_name : str -> str {\n                \"user\" + delimiter + user_name + delimiter + \"broker-configmap\"\n            }\n            name = lambda user_name : str -> str {\n                \"user\" + delimiter + user_name + delimiter + \"broker\"\n            }\n        }\n        deadLetter = {\n            name = lambda user_name : str -> str {\n                \"user\" + delimiter + user_name + delimiter + \"dead-letter\"\n            }\n        }\n        contextTrigger = {\n            name = lambda context_name : str -> str {\n                \"trigger-user-broker-to\" + delimiter + context_name\n            }\n            crossplane_name = lambda user_name : str, context_name : str -> str {\n                \"trigger\" + delimiter + user_name + delimiter + \"broker-to\" + delimiter + context_name\n            }\n        }\n        trigger_back = lambda user_name : str -> str {\n          \"trigger-context-to-user\" + delimiter + user_name\n        }\n    }\n    host = {\n        broker = {\n            configmap = lambda host_name : str -> str {\n                host_name + delimiter + \"broker-configmap\"\n            }\n            name = lambda host_name : str -> str {\n                host_name + delimiter + \"broker\"\n            }\n        }\n        trigger = lambda host_name : str -> str {\n            # FIXME (@metacoma)\n            # host trigger name = \"trigger-{host_name}-broker-to-user-broker\n            \"trigger-host-broker-to\" + delimiter + host_name\n        }\n        trigger_back = lambda host_name : str -> str {\n            \"trigger-knative-to-host-\" + delimiter + host_name\n        }\n    }\n\n    context = {\n        istio_gateway = lambda context_name : str - >str {\n          \"context-${context_name}-gateway\"\n        } \n        neo4j_vs_name = lambda context_name : str -> str {\n          \"${context_name}-neo4j-ui\"\n        }\n        io_context = {\n            name = \"io-context\"\n            crossplane_name = lambda context_name : str -> str {\n                 context_name + delimiter + \"io-context\"\n            }\n            crossplane_trigger = lambda context_name : str -> str {\n                 context_name + delimiter + \"io-context-trigger\"\n            }\n\n            image = \"ghcr.io/mindwm/io-context:latest\"\n        }\n        touch = {\n            name = \"mindwm-touch\"\n            crossplane_name = lambda context_name : str -> str {\n                 context_name + delimiter + \"mindwm-touch\"\n            }\n            crossplane_trigger = lambda context_name : str -> str {\n                 context_name + delimiter + \"mindwm-touch-trigger\"\n            }\n\n            image = \"ghcr.io/mindwm/mindwm-touch:latest\"\n        }\n    }\n}\n\nknative = {\n    serving = {\n        namespace = \"knative-serving\"\n        version = \"1.18.0\"\n    }\n    eventing = {\n        namespace = \"knative-eventing\"\n        version = \"1.18.0\"\n    }\n}\n\ncert_manager = {\n  helm_chart_version = \"1.17.2\"\n  namespace = \"cert-manager\"\n}\n\nistio = {\n    version = \"1.24.2\"\n    system = {\n        namespace = \"istio-system\"\n    }\n    gateway = {\n        namespace = \"istio-system\"\n    }\n    pilot = {\n        cpu_req = \"200m\"\n    }\n}\n\nkafka_cluster_name = \"neo4j-cdc\"\nkafka_port = 9003\n#neo4j_version = \"4.4.33\"\n#neo4j_password = \"password\"\ncrossplane = {\n    namespace = \"crossplane-system\"\n}\n\nmonitoring = {\n  namespace = \"monitoring\"\n  gateway_name = \"${namespace}-gateway\"\n  otel_collector = {\n    release_name = \"otel-collector\"\n  }\n  loki = {\n    url = \"loki.${mindwm_domain}\"\n    release_name = \"loki\"\n    virtual_service = \"loki-vs\"\n    destination = lambda {\n        \"${monitoring.loki.release_name}-gateway\"\n    }\n  }\n  tempo = {\n    url = \"tempo.${mindwm_domain}\"\n    virtual_service = \"tempo-vs\"\n    release_name = \"tempo\"\n    destination = lambda {\n      \"tempo\"\n    }\n  }\n  grafana = {\n    url = \"grafana.${mindwm_domain}\"\n    virtual_service = \"grafana-vs\"\n    destination = lambda {\n      \"${monitoring.victoria_metrics.release_name}-grafana\"\n    }\n  } \n  victoria_metrics = {\n    release_name = \"vm-aio\"\n    url = \"vm.${mindwm_domain}\"\n    virtual_service = \"vm-vs\"\n    destination = lambda {\n      #\"${monitoring.victoria_metrics.release_name}.${monitoring.namespace}.svc.cluster.local\"\n      \"vmsingle-${monitoring.victoria_metrics.release_name}-victoria-metrics-k8s-stack.${monitoring.namespace}.svc.cluster.local\"\n    }\n  }\n  promtail = {\n    release_name = \"promtail\"\n  }\n  zipkin_endpoint = lambda tempo_release_name : str, monitoring_ns : str {\n    \"http://${tempo_release_name}.${monitoring_ns}:9411/api/v2/spans\"\n  }\n  prometheus_endpoint = lambda {\n    \"http://vmsingle-${monitoring.victoria_metrics.release_name}-victoria-metrics-k8s-stack.${monitoring.namespace}:8429\"\n  }\n  opencensus_endpoint = lambda tempo_release_name : str, monitoring_ns : str {\n    \"${tempo_release_name}.${monitoring_ns}:55678\"\n  }\n  traces_endpoint = lambda tempo_release_name : str, monitoring_ns : str {\n    \"http://${tempo_release_name}.${monitoring_ns}:4317/v1/traces\"\n  }\n  loki_endpoint = lambda {\n    \"http://${monitoring.loki.release_name}.${monitoring.namespace}:3100/otlp\"\n  }\n}\n\ndelimiter = \"-\"\n\ncontextNamespacePrefix = \"context\"\nuserNamespacePrefix = \"team\"\n\nmakeUserNamespace = lambda username : str {\n    userNamespacePrefix + delimiter + username\n}\n\nmakeContextNamespace = lambda ns_name : str {\n    contextNamespacePrefix + delimiter + ns_name\n}\n\nmakeKafkaTopicName = lambda context_name : str {\n    \"context\" + delimiter + context_name + delimiter + \"cdc\"\n}\n\nneo4j = {\n    version = \"4.4.35\"\n    username = \"neo4j\"\n    password = \"password\"\n    release_name = \"neo4j\"\n    port = 7687\n    http_port = 7474\n\n    crossplane_pvc_name = lambda context_name : str -> str {\n        context_name + delimiter + \"neo4j-plugin-pvc\"\n    }\n\n    crossplane_name = lambda context_name : str -> str {\n        context_name + delimiter + \"neo4j\"\n    }\n}\n\nvector = {\n    image = {\n        repo = \"ghcr.io/mindwm/vector-image/vector-image\"\n        tag = \"main\"\n    }\n    chart_version = \"0.33.0\"\n    crossplane_name = lambda context_name : str -> str {\n        context_name + delimiter + \"vector\"\n    }\n}\n\nconfig = {\n    kafka_cluster_name = \"neo4j-cdc\"\n    kafka_port = 9003\n    crossplane = {\n        namespace = \"crossplane-system\"\n    }\n}\n\nzot = {\n    chart_version = \"0.1.65\"\n    release_name = \"zot\"\n    namespace = \"zot\"\n}\n\nimport regex\nimport manifests\n\nuserPrefix = \"user\"\ncontextPrefix = \"context\"\nhostPrefix = \"host\"\n\nschema ResourceNameStr:\n    data: str\n    check:\n        regex.match(data, r'^[a-z0-9]([-a-z0-9]*[a-z0-9])?$')\n        len(data) < 64\nschema DomainStr:\n    data: str\n    check:\n        regex.match(data, \"\")\n\ngetData = lambda resourceStr : any -> str {\n    resourceStr.data\n}\ncrossplaneResourceName = lambda entity: any, resourceName : ResourceNameStr -> str {\n    getData(entity.name) + \"-\" + getData(resourceName)\n}\n\ncrossplane_user2context_trigger_name = lambda user : MindwmUser, ctx: MindwmContext -> str {\n  \"user-\" + getData(user.name) + \"-to-context-\" + getData(ctx.name)\n} \n\ncrossplane_context2user_trigger_name = lambda user : MindwmUser, ctx: MindwmContext -> str {\n  \"context-\" + getData(ctx.name) + \"-to-user-\" + getData(user.name)\n} \n\ndomain: DomainStr { data = \"mindwm.local\" }\n\nschema Mindwm2:\n    context: MindwmContext\n    user: MindwmUser\n    host: MindwmHost\n\nschema MindwmHost:\n    name: ResourceNameStr\n    broker: Broker { name.data = \"${getData(name)}-host-broker\"}\n    # from host_broker to user broker trigger\n    trigger: Trigger { name.data = \"${getData(name)}-trigger-to-user-broker\" }\n    # from user_broker to host broker trigger\n    trigger_back: Trigger {\n      name.data = \"user-broker-to-\" + getData(name) + \"-broker-trigger\"\n    } \n\nschema MindwmUser:\n    name: ResourceNameStr\n    namespace: ResourceNameStr = { data = \"${userPrefix}-${getData(name)}\" }\n    broker: Broker { name.data = \"user-broker\" }\n\nschema MindwmContext:\n    name: ResourceNameStr\n    namespace: ResourceNameStr = { data = \"${contextPrefix}-${getData(name)}\" }\n    broker: Broker { \n      name.data = \"context-broker\"\n      virtual_service = {\n        name.data = \"broker-virtual-service\"\n      } \n    } \n    kafka: Kafka {}\n    neo4j: Neo4j {}\n    vector: Vector {}\n    cdc_topic: KafkaTopic { \n      name.data = \"context-\" + getData(name) + \"-cdc\"\n    } \n    gateway: IstioGateway { \n      name.data = \"gateway\" \n      hosts = [\n        \"neo4j.\" + getData(name) + \".\" + getData(domain)\n      ] \n    } \n    neo4j_virtual_service: IstioVirtualService {\n      name.data = \"neo4j-virtual-service\"\n    } \n    kafkaSource: KafkaSource = {\n        name.data = getData(cdc_topic.name) + \"-kafkasource\"\n        topicName = cdc_topic.name\n        bootstrap_servers = [ \"${getData(kafka.cluster_name)}.${getData(kafka.namespace)}:${kafka.port}\" ]\n    }\n    io_context: KnativeFunction {\n        name.data = \"iocontext\"\n        image = \"ghcr.io/mindwm/knfunc-io-context:latest\"\n    }\n    kafka_cdc: KnativeFunction {\n        name.data = \"kafka-cdc\"\n        image = \"ghcr.io/mindwm/knfunc-kafka-cdc:1.0.4\"\n    }\n    pong: KnativeFunction {\n        name.data = \"pong\"\n        image = \"ghcr.io/mindwm/knfunc-pong:latest\"\n    }\n\n    clipboard: KnativeFunction {\n        name.data = \"clipboard\"\n        image = \"ghcr.io/mindwm/knfunc-clipboard:master\"\n    }\n\nschema KafkaTopic:\n    name: ResourceNameStr\n\nschema Broker:\n    name: ResourceNameStr\n    configMapName: ResourceNameStr = (lambda brokerName : ResourceNameStr -> ResourceNameStr {\n        { data = \"${getData(brokerName)}-config\" }\n    })(name)\n    deadLetter: DeadLetter { name.data = \"dead-letter\" }\n    virtual_service?: IstioVirtualService \n\nschema DeadLetter:\n    name: ResourceNameStr\n    image: str = \"gcr.io/knative-releases/knative.dev/eventing/cmd/event_display\"\n\nschema Trigger:\n    name: ResourceNameStr\n\nschema KafkaSource:\n    name: ResourceNameStr\n    topicName: ResourceNameStr\n    bootstrap_servers: [str]\n\nschema Kafka:\n    namespace: ResourceNameStr = { data = \"redpanda\" }\n    port: int = 9093\n    cluster_name: ResourceNameStr = { data = \"neo4j-cdc\" }\n    bootstrap_servers: [str] = [\n       getData(cluster_name) + \".\" + getData(namespace) + \":\" + str(port)\n    ]\n\n\nschema Neo4j:\n    name: ResourceNameStr = { data = \"neo4j\" }\n    version: str = \"4.4.33\"\n    username: str = \"neo4j\"\n    password: str = \"password\"\n    plugin_pvc_name: ResourceNameStr = { data = \"neo4j-plugins\" }\n    pvc_size: str = \"5Gi\"\n    port: int = 7687\n\nschema Vector:\n    name: ResourceNameStr = { data = \"vector\" }\n\nschema Crossplane:\n    apiVersion: str = \"apiextensions.crossplane.io/v1\"\n    compositeVersion: str = \"v1beta1\"\n    domain: DomainStr { data = \"mindwm.io\" }\n\nschema IstioGateway:\n    name: ResourceNameStr \n    hosts: [str]\n\nschema IstioVirtualService:\n    name: ResourceNameStr\n\nschema KnativeFunction:\n    name: ResourceNameStr \n    image: str\n#ctx = MindwmContext { name.data = \"pink\" }\n\nuser_name = option(\"params\").oxr.spec.name\ncontext_names = option(\"params\").oxr.spec.context\ncontexts = [\n  MindwmContext { name.data = context_name }\n  for context_name in context_names\n]\nuser = MindwmUser { name.data = user_name }\nitems = [\n  {\n    apiVersion = \"kubernetes.crossplane.io/v1alpha2\"\n    kind = \"Object\"\n    metadata.name = crossplaneResourceName(user, user.namespace) \n    spec.forProvider.manifest = k8core.Namespace {\n      metadata.name = getData(user.namespace)\n      metadata.labels = {\n          \"istio-injection\" = \"enabled\"\n      }\n    }\n  }\n  # deadLetter service\n  crossplane_kubernetes.Object {\n    metadata.name = crossplaneResourceName(user, user.broker.deadLetter.name)\n    spec.forProvider.manifest = knative_service.Service {\n      metadata = {\n        name = getData(user.broker.deadLetter.name)\n        namespace = getData(user.namespace)\n      }\n      spec.template.spec.containers = [{\n          image = user.broker.deadLetter.image\n          env = [{\n            name = \"REQUEST_LOGGING_ENABLED\"\n            value = \"1\"\n          }] \n      }]\n    } \n  } \n  crossplane_kubernetes.Object {\n    metadata.name = crossplaneResourceName(user, user.broker.configMapName) \n    spec.forProvider.manifest = k8core.ConfigMap {\n        metadata = {\n            name = getData(user.broker.configMapName)\n            namespace = getData(user.namespace)\n        } \n        data = {\n            \"channel-template-spec\" = '''  apiVersion: messaging.knative.dev/v1\n  kind: InMemoryChannel\n  '''\n        }\n    } \n  }\n\n  crossplane_kubernetes.Object {\n    metadata.name = crossplaneResourceName(user, user.broker.name)\n    spec.forProvider.manifest = knative_broker.Broker {\n      metadata = {\n        name = getData(user.broker.name)\n        namespace = getData(user.namespace)\n        annotations = {\n          \"eventing.knative.dev/broker.class\" = \"MTChannelBasedBroker\"\n        }\n      } \n      spec.config = {\n          apiVersion = \"v1\"\n          kind = \"ConfigMap\"\n          name = getData(user.broker.configMapName)\n      }\n    }\n  } \n\n] + [\n    # user broker -> context broker\n    crossplane_kubernetes.Object {\n      metadata.name = crossplane_user2context_trigger_name(user, ctx)\n      spec.forProvider.manifest = {\n        apiVersion = \"eventing.knative.dev/v1\"\n        kind = \"Trigger\"\n        metadata = {\n          name = crossplane_user2context_trigger_name(user, ctx)\n          namespace = getData(user.namespace)\n        }\n        spec = {\n          broker = getData(user.broker.name)\n          delivery.deadLetterSink.ref = {\n            apiVersion = \"serving.knative.dev/v1\"\n            kind = \"Service\" \n            name = getData(user.broker.deadLetter.name)\n          }\n          filters = [{\n            \"any\" = [\n              {exact.type = \"org.mindwm.v1.iodocument\"}\n              {exact.type = \"org.mindwm.v1.clipboard\"}\n              {exact.type = \"org.mindwm.v1.ping\"}\n            ]\n          }]\n          subscriber.ref = {\n            apiVersion = \"eventing.knative.dev/v1\"\n            kind = \"Broker\"\n            namespace = getData(ctx.namespace)\n            name = getData(ctx.broker.name)\n          }\n        } \n      } \n    }\n    for ctx in contexts\n] + [\n    # context broker -> user broker\n    crossplane_kubernetes.Object {\n      metadata.name = crossplane_context2user_trigger_name(user, ctx)\n      spec.forProvider.manifest = {\n        apiVersion = \"eventing.knative.dev/v1\"\n        kind = \"Trigger\"\n        metadata = {\n          name = crossplane_context2user_trigger_name(user, ctx)\n          namespace = getData(ctx.namespace)\n        }\n        spec = {\n          broker = getData(ctx.broker.name)\n          delivery.deadLetterSink.ref = {\n            apiVersion = \"serving.knative.dev/v1\"\n            kind = \"Service\" \n            name = getData(ctx.broker.deadLetter.name)\n          }\n          filters = [{\n            \"all\" = [\n                { cesql = \"source NOT LIKE 'org.mindwm.\" + getData(user.name) + \"._%'\" }\n                { cesql = \"subject LIKE 'org.mindwm.\" + getData(user.name) + \"._%' OR source LIKE 'org.mindwm.context.\" + getData(ctx.name) + \"._%'\" }\n                #{ cesql = \"source LIKE 'org.mindwm.context.\" + getData(ctx.name) + \".graph.%'\" }\n            ]\n          }]\n          subscriber.ref = {\n            apiVersion = \"eventing.knative.dev/v1\"\n            kind = \"Broker\"\n            namespace = getData(user.namespace)\n            name = getData(user.broker.name)\n          }\n        } \n      } \n    }\n    for ctx in contexts\n]\n"
+        source: "import k8s.api.core.v1 as k8core\nimport knative.v1.serving_knative_dev_v1_service as knative_service\nimport knative.v1.eventing_knative_dev_v1_broker as knative_broker\nimport crossplane_provider_kubernetes.v1alpha1.kubernetes_crossplane_io_v1alpha1_object as crossplane_kubernetes\nmindwm_domain = \"mindwm.local\"\n\n\nsources = {\n  mindwm_ns = \"org.mindwm\" \n  func_ns = \"knfunc\"\n  knfunc_action = lambda user_name host_name {\n    hostname = \"%\" if host_name == \"\" else host_name\n    \"${sources.mindwm_ns}.${sources.func_ns}.%.%.${user_name}..tmux.%.%.action\"\n  } \n} \n\nkafka = {\n    cluster_name = \"neo4j-cdc\"\n    namespace = \"redpanda\"\n    port = 9093\n    brokerEndpoint = cluster_name + \".\" + namespace + \":${port}\"\n    mkContextCdcTopicName = lambda context_name : str {\n        context_name + \"-cdc-topic\"\n    }\n}\n\nargocd = {\n  release_name = \"argocd\"\n  gateway_name = \"argocd-gateway\"\n  namespace = \"argocd\"\n  url = \"argocd.${mindwm_domain}\"\n  virtual_service = \"argocd-vs\"\n  destination = lambda {\n    \"${argocd.release_name}-server.${argocd.namespace}.svc.cluster.local\"\n  } \n} \n\nknativeBroker = {\n    deadLetterImage = \"gcr.io/knative-releases/knative.dev/eventing/cmd/event_display\"\n}\n\ncontextBroker = {\n    name = lambda context_name : str {\n        \"context-broker\" + delimiter + context_name\n    }\n    configMapName = lambda context_name : str {\n        name(context_name) + delimiter + \"configmap\"\n    }\n    kafkaSourceName = lambda context_name : str {\n        name(context_name) + delimiter + \"source\"\n\n    }\n    deadLetterName = lambda context_name : str {\n        name(context_name) + delimiter + \"dead-letter\"\n    }\n}\n\n\nMindwm = {\n    user = {\n        namespace = lambda username : str -> str {\n            \"user-\" + username\n        }\n        broker = {\n            configmap = lambda user_name : str -> str {\n                \"user\" + delimiter + user_name + delimiter + \"broker-configmap\"\n            }\n            name = lambda user_name : str -> str {\n                \"user\" + delimiter + user_name + delimiter + \"broker\"\n            }\n        }\n        deadLetter = {\n            name = lambda user_name : str -> str {\n                \"user\" + delimiter + user_name + delimiter + \"dead-letter\"\n            }\n        }\n        contextTrigger = {\n            name = lambda context_name : str -> str {\n                \"trigger-user-broker-to\" + delimiter + context_name\n            }\n            crossplane_name = lambda user_name : str, context_name : str -> str {\n                \"trigger\" + delimiter + user_name + delimiter + \"broker-to\" + delimiter + context_name\n            }\n        }\n        trigger_back = lambda user_name : str -> str {\n          \"trigger-context-to-user\" + delimiter + user_name\n        }\n    }\n    host = {\n        broker = {\n            configmap = lambda host_name : str -> str {\n                host_name + delimiter + \"broker-configmap\"\n            }\n            name = lambda host_name : str -> str {\n                host_name + delimiter + \"broker\"\n            }\n        }\n        trigger = lambda host_name : str -> str {\n            # FIXME (@metacoma)\n            # host trigger name = \"trigger-{host_name}-broker-to-user-broker\n            \"trigger-host-broker-to\" + delimiter + host_name\n        }\n        trigger_back = lambda host_name : str -> str {\n            \"trigger-knative-to-host-\" + delimiter + host_name\n        }\n    }\n\n    context = {\n        istio_gateway = lambda context_name : str - >str {\n          \"context-${context_name}-gateway\"\n        } \n        neo4j_vs_name = lambda context_name : str -> str {\n          \"${context_name}-neo4j-ui\"\n        }\n        io_context = {\n            name = \"io-context\"\n            crossplane_name = lambda context_name : str -> str {\n                 context_name + delimiter + \"io-context\"\n            }\n            crossplane_trigger = lambda context_name : str -> str {\n                 context_name + delimiter + \"io-context-trigger\"\n            }\n\n            image = \"ghcr.io/mindwm/io-context:latest\"\n        }\n        touch = {\n            name = \"mindwm-touch\"\n            crossplane_name = lambda context_name : str -> str {\n                 context_name + delimiter + \"mindwm-touch\"\n            }\n            crossplane_trigger = lambda context_name : str -> str {\n                 context_name + delimiter + \"mindwm-touch-trigger\"\n            }\n\n            image = \"ghcr.io/mindwm/mindwm-touch:latest\"\n        }\n    }\n}\n\nknative = {\n    serving = {\n        namespace = \"knative-serving\"\n        version = \"1.17.0\"\n    }\n    eventing = {\n        namespace = \"knative-eventing\"\n        version = \"1.17.0\"\n    }\n}\n\ncert_manager = {\n  helm_chart_version = \"1.16.3\"\n  namespace = \"cert-manager\"\n}\n\nistio = {\n    version = \"1.24.2\"\n    system = {\n        namespace = \"istio-system\"\n    }\n    gateway = {\n        namespace = \"istio-system\"\n    }\n    pilot = {\n        cpu_req = \"200m\"\n    }\n}\n\nkafka_cluster_name = \"neo4j-cdc\"\nkafka_port = 9003\n#neo4j_version = \"4.4.33\"\n#neo4j_password = \"password\"\ncrossplane = {\n    namespace = \"crossplane-system\"\n}\n\nmonitoring = {\n  namespace = \"monitoring\"\n  gateway_name = \"${namespace}-gateway\"\n  otel_collector = {\n    release_name = \"otel-collector\"\n  }\n  loki = {\n    url = \"loki.${mindwm_domain}\"\n    release_name = \"loki\"\n    virtual_service = \"loki-vs\"\n    destination = lambda {\n        \"${monitoring.loki.release_name}-gateway\"\n    }\n  }\n  tempo = {\n    url = \"tempo.${mindwm_domain}\"\n    virtual_service = \"tempo-vs\"\n    release_name = \"tempo\"\n    destination = lambda {\n      \"tempo\"\n    }\n  }\n  grafana = {\n    url = \"grafana.${mindwm_domain}\"\n    virtual_service = \"grafana-vs\"\n    destination = lambda {\n      \"${monitoring.victoria_metrics.release_name}-grafana\"\n    }\n  } \n  victoria_metrics = {\n    release_name = \"vm-aio\"\n    url = \"vm.${mindwm_domain}\"\n    virtual_service = \"vm-vs\"\n    destination = lambda {\n      #\"${monitoring.victoria_metrics.release_name}.${monitoring.namespace}.svc.cluster.local\"\n      \"vmsingle-${monitoring.victoria_metrics.release_name}-victoria-metrics-k8s-stack.${monitoring.namespace}.svc.cluster.local\"\n    }\n  }\n  promtail = {\n    release_name = \"promtail\"\n  }\n  zipkin_endpoint = lambda tempo_release_name : str, monitoring_ns : str {\n    \"http://${tempo_release_name}.${monitoring_ns}:9411/api/v2/spans\"\n  }\n  prometheus_endpoint = lambda {\n    \"http://vmsingle-${monitoring.victoria_metrics.release_name}-victoria-metrics-k8s-stack.${monitoring.namespace}:8429\"\n  }\n  opencensus_endpoint = lambda tempo_release_name : str, monitoring_ns : str {\n    \"${tempo_release_name}.${monitoring_ns}:55678\"\n  }\n  traces_endpoint = lambda tempo_release_name : str, monitoring_ns : str {\n    \"http://${tempo_release_name}.${monitoring_ns}:4317/v1/traces\"\n  }\n  loki_endpoint = lambda {\n    \"http://${monitoring.loki.release_name}.${monitoring.namespace}:3100/otlp\"\n  }\n}\n\ndelimiter = \"-\"\n\ncontextNamespacePrefix = \"context\"\nuserNamespacePrefix = \"team\"\n\nmakeUserNamespace = lambda username : str {\n    userNamespacePrefix + delimiter + username\n}\n\nmakeContextNamespace = lambda ns_name : str {\n    contextNamespacePrefix + delimiter + ns_name\n}\n\nmakeKafkaTopicName = lambda context_name : str {\n    \"context\" + delimiter + context_name + delimiter + \"cdc\"\n}\n\nneo4j = {\n    version = \"4.4.35\"\n    username = \"neo4j\"\n    password = \"password\"\n    release_name = \"neo4j\"\n    port = 7687\n    http_port = 7474\n\n    crossplane_pvc_name = lambda context_name : str -> str {\n        context_name + delimiter + \"neo4j-plugin-pvc\"\n    }\n\n    crossplane_name = lambda context_name : str -> str {\n        context_name + delimiter + \"neo4j\"\n    }\n}\n\nvector = {\n    image = {\n        repo = \"ghcr.io/mindwm/vector-image/vector-image\"\n        tag = \"main\"\n    }\n    chart_version = \"0.33.0\"\n    crossplane_name = lambda context_name : str -> str {\n        context_name + delimiter + \"vector\"\n    }\n}\n\nconfig = {\n    kafka_cluster_name = \"neo4j-cdc\"\n    kafka_port = 9003\n    crossplane = {\n        namespace = \"crossplane-system\"\n    }\n}\n\nzot = {\n    chart_version = \"0.1.68\"\n    release_name = \"zot\"\n    namespace = \"zot\"\n}\n\nimport regex\nimport manifests\n\nuserPrefix = \"user\"\ncontextPrefix = \"context\"\nhostPrefix = \"host\"\n\nschema ResourceNameStr:\n    data: str\n    check:\n        regex.match(data, r'^[a-z0-9]([-a-z0-9]*[a-z0-9])?$')\n        len(data) < 64\nschema DomainStr:\n    data: str\n    check:\n        regex.match(data, \"\")\n\ngetData = lambda resourceStr : any -> str {\n    resourceStr.data\n}\ncrossplaneResourceName = lambda entity: any, resourceName : ResourceNameStr -> str {\n    getData(entity.name) + \"-\" + getData(resourceName)\n}\n\ncrossplane_user2context_trigger_name = lambda user : MindwmUser, ctx: MindwmContext -> str {\n  \"user-\" + getData(user.name) + \"-to-context-\" + getData(ctx.name)\n} \n\ncrossplane_context2user_trigger_name = lambda user : MindwmUser, ctx: MindwmContext -> str {\n  \"context-\" + getData(ctx.name) + \"-to-user-\" + getData(user.name)\n} \n\ndomain: DomainStr { data = \"mindwm.local\" }\n\nschema Mindwm2:\n    context: MindwmContext\n    user: MindwmUser\n    host: MindwmHost\n\nschema MindwmHost:\n    name: ResourceNameStr\n    broker: Broker { name.data = \"${getData(name)}-host-broker\"}\n    # from host_broker to user broker trigger\n    trigger: Trigger { name.data = \"${getData(name)}-trigger-to-user-broker\" }\n    # from user_broker to host broker trigger\n    trigger_back: Trigger {\n      name.data = \"user-broker-to-\" + getData(name) + \"-broker-trigger\"\n    } \n\nschema MindwmUser:\n    name: ResourceNameStr\n    namespace: ResourceNameStr = { data = \"${userPrefix}-${getData(name)}\" }\n    broker: Broker { name.data = \"user-broker\" }\n\nschema MindwmContext:\n    name: ResourceNameStr\n    namespace: ResourceNameStr = { data = \"${contextPrefix}-${getData(name)}\" }\n    broker: Broker { \n      name.data = \"context-broker\"\n      virtual_service = {\n        name.data = \"broker-virtual-service\"\n      } \n    } \n    kafka: Kafka {}\n    neo4j: Neo4j {}\n    vector: Vector {}\n    cdc_topic: KafkaTopic { \n      name.data = \"context-\" + getData(name) + \"-cdc\"\n    } \n    gateway: IstioGateway { \n      name.data = \"gateway\" \n      hosts = [\n        \"neo4j.\" + getData(name) + \".\" + getData(domain)\n      ] \n    } \n    neo4j_virtual_service: IstioVirtualService {\n      name.data = \"neo4j-virtual-service\"\n    } \n    kafkaSource: KafkaSource = {\n        name.data = getData(cdc_topic.name) + \"-kafkasource\"\n        topicName = cdc_topic.name\n        bootstrap_servers = [ \"${getData(kafka.cluster_name)}.${getData(kafka.namespace)}:${kafka.port}\" ]\n    }\n    io_context: KnativeFunction {\n        name.data = \"iocontext\"\n        image = \"ghcr.io/mindwm/knfunc-io-context:latest\"\n    }\n    kafka_cdc: KnativeFunction {\n        name.data = \"kafka-cdc\"\n        image = \"ghcr.io/mindwm/knfunc-kafka-cdc:1.0.4\"\n    }\n    pong: KnativeFunction {\n        name.data = \"pong\"\n        image = \"ghcr.io/mindwm/knfunc-pong:latest\"\n    }\n\n    clipboard: KnativeFunction {\n        name.data = \"clipboard\"\n        image = \"ghcr.io/mindwm/knfunc-clipboard:master\"\n    }\n\nschema KafkaTopic:\n    name: ResourceNameStr\n\nschema Broker:\n    name: ResourceNameStr\n    configMapName: ResourceNameStr = (lambda brokerName : ResourceNameStr -> ResourceNameStr {\n        { data = \"${getData(brokerName)}-config\" }\n    })(name)\n    deadLetter: DeadLetter { name.data = \"dead-letter\" }\n    virtual_service?: IstioVirtualService \n\nschema DeadLetter:\n    name: ResourceNameStr\n    image: str = \"gcr.io/knative-releases/knative.dev/eventing/cmd/event_display\"\n\nschema Trigger:\n    name: ResourceNameStr\n\nschema KafkaSource:\n    name: ResourceNameStr\n    topicName: ResourceNameStr\n    bootstrap_servers: [str]\n\nschema Kafka:\n    namespace: ResourceNameStr = { data = \"redpanda\" }\n    port: int = 9093\n    cluster_name: ResourceNameStr = { data = \"neo4j-cdc\" }\n    bootstrap_servers: [str] = [\n       getData(cluster_name) + \".\" + getData(namespace) + \":\" + str(port)\n    ]\n\n\nschema Neo4j:\n    name: ResourceNameStr = { data = \"neo4j\" }\n    version: str = \"4.4.33\"\n    username: str = \"neo4j\"\n    password: str = \"password\"\n    plugin_pvc_name: ResourceNameStr = { data = \"neo4j-plugins\" }\n    pvc_size: str = \"5Gi\"\n    port: int = 7687\n\nschema Vector:\n    name: ResourceNameStr = { data = \"vector\" }\n\nschema Crossplane:\n    apiVersion: str = \"apiextensions.crossplane.io/v1\"\n    compositeVersion: str = \"v1beta1\"\n    domain: DomainStr { data = \"mindwm.io\" }\n\nschema IstioGateway:\n    name: ResourceNameStr \n    hosts: [str]\n\nschema IstioVirtualService:\n    name: ResourceNameStr\n\nschema KnativeFunction:\n    name: ResourceNameStr \n    image: str\n#ctx = MindwmContext { name.data = \"pink\" }\n\nuser_name = option(\"params\").oxr.spec.name\ncontext_names = option(\"params\").oxr.spec.context\ncontexts = [\n  MindwmContext { name.data = context_name }\n  for context_name in context_names\n]\nuser = MindwmUser { name.data = user_name }\nitems = [\n  {\n    apiVersion = \"kubernetes.crossplane.io/v1alpha2\"\n    kind = \"Object\"\n    metadata.name = crossplaneResourceName(user, user.namespace) \n    spec.forProvider.manifest = k8core.Namespace {\n      metadata.name = getData(user.namespace)\n      metadata.labels = {\n          \"istio-injection\" = \"enabled\"\n      }\n    }\n  }\n  # deadLetter service\n  crossplane_kubernetes.Object {\n    metadata.name = crossplaneResourceName(user, user.broker.deadLetter.name)\n    spec.forProvider.manifest = knative_service.Service {\n      metadata = {\n        name = getData(user.broker.deadLetter.name)\n        namespace = getData(user.namespace)\n      }\n      spec.template.spec.containers = [{\n          image = user.broker.deadLetter.image\n          env = [{\n            name = \"REQUEST_LOGGING_ENABLED\"\n            value = \"1\"\n          }] \n      }]\n    } \n  } \n  crossplane_kubernetes.Object {\n    metadata.name = crossplaneResourceName(user, user.broker.configMapName) \n    spec.forProvider.manifest = k8core.ConfigMap {\n        metadata = {\n            name = getData(user.broker.configMapName)\n            namespace = getData(user.namespace)\n        } \n        data = {\n            \"channel-template-spec\" = '''  apiVersion: messaging.knative.dev/v1\n  kind: InMemoryChannel\n  '''\n        }\n    } \n  }\n\n  crossplane_kubernetes.Object {\n    metadata.name = crossplaneResourceName(user, user.broker.name)\n    spec.forProvider.manifest = knative_broker.Broker {\n      metadata = {\n        name = getData(user.broker.name)\n        namespace = getData(user.namespace)\n        annotations = {\n          \"eventing.knative.dev/broker.class\" = \"MTChannelBasedBroker\"\n        }\n      } \n      spec.config = {\n          apiVersion = \"v1\"\n          kind = \"ConfigMap\"\n          name = getData(user.broker.configMapName)\n      }\n    }\n  } \n\n] + [\n    # user broker -> context broker\n    crossplane_kubernetes.Object {\n      metadata.name = crossplane_user2context_trigger_name(user, ctx)\n      spec.forProvider.manifest = {\n        apiVersion = \"eventing.knative.dev/v1\"\n        kind = \"Trigger\"\n        metadata = {\n          name = crossplane_user2context_trigger_name(user, ctx)\n          namespace = getData(user.namespace)\n        }\n        spec = {\n          broker = getData(user.broker.name)\n          delivery.deadLetterSink.ref = {\n            apiVersion = \"serving.knative.dev/v1\"\n            kind = \"Service\" \n            name = getData(user.broker.deadLetter.name)\n          }\n          filters = [{\n            \"any\" = [\n              {exact.type = \"org.mindwm.v1.iodocument\"}\n              {exact.type = \"org.mindwm.v1.clipboard\"}\n              {exact.type = \"org.mindwm.v1.ping\"}\n            ]\n          }]\n          subscriber.ref = {\n            apiVersion = \"eventing.knative.dev/v1\"\n            kind = \"Broker\"\n            namespace = getData(ctx.namespace)\n            name = getData(ctx.broker.name)\n          }\n        } \n      } \n    }\n    for ctx in contexts\n] + [\n    # context broker -> user broker\n    crossplane_kubernetes.Object {\n      metadata.name = crossplane_context2user_trigger_name(user, ctx)\n      spec.forProvider.manifest = {\n        apiVersion = \"eventing.knative.dev/v1\"\n        kind = \"Trigger\"\n        metadata = {\n          name = crossplane_context2user_trigger_name(user, ctx)\n          namespace = getData(ctx.namespace)\n        }\n        spec = {\n          broker = getData(ctx.broker.name)\n          delivery.deadLetterSink.ref = {\n            apiVersion = \"serving.knative.dev/v1\"\n            kind = \"Service\" \n            name = getData(ctx.broker.deadLetter.name)\n          }\n          filters = [{\n            \"all\" = [\n                { cesql = \"source NOT LIKE 'org.mindwm.\" + getData(user.name) + \"._%'\" }\n                { cesql = \"subject LIKE 'org.mindwm.\" + getData(user.name) + \"._%' OR source LIKE 'org.mindwm.context.\" + getData(ctx.name) + \"._%'\" }\n                #{ cesql = \"source LIKE 'org.mindwm.context.\" + getData(ctx.name) + \".graph.%'\" }\n            ]\n          }]\n          subscriber.ref = {\n            apiVersion = \"eventing.knative.dev/v1\"\n            kind = \"Broker\"\n            namespace = getData(user.namespace)\n            name = getData(user.broker.name)\n          }\n        } \n      } \n    }\n    for ctx in contexts\n]\n"
   - step: automatically-detect-ready-composed-resources
     functionRef:
       name: function-auto-ready
@@ -62891,7 +62590,7 @@ spec:
       kind: KCLInput
       spec:
         dependencies: "                k8s = { oci = \"oci://ghcr.io/kcl-lang/k8s\", tag = \"1.29\" }\n                knative = { oci = \"oci://ghcr.io/kcl-lang/knative\", tag = \"0.2.0\" }\n                crossplane-provider-kubernetes = { oci = \"oci://ghcr.io/kcl-lang/crossplane-provider-kubernetes\", tag = \"0.9.0\" }\n                "
-        source: "import k8s.api.core.v1 as k8core\nimport knative.v1.serving_knative_dev_v1_service as knative_service\nimport knative.v1.eventing_knative_dev_v1_broker as knative_broker\nimport crossplane_provider_kubernetes.v1alpha1.kubernetes_crossplane_io_v1alpha1_object as crossplane_kubernetes\nmindwm_domain = \"mindwm.local\"\n\n\nsources = {\n  mindwm_ns = \"org.mindwm\" \n  func_ns = \"knfunc\"\n  knfunc_action = lambda user_name host_name {\n    hostname = \"%\" if host_name == \"\" else host_name\n    \"${sources.mindwm_ns}.${sources.func_ns}.%.%.${user_name}.${host_name}.tmux.%.%.action\"\n  } \n} \n\nkafka = {\n    cluster_name = \"neo4j-cdc\"\n    namespace = \"redpanda\"\n    port = 9093\n    brokerEndpoint = cluster_name + \".\" + namespace + \":${port}\"\n    mkContextCdcTopicName = lambda context_name : str {\n        context_name + \"-cdc-topic\"\n    }\n}\n\nargocd = {\n  release_name = \"argocd\"\n  gateway_name = \"argocd-gateway\"\n  namespace = \"argocd\"\n  url = \"argocd.${mindwm_domain}\"\n  virtual_service = \"argocd-vs\"\n  destination = lambda {\n    \"${argocd.release_name}-server.${argocd.namespace}.svc.cluster.local\"\n  } \n} \n\nknativeBroker = {\n    deadLetterImage = \"gcr.io/knative-releases/knative.dev/eventing/cmd/event_display\"\n}\n\ncontextBroker = {\n    name = lambda context_name : str {\n        \"context-broker\" + delimiter + context_name\n    }\n    configMapName = lambda context_name : str {\n        name(context_name) + delimiter + \"configmap\"\n    }\n    kafkaSourceName = lambda context_name : str {\n        name(context_name) + delimiter + \"source\"\n\n    }\n    deadLetterName = lambda context_name : str {\n        name(context_name) + delimiter + \"dead-letter\"\n    }\n}\n\n\nMindwm = {\n    user = {\n        namespace = lambda username : str -> str {\n            \"user-\" + username\n        }\n        broker = {\n            configmap = lambda user_name : str -> str {\n                \"user\" + delimiter + user_name + delimiter + \"broker-configmap\"\n            }\n            name = lambda user_name : str -> str {\n                \"user\" + delimiter + user_name + delimiter + \"broker\"\n            }\n        }\n        deadLetter = {\n            name = lambda user_name : str -> str {\n                \"user\" + delimiter + user_name + delimiter + \"dead-letter\"\n            }\n        }\n        contextTrigger = {\n            name = lambda context_name : str -> str {\n                \"trigger-user-broker-to\" + delimiter + context_name\n            }\n            crossplane_name = lambda user_name : str, context_name : str -> str {\n                \"trigger\" + delimiter + user_name + delimiter + \"broker-to\" + delimiter + context_name\n            }\n        }\n        trigger_back = lambda user_name : str -> str {\n          \"trigger-context-to-user\" + delimiter + user_name\n        }\n    }\n    host = {\n        broker = {\n            configmap = lambda host_name : str -> str {\n                host_name + delimiter + \"broker-configmap\"\n            }\n            name = lambda host_name : str -> str {\n                host_name + delimiter + \"broker\"\n            }\n        }\n        trigger = lambda host_name : str -> str {\n            # FIXME (@metacoma)\n            # host trigger name = \"trigger-{host_name}-broker-to-user-broker\n            \"trigger-host-broker-to\" + delimiter + host_name\n        }\n        trigger_back = lambda host_name : str -> str {\n            \"trigger-knative-to-host-\" + delimiter + host_name\n        }\n    }\n\n    context = {\n        istio_gateway = lambda context_name : str - >str {\n          \"context-${context_name}-gateway\"\n        } \n        neo4j_vs_name = lambda context_name : str -> str {\n          \"${context_name}-neo4j-ui\"\n        }\n        io_context = {\n            name = \"io-context\"\n            crossplane_name = lambda context_name : str -> str {\n                 context_name + delimiter + \"io-context\"\n            }\n            crossplane_trigger = lambda context_name : str -> str {\n                 context_name + delimiter + \"io-context-trigger\"\n            }\n\n            image = \"ghcr.io/mindwm/io-context:latest\"\n        }\n        touch = {\n            name = \"mindwm-touch\"\n            crossplane_name = lambda context_name : str -> str {\n                 context_name + delimiter + \"mindwm-touch\"\n            }\n            crossplane_trigger = lambda context_name : str -> str {\n                 context_name + delimiter + \"mindwm-touch-trigger\"\n            }\n\n            image = \"ghcr.io/mindwm/mindwm-touch:latest\"\n        }\n    }\n}\n\nknative = {\n    serving = {\n        namespace = \"knative-serving\"\n        version = \"1.18.0\"\n    }\n    eventing = {\n        namespace = \"knative-eventing\"\n        version = \"1.18.0\"\n    }\n}\n\ncert_manager = {\n  helm_chart_version = \"1.17.2\"\n  namespace = \"cert-manager\"\n}\n\nistio = {\n    version = \"1.24.2\"\n    system = {\n        namespace = \"istio-system\"\n    }\n    gateway = {\n        namespace = \"istio-system\"\n    }\n    pilot = {\n        cpu_req = \"200m\"\n    }\n}\n\nkafka_cluster_name = \"neo4j-cdc\"\nkafka_port = 9003\n#neo4j_version = \"4.4.33\"\n#neo4j_password = \"password\"\ncrossplane = {\n    namespace = \"crossplane-system\"\n}\n\nmonitoring = {\n  namespace = \"monitoring\"\n  gateway_name = \"${namespace}-gateway\"\n  otel_collector = {\n    release_name = \"otel-collector\"\n  }\n  loki = {\n    url = \"loki.${mindwm_domain}\"\n    release_name = \"loki\"\n    virtual_service = \"loki-vs\"\n    destination = lambda {\n        \"${monitoring.loki.release_name}-gateway\"\n    }\n  }\n  tempo = {\n    url = \"tempo.${mindwm_domain}\"\n    virtual_service = \"tempo-vs\"\n    release_name = \"tempo\"\n    destination = lambda {\n      \"tempo\"\n    }\n  }\n  grafana = {\n    url = \"grafana.${mindwm_domain}\"\n    virtual_service = \"grafana-vs\"\n    destination = lambda {\n      \"${monitoring.victoria_metrics.release_name}-grafana\"\n    }\n  } \n  victoria_metrics = {\n    release_name = \"vm-aio\"\n    url = \"vm.${mindwm_domain}\"\n    virtual_service = \"vm-vs\"\n    destination = lambda {\n      #\"${monitoring.victoria_metrics.release_name}.${monitoring.namespace}.svc.cluster.local\"\n      \"vmsingle-${monitoring.victoria_metrics.release_name}-victoria-metrics-k8s-stack.${monitoring.namespace}.svc.cluster.local\"\n    }\n  }\n  promtail = {\n    release_name = \"promtail\"\n  }\n  zipkin_endpoint = lambda tempo_release_name : str, monitoring_ns : str {\n    \"http://${tempo_release_name}.${monitoring_ns}:9411/api/v2/spans\"\n  }\n  prometheus_endpoint = lambda {\n    \"http://vmsingle-${monitoring.victoria_metrics.release_name}-victoria-metrics-k8s-stack.${monitoring.namespace}:8429\"\n  }\n  opencensus_endpoint = lambda tempo_release_name : str, monitoring_ns : str {\n    \"${tempo_release_name}.${monitoring_ns}:55678\"\n  }\n  traces_endpoint = lambda tempo_release_name : str, monitoring_ns : str {\n    \"http://${tempo_release_name}.${monitoring_ns}:4317/v1/traces\"\n  }\n  loki_endpoint = lambda {\n    \"http://${monitoring.loki.release_name}.${monitoring.namespace}:3100/otlp\"\n  }\n}\n\ndelimiter = \"-\"\n\ncontextNamespacePrefix = \"context\"\nuserNamespacePrefix = \"team\"\n\nmakeUserNamespace = lambda username : str {\n    userNamespacePrefix + delimiter + username\n}\n\nmakeContextNamespace = lambda ns_name : str {\n    contextNamespacePrefix + delimiter + ns_name\n}\n\nmakeKafkaTopicName = lambda context_name : str {\n    \"context\" + delimiter + context_name + delimiter + \"cdc\"\n}\n\nneo4j = {\n    version = \"4.4.35\"\n    username = \"neo4j\"\n    password = \"password\"\n    release_name = \"neo4j\"\n    port = 7687\n    http_port = 7474\n\n    crossplane_pvc_name = lambda context_name : str -> str {\n        context_name + delimiter + \"neo4j-plugin-pvc\"\n    }\n\n    crossplane_name = lambda context_name : str -> str {\n        context_name + delimiter + \"neo4j\"\n    }\n}\n\nvector = {\n    image = {\n        repo = \"ghcr.io/mindwm/vector-image/vector-image\"\n        tag = \"main\"\n    }\n    chart_version = \"0.33.0\"\n    crossplane_name = lambda context_name : str -> str {\n        context_name + delimiter + \"vector\"\n    }\n}\n\nconfig = {\n    kafka_cluster_name = \"neo4j-cdc\"\n    kafka_port = 9003\n    crossplane = {\n        namespace = \"crossplane-system\"\n    }\n}\n\nzot = {\n    chart_version = \"0.1.65\"\n    release_name = \"zot\"\n    namespace = \"zot\"\n}\n\nimport regex\nimport manifests\n\nuserPrefix = \"user\"\ncontextPrefix = \"context\"\nhostPrefix = \"host\"\n\nschema ResourceNameStr:\n    data: str\n    check:\n        regex.match(data, r'^[a-z0-9]([-a-z0-9]*[a-z0-9])?$')\n        len(data) < 64\nschema DomainStr:\n    data: str\n    check:\n        regex.match(data, \"\")\n\ngetData = lambda resourceStr : any -> str {\n    resourceStr.data\n}\ncrossplaneResourceName = lambda entity: any, resourceName : ResourceNameStr -> str {\n    getData(entity.name) + \"-\" + getData(resourceName)\n}\n\ncrossplane_user2context_trigger_name = lambda user : MindwmUser, ctx: MindwmContext -> str {\n  \"user-\" + getData(user.name) + \"-to-context-\" + getData(ctx.name)\n} \n\ncrossplane_context2user_trigger_name = lambda user : MindwmUser, ctx: MindwmContext -> str {\n  \"context-\" + getData(ctx.name) + \"-to-user-\" + getData(user.name)\n} \n\ndomain: DomainStr { data = \"mindwm.local\" }\n\nschema Mindwm2:\n    context: MindwmContext\n    user: MindwmUser\n    host: MindwmHost\n\nschema MindwmHost:\n    name: ResourceNameStr\n    broker: Broker { name.data = \"${getData(name)}-host-broker\"}\n    # from host_broker to user broker trigger\n    trigger: Trigger { name.data = \"${getData(name)}-trigger-to-user-broker\" }\n    # from user_broker to host broker trigger\n    trigger_back: Trigger {\n      name.data = \"user-broker-to-\" + getData(name) + \"-broker-trigger\"\n    } \n\nschema MindwmUser:\n    name: ResourceNameStr\n    namespace: ResourceNameStr = { data = \"${userPrefix}-${getData(name)}\" }\n    broker: Broker { name.data = \"user-broker\" }\n\nschema MindwmContext:\n    name: ResourceNameStr\n    namespace: ResourceNameStr = { data = \"${contextPrefix}-${getData(name)}\" }\n    broker: Broker { \n      name.data = \"context-broker\"\n      virtual_service = {\n        name.data = \"broker-virtual-service\"\n      } \n    } \n    kafka: Kafka {}\n    neo4j: Neo4j {}\n    vector: Vector {}\n    cdc_topic: KafkaTopic { \n      name.data = \"context-\" + getData(name) + \"-cdc\"\n    } \n    gateway: IstioGateway { \n      name.data = \"gateway\" \n      hosts = [\n        \"neo4j.\" + getData(name) + \".\" + getData(domain)\n      ] \n    } \n    neo4j_virtual_service: IstioVirtualService {\n      name.data = \"neo4j-virtual-service\"\n    } \n    kafkaSource: KafkaSource = {\n        name.data = getData(cdc_topic.name) + \"-kafkasource\"\n        topicName = cdc_topic.name\n        bootstrap_servers = [ \"${getData(kafka.cluster_name)}.${getData(kafka.namespace)}:${kafka.port}\" ]\n    }\n    io_context: KnativeFunction {\n        name.data = \"iocontext\"\n        image = \"ghcr.io/mindwm/knfunc-io-context:latest\"\n    }\n    kafka_cdc: KnativeFunction {\n        name.data = \"kafka-cdc\"\n        image = \"ghcr.io/mindwm/knfunc-kafka-cdc:1.0.4\"\n    }\n    pong: KnativeFunction {\n        name.data = \"pong\"\n        image = \"ghcr.io/mindwm/knfunc-pong:latest\"\n    }\n\n    clipboard: KnativeFunction {\n        name.data = \"clipboard\"\n        image = \"ghcr.io/mindwm/knfunc-clipboard:master\"\n    }\n\nschema KafkaTopic:\n    name: ResourceNameStr\n\nschema Broker:\n    name: ResourceNameStr\n    configMapName: ResourceNameStr = (lambda brokerName : ResourceNameStr -> ResourceNameStr {\n        { data = \"${getData(brokerName)}-config\" }\n    })(name)\n    deadLetter: DeadLetter { name.data = \"dead-letter\" }\n    virtual_service?: IstioVirtualService \n\nschema DeadLetter:\n    name: ResourceNameStr\n    image: str = \"gcr.io/knative-releases/knative.dev/eventing/cmd/event_display\"\n\nschema Trigger:\n    name: ResourceNameStr\n\nschema KafkaSource:\n    name: ResourceNameStr\n    topicName: ResourceNameStr\n    bootstrap_servers: [str]\n\nschema Kafka:\n    namespace: ResourceNameStr = { data = \"redpanda\" }\n    port: int = 9093\n    cluster_name: ResourceNameStr = { data = \"neo4j-cdc\" }\n    bootstrap_servers: [str] = [\n       getData(cluster_name) + \".\" + getData(namespace) + \":\" + str(port)\n    ]\n\n\nschema Neo4j:\n    name: ResourceNameStr = { data = \"neo4j\" }\n    version: str = \"4.4.33\"\n    username: str = \"neo4j\"\n    password: str = \"password\"\n    plugin_pvc_name: ResourceNameStr = { data = \"neo4j-plugins\" }\n    pvc_size: str = \"5Gi\"\n    port: int = 7687\n\nschema Vector:\n    name: ResourceNameStr = { data = \"vector\" }\n\nschema Crossplane:\n    apiVersion: str = \"apiextensions.crossplane.io/v1\"\n    compositeVersion: str = \"v1beta1\"\n    domain: DomainStr { data = \"mindwm.io\" }\n\nschema IstioGateway:\n    name: ResourceNameStr \n    hosts: [str]\n\nschema IstioVirtualService:\n    name: ResourceNameStr\n\nschema KnativeFunction:\n    name: ResourceNameStr \n    image: str\n#ctx = MindwmContext { name.data = \"pink\" }\n\nhost_name = option(\"params\").oxr.spec.name\nuser_name = option(\"params\").oxr.spec.username\n\nhost = MindwmHost { name.data = host_name }\nuser = MindwmUser { name.data = user_name }\nitems = [\n  crossplane_kubernetes.Object {\n    metadata.name = crossplaneResourceName(host, host.broker.configMapName) \n    spec.forProvider.manifest = k8core.ConfigMap {\n        metadata = {\n            name = getData(host.broker.configMapName)\n            namespace = getData(user.namespace)\n        } \n        data = {\n            \"channel-template-spec\" = '''  apiVersion: messaging.knative.dev/v1alpha1\n  kind: NatsJetStreamChannel\n  spec:\n    stream:\n      config:\n        additionalSubjects:\n          - \"org.mindwm.${user_name}.${host_name}.>\"\n        overrideName: ${host_name}\n  '''\n        }\n    } \n  }\n  crossplane_kubernetes.Object {\n    metadata.name = crossplaneResourceName(host, host.broker.name)\n    spec.forProvider.manifest = knative_broker.Broker {\n      metadata = {\n        name = getData(host.broker.name)\n        namespace = getData(user.namespace)\n        annotations = {\n          \"eventing.knative.dev/broker.class\" = \"MTChannelBasedBroker\"\n        }\n\n      } \n      spec.config = {\n          apiVersion = \"v1\"\n          kind = \"ConfigMap\"\n          name = getData(host.broker.configMapName)\n      }\n    }\n  } \n  # hostBroker -> UserBroker trigger\n  crossplane_kubernetes.Object {\n    metadata.name = crossplaneResourceName(host, host.trigger.name) \n    spec.forProvider.manifest = {\n      apiVersion = \"eventing.knative.dev/v1\"\n      kind = \"Trigger\"\n      metadata = {\n        # TODO(@metacoma) -trigger\n        name = getData(host.trigger.name) + \"-trigger\"\n        namespace = getData(user.namespace)\n      }\n      spec = {\n        broker = getData(host.broker.name)\n        delivery.deadLetterSink.ref = {\n          apiVersion = \"serving.knative.dev/v1\"\n          kind = \"Service\" \n          name = getData(user.broker.deadLetter.name)\n        }\n        filters = [{\n          # TODO (@metacoma) use variables\n          \"any\" = [\n            {exact.type = \"org.mindwm.v1.iodocument\"}\n            {exact.type = \"org.mindwm.v1.clipboard\"}\n            {exact.type = \"org.mindwm.v1.ping\"}\n          ]\n        }]\n        subscriber.ref = {\n          apiVersion = \"eventing.knative.dev/v1\"\n          kind = \"Broker\"\n          name = getData(user.broker.name)\n          namespace = getData(user.namespace)\n        }\n      } \n\n    } \n  }\n  crossplane_kubernetes.Object {\n    metadata.name = crossplaneResourceName(host, host.trigger_back.name) \n    spec.forProvider.manifest = {\n      apiVersion = \"eventing.knative.dev/v1\"\n      kind = \"Trigger\"\n      metadata = {\n        name = getData(host.trigger_back.name) \n        namespace = getData(user.namespace)\n      }\n      spec = {\n        broker = getData(user.broker.name)\n        delivery.deadLetterSink.ref = {\n          apiVersion = \"serving.knative.dev/v1\"\n          kind = \"Service\" \n          name = getData(user.broker.deadLetter.name)\n        }\n        filters = [{\n          \"all\" = [\n            { cesql = \"source NOT LIKE 'org.mindwm.\" + getData(user.name) + \"._%'\" }\n            { cesql = \"subject LIKE 'org.mindwm.\" + getData(user.name) + \"._%' OR source LIKE 'org.mindwm.context._%'\" }\n            #{ cesql = \"source LIKE 'org.mindwm.context.\" + getData(ctx.name) + \".graph.%'\" }\n          ]\n        }]\n        subscriber.ref = {\n          apiVersion = \"eventing.knative.dev/v1\"\n          kind = \"Broker\"\n          name = getData(host.broker.name)\n          namespace = getData(user.namespace)\n        }\n      } \n\n    } \n  }\n]\n"
+        source: "import k8s.api.core.v1 as k8core\nimport knative.v1.serving_knative_dev_v1_service as knative_service\nimport knative.v1.eventing_knative_dev_v1_broker as knative_broker\nimport crossplane_provider_kubernetes.v1alpha1.kubernetes_crossplane_io_v1alpha1_object as crossplane_kubernetes\nmindwm_domain = \"mindwm.local\"\n\n\nsources = {\n  mindwm_ns = \"org.mindwm\" \n  func_ns = \"knfunc\"\n  knfunc_action = lambda user_name host_name {\n    hostname = \"%\" if host_name == \"\" else host_name\n    \"${sources.mindwm_ns}.${sources.func_ns}.%.%.${user_name}.${host_name}.tmux.%.%.action\"\n  } \n} \n\nkafka = {\n    cluster_name = \"neo4j-cdc\"\n    namespace = \"redpanda\"\n    port = 9093\n    brokerEndpoint = cluster_name + \".\" + namespace + \":${port}\"\n    mkContextCdcTopicName = lambda context_name : str {\n        context_name + \"-cdc-topic\"\n    }\n}\n\nargocd = {\n  release_name = \"argocd\"\n  gateway_name = \"argocd-gateway\"\n  namespace = \"argocd\"\n  url = \"argocd.${mindwm_domain}\"\n  virtual_service = \"argocd-vs\"\n  destination = lambda {\n    \"${argocd.release_name}-server.${argocd.namespace}.svc.cluster.local\"\n  } \n} \n\nknativeBroker = {\n    deadLetterImage = \"gcr.io/knative-releases/knative.dev/eventing/cmd/event_display\"\n}\n\ncontextBroker = {\n    name = lambda context_name : str {\n        \"context-broker\" + delimiter + context_name\n    }\n    configMapName = lambda context_name : str {\n        name(context_name) + delimiter + \"configmap\"\n    }\n    kafkaSourceName = lambda context_name : str {\n        name(context_name) + delimiter + \"source\"\n\n    }\n    deadLetterName = lambda context_name : str {\n        name(context_name) + delimiter + \"dead-letter\"\n    }\n}\n\n\nMindwm = {\n    user = {\n        namespace = lambda username : str -> str {\n            \"user-\" + username\n        }\n        broker = {\n            configmap = lambda user_name : str -> str {\n                \"user\" + delimiter + user_name + delimiter + \"broker-configmap\"\n            }\n            name = lambda user_name : str -> str {\n                \"user\" + delimiter + user_name + delimiter + \"broker\"\n            }\n        }\n        deadLetter = {\n            name = lambda user_name : str -> str {\n                \"user\" + delimiter + user_name + delimiter + \"dead-letter\"\n            }\n        }\n        contextTrigger = {\n            name = lambda context_name : str -> str {\n                \"trigger-user-broker-to\" + delimiter + context_name\n            }\n            crossplane_name = lambda user_name : str, context_name : str -> str {\n                \"trigger\" + delimiter + user_name + delimiter + \"broker-to\" + delimiter + context_name\n            }\n        }\n        trigger_back = lambda user_name : str -> str {\n          \"trigger-context-to-user\" + delimiter + user_name\n        }\n    }\n    host = {\n        broker = {\n            configmap = lambda host_name : str -> str {\n                host_name + delimiter + \"broker-configmap\"\n            }\n            name = lambda host_name : str -> str {\n                host_name + delimiter + \"broker\"\n            }\n        }\n        trigger = lambda host_name : str -> str {\n            # FIXME (@metacoma)\n            # host trigger name = \"trigger-{host_name}-broker-to-user-broker\n            \"trigger-host-broker-to\" + delimiter + host_name\n        }\n        trigger_back = lambda host_name : str -> str {\n            \"trigger-knative-to-host-\" + delimiter + host_name\n        }\n    }\n\n    context = {\n        istio_gateway = lambda context_name : str - >str {\n          \"context-${context_name}-gateway\"\n        } \n        neo4j_vs_name = lambda context_name : str -> str {\n          \"${context_name}-neo4j-ui\"\n        }\n        io_context = {\n            name = \"io-context\"\n            crossplane_name = lambda context_name : str -> str {\n                 context_name + delimiter + \"io-context\"\n            }\n            crossplane_trigger = lambda context_name : str -> str {\n                 context_name + delimiter + \"io-context-trigger\"\n            }\n\n            image = \"ghcr.io/mindwm/io-context:latest\"\n        }\n        touch = {\n            name = \"mindwm-touch\"\n            crossplane_name = lambda context_name : str -> str {\n                 context_name + delimiter + \"mindwm-touch\"\n            }\n            crossplane_trigger = lambda context_name : str -> str {\n                 context_name + delimiter + \"mindwm-touch-trigger\"\n            }\n\n            image = \"ghcr.io/mindwm/mindwm-touch:latest\"\n        }\n    }\n}\n\nknative = {\n    serving = {\n        namespace = \"knative-serving\"\n        version = \"1.17.0\"\n    }\n    eventing = {\n        namespace = \"knative-eventing\"\n        version = \"1.17.0\"\n    }\n}\n\ncert_manager = {\n  helm_chart_version = \"1.16.3\"\n  namespace = \"cert-manager\"\n}\n\nistio = {\n    version = \"1.24.2\"\n    system = {\n        namespace = \"istio-system\"\n    }\n    gateway = {\n        namespace = \"istio-system\"\n    }\n    pilot = {\n        cpu_req = \"200m\"\n    }\n}\n\nkafka_cluster_name = \"neo4j-cdc\"\nkafka_port = 9003\n#neo4j_version = \"4.4.33\"\n#neo4j_password = \"password\"\ncrossplane = {\n    namespace = \"crossplane-system\"\n}\n\nmonitoring = {\n  namespace = \"monitoring\"\n  gateway_name = \"${namespace}-gateway\"\n  otel_collector = {\n    release_name = \"otel-collector\"\n  }\n  loki = {\n    url = \"loki.${mindwm_domain}\"\n    release_name = \"loki\"\n    virtual_service = \"loki-vs\"\n    destination = lambda {\n        \"${monitoring.loki.release_name}-gateway\"\n    }\n  }\n  tempo = {\n    url = \"tempo.${mindwm_domain}\"\n    virtual_service = \"tempo-vs\"\n    release_name = \"tempo\"\n    destination = lambda {\n      \"tempo\"\n    }\n  }\n  grafana = {\n    url = \"grafana.${mindwm_domain}\"\n    virtual_service = \"grafana-vs\"\n    destination = lambda {\n      \"${monitoring.victoria_metrics.release_name}-grafana\"\n    }\n  } \n  victoria_metrics = {\n    release_name = \"vm-aio\"\n    url = \"vm.${mindwm_domain}\"\n    virtual_service = \"vm-vs\"\n    destination = lambda {\n      #\"${monitoring.victoria_metrics.release_name}.${monitoring.namespace}.svc.cluster.local\"\n      \"vmsingle-${monitoring.victoria_metrics.release_name}-victoria-metrics-k8s-stack.${monitoring.namespace}.svc.cluster.local\"\n    }\n  }\n  promtail = {\n    release_name = \"promtail\"\n  }\n  zipkin_endpoint = lambda tempo_release_name : str, monitoring_ns : str {\n    \"http://${tempo_release_name}.${monitoring_ns}:9411/api/v2/spans\"\n  }\n  prometheus_endpoint = lambda {\n    \"http://vmsingle-${monitoring.victoria_metrics.release_name}-victoria-metrics-k8s-stack.${monitoring.namespace}:8429\"\n  }\n  opencensus_endpoint = lambda tempo_release_name : str, monitoring_ns : str {\n    \"${tempo_release_name}.${monitoring_ns}:55678\"\n  }\n  traces_endpoint = lambda tempo_release_name : str, monitoring_ns : str {\n    \"http://${tempo_release_name}.${monitoring_ns}:4317/v1/traces\"\n  }\n  loki_endpoint = lambda {\n    \"http://${monitoring.loki.release_name}.${monitoring.namespace}:3100/otlp\"\n  }\n}\n\ndelimiter = \"-\"\n\ncontextNamespacePrefix = \"context\"\nuserNamespacePrefix = \"team\"\n\nmakeUserNamespace = lambda username : str {\n    userNamespacePrefix + delimiter + username\n}\n\nmakeContextNamespace = lambda ns_name : str {\n    contextNamespacePrefix + delimiter + ns_name\n}\n\nmakeKafkaTopicName = lambda context_name : str {\n    \"context\" + delimiter + context_name + delimiter + \"cdc\"\n}\n\nneo4j = {\n    version = \"4.4.35\"\n    username = \"neo4j\"\n    password = \"password\"\n    release_name = \"neo4j\"\n    port = 7687\n    http_port = 7474\n\n    crossplane_pvc_name = lambda context_name : str -> str {\n        context_name + delimiter + \"neo4j-plugin-pvc\"\n    }\n\n    crossplane_name = lambda context_name : str -> str {\n        context_name + delimiter + \"neo4j\"\n    }\n}\n\nvector = {\n    image = {\n        repo = \"ghcr.io/mindwm/vector-image/vector-image\"\n        tag = \"main\"\n    }\n    chart_version = \"0.33.0\"\n    crossplane_name = lambda context_name : str -> str {\n        context_name + delimiter + \"vector\"\n    }\n}\n\nconfig = {\n    kafka_cluster_name = \"neo4j-cdc\"\n    kafka_port = 9003\n    crossplane = {\n        namespace = \"crossplane-system\"\n    }\n}\n\nzot = {\n    chart_version = \"0.1.68\"\n    release_name = \"zot\"\n    namespace = \"zot\"\n}\n\nimport regex\nimport manifests\n\nuserPrefix = \"user\"\ncontextPrefix = \"context\"\nhostPrefix = \"host\"\n\nschema ResourceNameStr:\n    data: str\n    check:\n        regex.match(data, r'^[a-z0-9]([-a-z0-9]*[a-z0-9])?$')\n        len(data) < 64\nschema DomainStr:\n    data: str\n    check:\n        regex.match(data, \"\")\n\ngetData = lambda resourceStr : any -> str {\n    resourceStr.data\n}\ncrossplaneResourceName = lambda entity: any, resourceName : ResourceNameStr -> str {\n    getData(entity.name) + \"-\" + getData(resourceName)\n}\n\ncrossplane_user2context_trigger_name = lambda user : MindwmUser, ctx: MindwmContext -> str {\n  \"user-\" + getData(user.name) + \"-to-context-\" + getData(ctx.name)\n} \n\ncrossplane_context2user_trigger_name = lambda user : MindwmUser, ctx: MindwmContext -> str {\n  \"context-\" + getData(ctx.name) + \"-to-user-\" + getData(user.name)\n} \n\ndomain: DomainStr { data = \"mindwm.local\" }\n\nschema Mindwm2:\n    context: MindwmContext\n    user: MindwmUser\n    host: MindwmHost\n\nschema MindwmHost:\n    name: ResourceNameStr\n    broker: Broker { name.data = \"${getData(name)}-host-broker\"}\n    # from host_broker to user broker trigger\n    trigger: Trigger { name.data = \"${getData(name)}-trigger-to-user-broker\" }\n    # from user_broker to host broker trigger\n    trigger_back: Trigger {\n      name.data = \"user-broker-to-\" + getData(name) + \"-broker-trigger\"\n    } \n\nschema MindwmUser:\n    name: ResourceNameStr\n    namespace: ResourceNameStr = { data = \"${userPrefix}-${getData(name)}\" }\n    broker: Broker { name.data = \"user-broker\" }\n\nschema MindwmContext:\n    name: ResourceNameStr\n    namespace: ResourceNameStr = { data = \"${contextPrefix}-${getData(name)}\" }\n    broker: Broker { \n      name.data = \"context-broker\"\n      virtual_service = {\n        name.data = \"broker-virtual-service\"\n      } \n    } \n    kafka: Kafka {}\n    neo4j: Neo4j {}\n    vector: Vector {}\n    cdc_topic: KafkaTopic { \n      name.data = \"context-\" + getData(name) + \"-cdc\"\n    } \n    gateway: IstioGateway { \n      name.data = \"gateway\" \n      hosts = [\n        \"neo4j.\" + getData(name) + \".\" + getData(domain)\n      ] \n    } \n    neo4j_virtual_service: IstioVirtualService {\n      name.data = \"neo4j-virtual-service\"\n    } \n    kafkaSource: KafkaSource = {\n        name.data = getData(cdc_topic.name) + \"-kafkasource\"\n        topicName = cdc_topic.name\n        bootstrap_servers = [ \"${getData(kafka.cluster_name)}.${getData(kafka.namespace)}:${kafka.port}\" ]\n    }\n    io_context: KnativeFunction {\n        name.data = \"iocontext\"\n        image = \"ghcr.io/mindwm/knfunc-io-context:latest\"\n    }\n    kafka_cdc: KnativeFunction {\n        name.data = \"kafka-cdc\"\n        image = \"ghcr.io/mindwm/knfunc-kafka-cdc:1.0.4\"\n    }\n    pong: KnativeFunction {\n        name.data = \"pong\"\n        image = \"ghcr.io/mindwm/knfunc-pong:latest\"\n    }\n\n    clipboard: KnativeFunction {\n        name.data = \"clipboard\"\n        image = \"ghcr.io/mindwm/knfunc-clipboard:master\"\n    }\n\nschema KafkaTopic:\n    name: ResourceNameStr\n\nschema Broker:\n    name: ResourceNameStr\n    configMapName: ResourceNameStr = (lambda brokerName : ResourceNameStr -> ResourceNameStr {\n        { data = \"${getData(brokerName)}-config\" }\n    })(name)\n    deadLetter: DeadLetter { name.data = \"dead-letter\" }\n    virtual_service?: IstioVirtualService \n\nschema DeadLetter:\n    name: ResourceNameStr\n    image: str = \"gcr.io/knative-releases/knative.dev/eventing/cmd/event_display\"\n\nschema Trigger:\n    name: ResourceNameStr\n\nschema KafkaSource:\n    name: ResourceNameStr\n    topicName: ResourceNameStr\n    bootstrap_servers: [str]\n\nschema Kafka:\n    namespace: ResourceNameStr = { data = \"redpanda\" }\n    port: int = 9093\n    cluster_name: ResourceNameStr = { data = \"neo4j-cdc\" }\n    bootstrap_servers: [str] = [\n       getData(cluster_name) + \".\" + getData(namespace) + \":\" + str(port)\n    ]\n\n\nschema Neo4j:\n    name: ResourceNameStr = { data = \"neo4j\" }\n    version: str = \"4.4.33\"\n    username: str = \"neo4j\"\n    password: str = \"password\"\n    plugin_pvc_name: ResourceNameStr = { data = \"neo4j-plugins\" }\n    pvc_size: str = \"5Gi\"\n    port: int = 7687\n\nschema Vector:\n    name: ResourceNameStr = { data = \"vector\" }\n\nschema Crossplane:\n    apiVersion: str = \"apiextensions.crossplane.io/v1\"\n    compositeVersion: str = \"v1beta1\"\n    domain: DomainStr { data = \"mindwm.io\" }\n\nschema IstioGateway:\n    name: ResourceNameStr \n    hosts: [str]\n\nschema IstioVirtualService:\n    name: ResourceNameStr\n\nschema KnativeFunction:\n    name: ResourceNameStr \n    image: str\n#ctx = MindwmContext { name.data = \"pink\" }\n\nhost_name = option(\"params\").oxr.spec.name\nuser_name = option(\"params\").oxr.spec.username\n\nhost = MindwmHost { name.data = host_name }\nuser = MindwmUser { name.data = user_name }\nitems = [\n  crossplane_kubernetes.Object {\n    metadata.name = crossplaneResourceName(host, host.broker.configMapName) \n    spec.forProvider.manifest = k8core.ConfigMap {\n        metadata = {\n            name = getData(host.broker.configMapName)\n            namespace = getData(user.namespace)\n        } \n        data = {\n            \"channel-template-spec\" = '''  apiVersion: messaging.knative.dev/v1alpha1\n  kind: NatsJetStreamChannel\n  spec:\n    stream:\n      config:\n        additionalSubjects:\n          - \"org.mindwm.${user_name}.${host_name}.>\"\n        overrideName: ${host_name}\n  '''\n        }\n    } \n  }\n  crossplane_kubernetes.Object {\n    metadata.name = crossplaneResourceName(host, host.broker.name)\n    spec.forProvider.manifest = knative_broker.Broker {\n      metadata = {\n        name = getData(host.broker.name)\n        namespace = getData(user.namespace)\n        annotations = {\n          \"eventing.knative.dev/broker.class\" = \"MTChannelBasedBroker\"\n        }\n\n      } \n      spec.config = {\n          apiVersion = \"v1\"\n          kind = \"ConfigMap\"\n          name = getData(host.broker.configMapName)\n      }\n    }\n  } \n  # hostBroker -> UserBroker trigger\n  crossplane_kubernetes.Object {\n    metadata.name = crossplaneResourceName(host, host.trigger.name) \n    spec.forProvider.manifest = {\n      apiVersion = \"eventing.knative.dev/v1\"\n      kind = \"Trigger\"\n      metadata = {\n        # TODO(@metacoma) -trigger\n        name = getData(host.trigger.name) + \"-trigger\"\n        namespace = getData(user.namespace)\n      }\n      spec = {\n        broker = getData(host.broker.name)\n        delivery.deadLetterSink.ref = {\n          apiVersion = \"serving.knative.dev/v1\"\n          kind = \"Service\" \n          name = getData(user.broker.deadLetter.name)\n        }\n        filters = [{\n          # TODO (@metacoma) use variables\n          \"any\" = [\n            {exact.type = \"org.mindwm.v1.iodocument\"}\n            {exact.type = \"org.mindwm.v1.clipboard\"}\n            {exact.type = \"org.mindwm.v1.ping\"}\n          ]\n        }]\n        subscriber.ref = {\n          apiVersion = \"eventing.knative.dev/v1\"\n          kind = \"Broker\"\n          name = getData(user.broker.name)\n          namespace = getData(user.namespace)\n        }\n      } \n\n    } \n  }\n  crossplane_kubernetes.Object {\n    metadata.name = crossplaneResourceName(host, host.trigger_back.name) \n    spec.forProvider.manifest = {\n      apiVersion = \"eventing.knative.dev/v1\"\n      kind = \"Trigger\"\n      metadata = {\n        name = getData(host.trigger_back.name) \n        namespace = getData(user.namespace)\n      }\n      spec = {\n        broker = getData(user.broker.name)\n        delivery.deadLetterSink.ref = {\n          apiVersion = \"serving.knative.dev/v1\"\n          kind = \"Service\" \n          name = getData(user.broker.deadLetter.name)\n        }\n        filters = [{\n          \"all\" = [\n            { cesql = \"source NOT LIKE 'org.mindwm.\" + getData(user.name) + \"._%'\" }\n            { cesql = \"subject LIKE 'org.mindwm.\" + getData(user.name) + \"._%' OR source LIKE 'org.mindwm.context._%'\" }\n            #{ cesql = \"source LIKE 'org.mindwm.context.\" + getData(ctx.name) + \".graph.%'\" }\n          ]\n        }]\n        subscriber.ref = {\n          apiVersion = \"eventing.knative.dev/v1\"\n          kind = \"Broker\"\n          name = getData(host.broker.name)\n          namespace = getData(user.namespace)\n        }\n      } \n\n    } \n  }\n]\n"
   - step: automatically-detect-ready-composed-resources
     functionRef:
       name: function-auto-ready
