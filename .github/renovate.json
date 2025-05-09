@@ -1,8 +1,6 @@
 {
   "labels": ["dependencies"], 
-  "prConcurrentLimit": 20,
-
-
+  "prConcurrentLimit": 0,
   "kubernetes": {
     "managerFilePatterns": ["/\\.yaml$/"]
   },
