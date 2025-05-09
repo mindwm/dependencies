@@ -257,7 +257,7 @@ spec:
         write:
           replicas: 0
     repoURL: https://grafana.github.io/helm-charts
-    targetRevision: '6.25.0'
+    targetRevision: '6.29.0'
   syncPolicy:
     automated:
       selfHeal: true
