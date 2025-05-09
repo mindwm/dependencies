@@ -380,7 +380,7 @@ spec:
             enabled: true
             remoteWriteUrl: http://vmsingle-vm-aio-victoria-metrics-k8s-stack.monitoring:8429/api/v1/write
     repoURL: https://grafana.github.io/helm-charts
-    targetRevision: '1.18.1'
+    targetRevision: '1.21.1'
   syncPolicy:
     automated:
       selfHeal: true
