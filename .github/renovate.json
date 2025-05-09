@@ -1,28 +1,8 @@
 {
   "labels": ["dependencies"], 
-  "packageRules": [
-      {
-        "matchPackageNames": ["/kubernetes/"],
-        "labels": ["kubernetes", "dependencies"]
-      },
-      {
-        "matchPackageNames": ["/argocd/"],
-        "labels": ["argocd", "dependencies"]
-      },
-      {
-        "matchPackageNames": ["/crossplane/"],
-        "labels": ["crossplane", "dependencies"]
-      },
-      {
-        "matchPackageNames": ["/tekton/"],
-        "labels": ["tekton", "dependencies"]
-      },
-      {
-        "matchPackageNames": ["/helm-values/"],
-        "labels": ["helm-values", "dependencies"]
-      }
-    ], 
   "prConcurrentLimit": 20,
+
+
   "kubernetes": {
     "managerFilePatterns": ["/\\.yaml$/"]
   },
@@ -37,5 +17,11 @@
   },
   "helm-values": {
     "managerFilePatterns": ["/\\.yaml$/"]
-  }
+  },
+  "packageRules": [
+    {
+      "matchPackageNames": ["/.*/"],
+      "addLabels": ["{{depName}}"]
+    }
+  ]
 }
