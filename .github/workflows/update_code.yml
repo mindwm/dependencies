@@ -22,10 +22,21 @@ jobs:
           owner: 'mindwm'
           repository: 'mindwm-gitops'
 
+      - name: before
+        run: |
+          ls -ltrh mindwm-gitops.yaml
+          ls -ltrh mindwm-gitops
+
+
       - name: Run KCL and generate mindwm-gitops.yaml
         uses: docker://kcllang/kcl:v0.9.7
         with:
           args: /bin/sh -c "(cd mindwm-gitops && kcl run > /mindwm-gitops.yaml); rm -rf mindwm-gitops"
+
+      - name: after
+        run: |
+          ls -ltrh mindwm-gitops.yaml
+
       - name: Commit & Push changes
         uses: actions-js/push@master
         with:
