@@ -58979,7 +58979,7 @@ spec:
       containers:
       - name: kafka-webhook-eventing
         terminationMessagePolicy: FallbackToLogsOnError
-        image: gcr.io/knative-releases/knative.dev/eventing-kafka-broker/control-plane/cmd/webhook-kafka@sha256:cdb92a989e11950fe35c55cd09b32d824e3ab86d4bc42cf577da59faac09df8f
+        image: gcr.io/knative-releases/knative.dev/eventing-kafka-broker/control-plane/cmd/webhook-kafka@sha256:ac3613d5021b8ea35cd123fe6bb21d6e482f51e18af9dfb8e887f07528cf1b3d
         resources:
           requests:
             cpu: '20m'
