@@ -25,7 +25,7 @@ jobs:
       - name: Run KCL and generate mindwm-gitops.yaml
         uses: docker://kcllang/kcl:v0.9.7
         with:
-          args: /bin/sh -c "cd mindwm-gitops && kcl run | tee /mindwm-gitops.yaml"
+          args: /bin/sh -c "(cd mindwm-gitops && kcl run > /mindwm-gitops.yaml); rm -rf mindwm-gitops"
       - name: Commit & Push changes
         uses: actions-js/push@master
         with:
