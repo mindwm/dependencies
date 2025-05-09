@@ -58613,7 +58613,7 @@ spec:
             weight: 100
       containers:
       - name: controller
-        image: gcr.io/knative-releases/knative.dev/eventing-kafka-broker/control-plane/cmd/kafka-controller@sha256:d7427bf00794cd9180e3844f35e40bedd11d9547b12c5f309e1aaf2234464ca8
+        image: gcr.io/knative-releases/knative.dev/eventing-kafka-broker/control-plane/cmd/kafka-controller@sha256:e80fc086fb12b136b93f666f2a7aaa47c281fa2838aa4312c379e09d04452db3
         imagePullPolicy: IfNotPresent
         env:
         - name: BROKER_DATA_PLANE_CONFIG_MAP_NAMESPACE
