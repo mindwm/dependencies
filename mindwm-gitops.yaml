@@ -348,7 +348,7 @@ spec:
           zipkin:
             enabled: false
     repoURL: https://open-telemetry.github.io/opentelemetry-helm-charts
-    targetRevision: '0.114.0'
+    targetRevision: '0.122.5'
   syncPolicy:
     automated:
       selfHeal: true
