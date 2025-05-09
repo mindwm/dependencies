@@ -310,7 +310,7 @@ spec:
       releaseName: otel-collector
       values: |
         image:
-          repository: otel/opentelemetry-collector-k8s
+          repository: ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector-k8s
         mode: deployment
         config:
           receivers:
@@ -348,7 +348,7 @@ spec:
           zipkin:
             enabled: false
     repoURL: https://open-telemetry.github.io/opentelemetry-helm-charts
-    targetRevision: '0.114.0'
+    targetRevision: '0.122.5'
   syncPolicy:
     automated:
       selfHeal: true
