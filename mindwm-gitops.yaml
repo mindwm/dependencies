@@ -60640,7 +60640,7 @@ spec:
       containers:
       - name: nats-webhook
         terminationMessagePolicy: FallbackToLogsOnError
-        image: gcr.io/knative-releases/knative.dev/eventing-natss/cmd/webhook@sha256:a5d32c9d3ad21d2c02253dae5264ae4cbb1740aac45e36328a7476a6f80c6dfb
+        image: gcr.io/knative-releases/knative.dev/eventing-natss/cmd/webhook@sha256:0acc45c6ed0f1c36536f79c918e9ef930b34e4dfcdd5bca995264342ac98ca2d
         resources:
           requests:
             cpu: '20m'
