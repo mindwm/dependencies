@@ -17,6 +17,9 @@
   "helm-values": {
     "managerFilePatterns": ["/\\.yaml$/"]
   },
+  "terraform": {
+    "managerFilePatterns": ["/tests\/e2e\/.*\\.tf/"]
+  },
   "packageRules": [
     {
       "matchPackageNames": ["/.*/"],
