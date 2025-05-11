@@ -43,7 +43,8 @@
       ],
       "depNameTemplate": "argo-cd",
       "datasourceTemplate": "helm",
-      "packageNameTemplate": "argo/argo-cd"
+      "packageNameTemplate": "argo/argo-cd",
+      "registryUrlTemplate": "https://argoproj.github.io/argo-helm"
     }
   ],
 
