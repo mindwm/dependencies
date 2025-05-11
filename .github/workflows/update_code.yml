@@ -36,6 +36,7 @@ jobs:
               (cd mindwm-gitops && kcl run -q) > mindwm-gitops.yaml;
               cp -vr mindwm-gitops/tests/ tests/ 
               cp -vr mindwm-gitops/.github/workflows github-workflows
+              cp -vr mindwm-gitops/Makefile .
               rm -rf mindwm-gitops
             "
       - name: Commit & Push changes
