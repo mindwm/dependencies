@@ -3,7 +3,7 @@ name = "mindwm-gitops"
 version = "0.1.0"
 
 [dependencies]
-argoproj = { oci = "oci://ghcr.io/kcl-lang/argoproj", tag = "0.1.0" }
+argoproj = { oci = "oci://ghcr.io/kcl-lang/argoproj", tag = "0.2.1" }
 crossplane = "1.16.0"
 istio = "1.21.2"
 json_merge_patch = { oci = "oci://ghcr.io/kcl-lang/json_merge_patch", tag = "0.1.0" }
