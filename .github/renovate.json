@@ -35,8 +35,18 @@
       "depNameTemplate": "k3s",
       "datasourceTemplate": "github-tags",
       "packageNameTemplate": "k3s-io/k3s"
+    },
+    {
+      "fileMatch": ["^Makefile$"],
+      "matchStrings": [
+        "ARGOCD_HELM_CHART_VERSION\\s*:?=\\s*(?<currentValue>[0-9.]+)"
+      ],
+      "depNameTemplate": "argo-cd",
+      "datasourceTemplate": "helm",
+      "packageNameTemplate": "argo/argo-cd"
     }
   ],
+
   "packageRules": [
     {
       "matchPackageNames": ["/.*/"],
