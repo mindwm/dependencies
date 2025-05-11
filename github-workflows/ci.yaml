@@ -69,7 +69,7 @@ jobs:
         echo $CI_INSTANCE_IP
 
     - name: run pytests
-      uses: appleboy/ssh-action@v1.0.3
+      uses: appleboy/ssh-action@v1.2.2
       with:
         host: ${{ env.CI_INSTANCE_IP }}
         username: ci
