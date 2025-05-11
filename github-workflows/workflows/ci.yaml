@@ -1,0 +1,177 @@
+name: ci
+
+
+permissions:
+  checks: write
+  contents: write
+  issues: write
+  pull-requests: write
+
+on:
+  pull_request:
+    branches-ignore: [ "dev/*" ]
+#  push:
+#    branches: [ "master" ]
+
+env:
+  TF_VAR_ssh_private_key: ${{ secrets.CI_SSH_KEY }}
+  TF_VAR_linode_token: ${{ secrets.CI_LINODE_TOKEN }}
+  TF_VAR_root_password: ${{ secrets.CI_ROOT_PASSWORD }}
+  TF_DIR: "./tests/e2e"
+  TF_VAR_git_repository: "${{ github.event.pull_request.head.repo.full_name }}"
+  TF_VAR_git_commit_sha: "${{ github.sha }}"
+  TF_VAR_git_ref_name: "${{ github.event.pull_request.head.ref }}"
+  TF_VAR_artifact_dir: "/tmp/artifacts"
+  TF_VAR_run_number: ${{ github.run_number }}
+  TF_VAR_run_attempt: ${{ github.run_attempt }}
+  TF_VAR_node_name: "mindwm-${{ github.sha }}"
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Set up JDK
+      uses: actions/setup-java@v3
+      with:
+        distribution: zulu
+        java-version: 17
+
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        ref: ${{github.event.pull_request.head.ref}}
+        repository: ${{github.event.pull_request.head.repo.full_name}}
+
+    - uses: hashicorp/setup-terraform@v3
+      with:
+        terraform_version: "1.10.5"
+
+    - name: terraform init
+      working-directory: "${{ env.TF_DIR }}"
+      run: terraform init
+
+    - name: terraform plan
+      working-directory: "${{ env.TF_DIR }}"
+      run: terraform plan
+
+    - name: terraform apply
+      working-directory: "${{ env.TF_DIR }}"
+      run: terraform apply -auto-approve
+
+    - name: set CI_INSTANCE_IP variable
+      working-directory: "${{ env.TF_DIR }}"
+      run: |
+        echo "CI_INSTANCE_IP=$(cat terraform.tfstate | jq -r '.outputs.ci_instance_ip.value')" >> $GITHUB_ENV
+
+
+    - name: show CI_INSTANCE_IP
+      run: | 
+        echo $CI_INSTANCE_IP
+
+    - name: run pytests
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ env.CI_INSTANCE_IP }}
+        username: ci
+        key: ${{ secrets.CI_SSH_KEY }}
+        command_timeout: 70m
+        script: |
+          test -d ${{ env.TF_VAR_artifact_dir }} &&  rm -rfv ${{ env.TV_VAR_artifact_dir }}
+          mkdir -p ${{ env.TF_VAR_artifact_dir }}
+          echo 0 > ${{ env.TF_VAR_artifact_dir }}/exit_code
+          test -d ~/.kube || mkdir ~/.kube
+          test -d mindwm-gitops && rm -rf mindwm-gitops
+          git clone -b "${{ github.event.pull_request.head.ref }}" https://github.com/${{ github.event.pull_request.head.repo.full_name }}
+          cd mindwm-gitops 
+          export KUBECONFIG=${HOME}/.kube/config
+          make mindwm_test 
+          echo $? > ${{ env.TF_VAR_artifact_dir }}/exit_code
+          cd ${{ env.TF_VAR_artifact_dir }}
+          tar cvf /tmp/artifacts.tar . 
+
+
+    - name: Download artifacts
+      uses: nicklasfrahm/scp-action@main
+      id: download_artifacts
+      if: always()
+      continue-on-error: true
+      with:
+        direction: download
+        host: ${{ env.CI_INSTANCE_IP }}
+        insecure_ignore_fingerprint: true
+        username: ci
+        key: ${{ secrets.CI_SSH_KEY }}
+        source: /tmp/artifacts.tar
+        target: artifacts.tar
+
+
+    - name: Unpack artifacts
+      id: have_artifacts
+      if: steps.download_artifacts.outcome == 'success'
+      continue-on-error: true
+      run: |
+        mkdir artifacts
+        tar xvf artifacts.tar -C artifacts
+
+    - name: Load test report history
+      uses: actions/checkout@v4
+      if: steps.have_artifacts.outcome == 'success'
+      continue-on-error: true
+      with:
+        token: ${{ secrets.MINDWM_TOKEN }}
+        repository: 'mindwm/mindwm.github.io'
+        ref: main
+        path: gh-pages
+
+    - name: Allure Report Action
+      uses: mgrybyk-org/allure-report-branch-js-action@v1
+      if: steps.have_artifacts.outcome == 'success'
+      continue-on-error: true
+      id: allure # used in comment to PR
+      with:
+        list_dirs: true
+        report_id: 'ci'
+        gh_pages: 'gh-pages'
+        report_dir: 'artifacts/allure-results'
+
+    - name: Update mindwm.github.io
+      id: update_mindwm_github_io
+      if: steps.have_artifacts.outcome == 'success'
+      uses: cpina/github-action-push-to-another-repository@target-branch
+      env:
+        SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
+      with:
+        source-directory: gh-pages/allure-action
+        destination-github-username: 'mindwm'
+        destination-repository-name: 'mindwm.github.io'
+        user-email: github-actions@github.com
+        commit-message: See ORIGIN_COMMIT from $GITHUB_REF
+        target-branch: main
+        target-directory: mindwm-gitops/allure-action
+
+
+    - name: Comment PR with Allure Report link
+      if: ${{ steps.have_artifacts.outcome == 'success' && github.event_name == 'pull_request' && steps.allure.outputs.report_url }}
+      continue-on-error: true
+      uses: thollander/actions-comment-pull-request@v2
+      with:
+        message: |
+          ${{ steps.allure.outputs.test_result_icon }} [Allure Report](${{ steps.allure.outputs.report_url }}) | [History](${{ steps.allure.outputs.report_history_url }})
+        comment_tag: allure_report
+        mode: recreate
+
+    - name: Publish Test Report
+      uses: mikepenz/action-junit-report@v5
+      if: steps.have_artifacts.outcome == 'success'
+      with:
+        report_paths: 'artifacts/report.xml'
+
+
+    - name: return exit code
+      run: | 
+        exit `cat artifacts/exit_code`
+
+    - name: terraform destroy
+      if: always()
+      working-directory: "${{ env.TF_DIR }}"
+      run: terraform destroy -auto-approve

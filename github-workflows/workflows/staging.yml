@@ -1,0 +1,20 @@
+name: mcmp6 cluster
+
+on:
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  redeploy_cluster:
+
+    runs-on: [self-hosted, staging]
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        ref: ${{github.event.pull_request.head.ref}}
+        repository: ${{github.event.pull_request.head.repo.full_name}}
+
+    - name: Redeploy the k3s cluster
+      run: make mindwm_lifecycle TARGET_REVISION=${{github.event.pull_request.head.ref}}
