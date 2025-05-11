@@ -20,6 +20,9 @@
   "terraform": {
     "managerFilePatterns": ["/tests\/e2e\/.*\\.tf/"]
   },
+  "pip_requirements": {
+    "managerFilePatterns": ["/tests\/mindwm_bdd\/requirements.txt$/"]
+  },
   "packageRules": [
     {
       "matchPackageNames": ["/.*/"],
