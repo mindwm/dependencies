@@ -64,9 +64,8 @@
       "packageNameTemplate": "neo4j-standalone",
       "registryUrlTemplate": "https://helm.neo4j.com/neo4j"
     },
-
     {
-      "fileMatch": ["^kcl\\.mod$"],
+      "fileMatch": ["^kcl\\.mod$", "^xrd_kcl_function\\.k$"],
       "matchStrings": [
         "oci\\s*=\\s*\"oci://(?<registryHost>[^/]+)/(?<packageName>[^\"]+)\"[^}]*tag\\s*=\\s*\"(?<currentValue>[^\"]+)\""
       ],
