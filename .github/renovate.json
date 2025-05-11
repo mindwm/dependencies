@@ -53,7 +53,18 @@
       ],
       "depNameTemplate": "argoproj/argo-cd",
       "datasourceTemplate": "github-releases"
+    },
+    {
+      "fileMatch": ["^config\\.k$"],
+      "matchStrings": [
+        "neo4j\\s*=\\s*\\{[^}]*version\\s*=\\s*\"(?<currentValue>[0-9.]+)\""
+      ],
+      "depNameTemplate": "neo4j",
+      "datasourceTemplate": "helm",
+      "packageNameTemplate": "neo4j-standalone",
+      "registryUrlTemplate": "https://helm.neo4j.com/neo4j"
     }
+
   ],
 
   "packageRules": [
