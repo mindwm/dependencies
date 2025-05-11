@@ -45,6 +45,14 @@
       "datasourceTemplate": "helm",
       "packageNameTemplate": "argo-cd",
       "registryUrlTemplate": "https://argoproj.github.io/argo-helm"
+    },
+    {
+      "fileMatch": ["Makefile$"],
+      "matchStrings": [
+        "ARGOCD_APP_VERSION\\s*:?=\\s*(?<currentValue>[0-9.]+)"
+      ],
+      "depNameTemplate": "argoproj/argo-cd",
+      "datasourceTemplate": "github-releases"
     }
   ],
 
