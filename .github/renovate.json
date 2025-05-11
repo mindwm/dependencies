@@ -63,8 +63,17 @@
       "datasourceTemplate": "helm",
       "packageNameTemplate": "neo4j-standalone",
       "registryUrlTemplate": "https://helm.neo4j.com/neo4j"
-    }
+    },
 
+    {
+      "fileMatch": ["^kcl\\.mod$"],
+      "matchStrings": [
+        "oci\\s*=\\s*\"oci://(?<registryHost>[^/]+)/(?<packageName>[^\"]+)\"[^}]*tag\\s*=\\s*\"(?<currentValue>[^\"]+)\""
+      ],
+      "datasourceTemplate": "docker",
+      "registryUrlTemplate": "https://{{registryHost}}",
+      "versioningTemplate": "semver"
+    }
   ],
 
   "packageRules": [
