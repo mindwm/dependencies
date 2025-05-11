@@ -23,6 +23,9 @@
   "pip_requirements": {
     "managerFilePatterns": ["/tests\/mindwm_bdd\/requirements.txt$/"]
   },
+  "github-actions": {
+    "managerFilePatterns": ["/github-workflows\/.*\\.yaml$/"]
+  },
   "packageRules": [
     {
       "matchPackageNames": ["/.*/"],

@@ -35,6 +35,7 @@ jobs:
             /bin/sh -c "
               (cd mindwm-gitops && kcl run -q) > mindwm-gitops.yaml;
               cp -vr mindwm-gitops/tests/ tests/ 
+              cp -vr mindwm-gitops/.github/workflows github-workflows
               rm -rf mindwm-gitops
             "
       - name: after
