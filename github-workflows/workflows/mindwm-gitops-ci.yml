@@ -1,4 +1,4 @@
-name: allure-test-report
+name: MindWM Gitops CI
 
 on:
   workflow_dispatch:
