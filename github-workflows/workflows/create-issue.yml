@@ -1,0 +1,88 @@
+on:
+  workflow_call:
+    secrets:
+      MINDWM_TOKEN:
+        required: true
+    inputs:
+      artifact_name:
+        required: true
+        type: string
+      junit_total:
+        required: true
+        type: string
+      junit_passed:
+        required: true
+        type: string
+      junit_skipped:
+        required: true
+        type: string
+      junit_retried:
+        required: true
+        type: string
+      junit_failed:
+        required: true
+        type: string
+      junit_summary:
+        required: true
+        type: string
+      junit_detailed_summary:
+        required: true
+        type: string
+      junit_flaky_summary:
+        required: true
+        type: string
+      allure_report_url: 
+        required: true
+        type: string
+      allure_test_result_icon: 
+        required: true
+        type: string
+      github_job_url: 
+        required: true
+        type: string
+
+
+jobs:
+  create_issue:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ inputs.artifact_name }}
+          path: ${{ inputs.artifact_name }}
+
+      - name: Extract fail test title and name
+        id: failed_test_name
+        run: |
+          echo name=$(jq -r 'select(has("status") and .status != "passed") | "\(.fullName) \(.name)"' ${{ inputs.artifact_name }}/allure-results/*.json) >> $GITHUB_OUTPUT
+
+
+      # checkout for NIGHTLY_JOB_TEMPLATE template
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.ref || 'master' }}
+          repository: ${{ github.event.pull_request.head.repo.full_name || github.repository }}
+
+      - name: "Create an issue"
+        uses: JasonEtco/create-an-issue@v2
+        env:
+          #ISSUE_TITLE: ${{ env.JUNIT_FAILED_TEST_TITLE }}
+          ISSUE_TITLE: ${{ steps.failed_test_name.outputs.name }}
+          GITHUB_TOKEN: ${{ secrets.MINDWM_TOKEN }}
+          JUNIT_TOTAL: ${{ inputs.junit_total }}
+          JUNIT_PASSED: ${{ inputs.junit_passed }}
+          JUNIT_SKIPPED: ${{ inputs.junit_skipped }}
+          JUNIT_RETRIED: ${{ inputs.junit_retried }}
+          JUNIT_FAILED: ${{ inputs.junit_failed }}
+          JUNIT_SUMMARY: ${{ inputs.junit_summary }}
+          JUNIT_DETAILED_SUMMARY: ${{ inputs.junit_detailed_summary }}
+          JUNIT_FLAKY_SUMMARY: ${{ inputs.junit_flaky_summary }}
+          ALLURE_TEST_RESULT_ICON: ${{ inputs.allure_test_result_icon }}
+          ALLURE_REPORT_URL: ${{ inputs.allure_report_url }}
+          GITHUB_FAILED_JOB_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        with:
+          update_existing: true
+          search_existing: open
+          filename: .github/NIGHTLY_JOB_TEMPLATE.md

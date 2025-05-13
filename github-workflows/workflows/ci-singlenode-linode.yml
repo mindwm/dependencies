@@ -1,0 +1,157 @@
+name: 'CI: singlenode, provider linode'
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches-ignore: [ "dev/*" ]
+
+permissions:
+  checks: write
+  contents: write
+  issues: write
+  pull-requests: write
+
+env:
+  terraform_artifact_name: "terraform-${{ github.sha }}-${{ github.run_number }}-${{ github.run_attempt }}"
+  terraform_state_artifact_name: "terraform-state-${{ github.sha }}-${{ github.run_number }}-${{ github.run_attempt }}"
+  test_artifact_name: "test-${{ github.sha }}-${{ github.run_number }}-${{ github.run_attempt }}"
+
+jobs:
+  set_env:
+    runs-on: ubuntu-24.04
+    outputs:
+      terraform_artifact_name: ${{ steps.set.outputs.terraform_artifact_name }}
+      terraform_state_artifact_name: ${{ steps.set.outputs.terraform_state_artifact_name }}
+      test_artifact_name: ${{ steps.set.outputs.test_artifact_name }}
+    steps:
+      - name: set outputs with default values
+        id: set
+        run: |    
+          echo "terraform_artifact_name=${{ env.terraform_artifact_name }}" >> $GITHUB_OUTPUT
+          echo "terraform_state_artifact_name=${{ env.terraform_state_artifact_name }}" >> $GITHUB_OUTPUT
+          echo "test_artifact_name=${{ env.test_artifact_name }}" >> $GITHUB_OUTPUT
+
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.ref || 'master' }}
+          repository: ${{ github.event.pull_request.head.repo.full_name || github.repository }}
+
+      - name: Upload terraform manifest 
+        uses: actions/upload-artifact@v4
+        with:
+          name: "${{ steps.set.outputs.terraform_artifact_name }}"
+          path: ./tests/e2e/
+
+
+  compute_deploy:
+    needs: set_env
+    uses: ./.github/workflows/linode-compute-deploy.yml
+    with:
+      artifact_name: ${{ needs.set_env.outputs.terraform_artifact_name }}
+      artifact_state_name: ${{ needs.set_env.outputs.terraform_state_artifact_name }}
+    secrets:
+      LINODE_TOKEN: ${{ secrets.CI_LINODE_TOKEN }}
+      ROOT_PASSWORD: ${{ secrets.CI_ROOT_PASSWORD }}
+      SSH_KEY: ${{ secrets.CI_SSH_KEY }}
+
+  run_tests:
+    needs: [set_env, compute_deploy]
+    uses: ./.github/workflows/run_test.yml
+    with:
+      node_ip_addr: ${{ needs.compute_deploy.outputs.node_ip_addr }}
+      test_name: fake_test_fail
+      git_branch: ${{ github.event.pull_request.head.ref || 'master' }}
+      git_repo: ${{ github.event.pull_request.head.repo.full_name || github.repository }}
+      artifact_dir: /tmp/artifacts
+    secrets:
+      SSH_KEY: ${{ secrets.CI_SSH_KEY }}
+
+  # download artifacts from the remote hosts and safe as github artifact
+  download_test_artifacts:
+    needs: [set_env, compute_deploy, run_tests]
+    uses: ./.github/workflows/download_artifacts.yml
+    with:
+      node_ip_addr: ${{ needs.compute_deploy.outputs.node_ip_addr }}
+      # remote dir
+      artifact_dir: /tmp/artifacts
+      # github artifact name
+      artifact_name: ${{ needs.set_env.outputs.test_artifact_name }}
+    secrets:
+      SSH_KEY: ${{ secrets.CI_SSH_KEY }}
+
+  allure_report:
+    needs: [set_env, compute_deploy, run_tests, download_test_artifacts]
+    uses: ./.github/workflows/allure-report.yml
+    with:
+      artifact_name: ${{ needs.set_env.outputs.test_artifact_name }}
+    secrets:
+      MINDWM_TOKEN: ${{ secrets.MINDWM_TOKEN }}
+
+  junit:
+    needs: [set_env, compute_deploy, run_tests, download_test_artifacts]
+    uses: ./.github/workflows/junit.yml
+    with:
+      artifact_name: ${{ needs.set_env.outputs.test_artifact_name }}
+
+  compute_destroy:
+    if: always()
+    needs: [set_env, download_test_artifacts]
+    uses: ./.github/workflows/linode-compute-destroy.yml
+    with:
+      artifact_name: ${{ needs.set_env.outputs.terraform_state_artifact_name }}
+    secrets:
+      LINODE_TOKEN: ${{ secrets.CI_LINODE_TOKEN }}
+      ROOT_PASSWORD: ${{ secrets.CI_ROOT_PASSWORD }}
+      SSH_KEY: ${{ secrets.CI_SSH_KEY }}
+
+  test_result:
+    needs: [set_env, allure_report]
+    uses: ./.github/workflows/test-result.yml
+    with:
+      artifact_name: ${{ needs.set_env.outputs.test_artifact_name }}
+      test_result: ${{ needs.allure_report.outputs.test_result }}
+
+  create_issue:
+    if: ${{ needs.allure_report.outputs.test_result == 'FAIL' && github.event_name != 'pull_request' }}
+    needs: [set_env, junit, allure_report]
+    uses: ./.github/workflows/create-issue.yml
+    with:
+      artifact_name: ${{ needs.set_env.outputs.test_artifact_name }}
+      github_job_url: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+      allure_report_url: ${{ needs.allure_report.outputs.test_result_url }}
+      allure_test_result_icon: ${{ needs.allure_report.outputs.test_result_icon }}
+      junit_total: ${{ needs.junit.outputs.junit_total }}
+      junit_passed: ${{ needs.junit.outputs.junit_passed }}
+      junit_skipped: ${{ needs.junit.outputs.junit_skipped }}
+      junit_retried: ${{ needs.junit.outputs.junit_retried }}
+      junit_failed: ${{ needs.junit.outputs.junit_failed }}
+      junit_summary: ${{ needs.junit.outputs.junit_summary }}
+      junit_detailed_summary: ${{ needs.junit.outputs.junit_detailed_summary }}
+      junit_flaky_summary: ${{ needs.junit.outputs.junit_flaky_summary }}
+    secrets:
+      MINDWM_TOKEN: ${{ secrets.MINDWM_TOKEN }}
+
+  upload_badge:
+    needs: [set_env, junit]
+    uses: ./.github/workflows/test-result-badge.yml
+    with:
+      junit_total: ${{ needs.junit.outputs.junit_total }}
+      junit_passed: ${{ needs.junit.outputs.junit_passed }}
+      junit_skipped: ${{ needs.junit.outputs.junit_skipped }}
+      junit_failed: ${{ needs.junit.outputs.junit_failed }}
+    secrets:
+      MINDWM_TOKEN: ${{ secrets.MINDWM_TOKEN }}
+
+  cleanup_artifacts:
+    needs: [set_env, compute_destroy, allure_report, junit, test_result]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: geekyeggo/delete-artifact@v5
+        with:
+          name: |
+            ${{ needs.set_env.outputs.terraform_artifact_name }}
+            ${{ needs.set_env.outputs.test_artifact_name }}
+            ${{ needs.set_env.outputs.terraform_state_artifact_name }}
+

@@ -1,0 +1,88 @@
+name: Allure Report
+
+on:
+  workflow_call:
+    inputs:
+      artifact_name:
+        required: true
+        type: string
+    secrets:
+      MINDWM_TOKEN:
+        required: true
+
+    outputs:
+      test_result:
+        description: "Test result"
+        value: ${{ jobs.allure_report.outputs.test_result }}
+      test_result_url:
+        description: "Test result url"
+        value: ${{ jobs.allure_report.outputs.test_result_url }}
+      test_result_icon:
+        description: "Test result icon"
+        value: ${{ jobs.allure_report.outputs.test_result_icon }}
+
+jobs:
+  allure_report:
+    runs-on: ubuntu-latest
+    outputs:
+      test_result: ${{ steps.allure.outputs.test_result }}
+      test_result_url: ${{ steps.allure.outputs.report_url }}
+      test_result_icon: ${{ steps.allure.outputs.test_result_icon }}
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ inputs.artifact_name }}
+          path: artifact_dir
+
+      - name: Load report history
+        uses: actions/checkout@v4
+        continue-on-error: true
+        with:
+          token: ${{ secrets.MINDWM_TOKEN }}
+          repository: 'mindwm/mindwm.github.io'
+          ref: main
+          path: gh-pages
+
+      - name: Workaround for allure reports
+        continue-on-error: false
+        run: |
+          test -d gh-pages/mindwm-gitops/allure-action || mkdir -p gh-pages/mindwm-gitops/allure-action
+          mv gh-pages/mindwm-gitops/allure-action gh-pages/allure-action
+
+      - name: Allure Report Action
+        uses: mgrybyk-org/allure-report-branch-js-action@v1
+        id: allure
+        continue-on-error: true
+        with:
+          list_dirs: true
+          report_id: 'ci'
+          gh_pages: 'gh-pages'
+          report_dir: 'artifact_dir/allure-results'
+
+      - name: show test result
+        run: |
+          echo test result: ${{ steps.allure.outputs.test_result }}
+          echo test result: ${{ steps.allure.outputs.test_result_icon }}
+
+      - name: Comment PR with Allure Report link
+        if: github.event_name == 'pull_request'
+        continue-on-error: true
+        uses: thollander/actions-comment-pull-request@v3
+        with:
+          message: |
+            ${{ steps.allure.outputs.test_result_icon }} [Allure Report](${{ steps.allure.outputs.report_url }}) | [History](${{ steps.allure.outputs.report_history_url }})
+          comment_tag: allure_report
+          mode: recreate
+
+      - name: Update mindwm.github.io
+        id: update_mindwm_github_io
+        run: |
+          cd gh-pages/
+          mv allure-action mindwm-gitops/
+          cd mindwm-gitops/allure-action
+          git add -A .
+          git config --global user.email "metacoma"
+          git config --global user.name "ryabin.ss@gmail.com"
+          git commit -m 'allure update' || echo "nothing to commit"
+          git push origin main

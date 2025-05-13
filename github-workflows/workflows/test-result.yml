@@ -1,0 +1,25 @@
+name: Test result
+
+on:
+  workflow_call:
+    inputs:
+      artifact_name:
+        required: true
+        type: string
+      test_result:
+        required: true
+        type: string
+
+jobs:
+  test_result:
+    runs-on: ubuntu-latest
+    steps:
+      - name: test result
+        env:
+          TEST_RESULT: "${{ inputs.test_result }}"
+        run: |
+          if [ "${TEST_RESULT}" = "FAIL" ]; then
+            echo "Test failed"
+            exit 1
+          fi
+
