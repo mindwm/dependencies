@@ -1,0 +1,43 @@
+name: Run MindWM tests
+
+on:
+  workflow_call:
+    inputs:
+      node_ip_addr:
+        required: true
+        type: string
+      test_name: 
+        required: true
+        type: string
+      git_branch: 
+        required: true
+        type: string
+      git_repo: 
+        required: true
+        type: string
+      artifact_dir:
+        required: true
+        type: string
+    secrets:
+      SSH_KEY:
+        required: true
+
+jobs:
+  run_tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: run pytests
+        uses: appleboy/ssh-action@v1.2.2
+        with:
+          host: ${{ inputs.node_ip_addr }}
+          username: ci
+          key: ${{ secrets.SSH_KEY }}
+          command_timeout: 90m
+          script: |
+            export PAGER=cat
+            git clone -b "${{ inputs.git_branch }}" https://github.com/"${{ inputs.git_repo }}" mindwm-gitops
+            cd mindwm-gitops
+            make mindwm_test TEST_NAME=${{ inputs.test_name }} ARTIFACT_DIR=${{ inputs.artifact_dir }}
+            echo $? > ${{ inputs.artifact_dir }}/exit_code 
+            cd ${{ inputs.artifact_dir }}
+            tar cvf /tmp/artifacts.tar .
